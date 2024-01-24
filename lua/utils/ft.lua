@@ -1,0 +1,17 @@
+return {
+  javascript = { 'eslint' },
+  typescript = { 'eslint' },
+  json = { 'eslint' },
+  yaml = { 'eslint' },
+  markdown = { 'markdownlint' },
+  lua = { 'luacheck' },
+  rust = { 'rustfmt' },
+  go = { 'gofmt' },
+  ruby = { 'rubocop' },
+  c = { 'clang-format' },
+  cpp = { 'clang-format' },
+  cmake = { 'cmake-format' },
+  make = { 'cmake-format' },
+  dockerfile = { 'dockerlint' },
+  bash = { 'shellcheck' },
+}
