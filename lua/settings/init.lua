@@ -1,6 +1,8 @@
+
 local M = {}
 
 local options = vim.opt
+local gl = vim.g
 local cmd = vim.cmd
 
 function M.vim_auto_cmds()
@@ -8,16 +10,14 @@ function M.vim_auto_cmds()
   cmd("highlight ColorColumn ctermbg=red")
   cmd("syntax on")
   cmd("syntax enable")
-  cmd("colorscheme kanagawa")
 end
 
 function M.lua_auto_cmds()
-  options.background = 'dark'
   options.mouse = "a"
   options.colorcolumn = "80"
   options.encoding = "utf-8"
   options.number = true
-  options.relativenumber = true
+  options.relativenumber = false
   options.autoindent = true
   options.autoread = true
   options.ruler = true
@@ -41,9 +41,16 @@ function M.lua_auto_cmds()
   options.shortmess:append "sI"
 end
 
+function M.globals()
+end
+
 function M.setup()
+  M.globals()
   M.vim_auto_cmds()
   M.lua_auto_cmds()
 end
 
+gl.theme_cache = vim.fn.stdpath "data" .. "/themes/cache/"
+gl.nvim_theme = "onedark"
+require("settings.colorscheme").load_all_highlights()
 return M
