@@ -20,8 +20,18 @@ require 'nvim-treesitter.configs'.setup {
       node_decremental = "-",
     },
   },
+  textobjects = {
+    lookahead = true,
+    select = {
+      enable = true,
+      include_surrounding_whitespace = true,
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = { [']m'] = '@function.outer', [']M'] = '@class.outer' },
+      goto_previous_start = { ['[m'] = '@function.outer', ['[M'] = '@class.outer' },
+    },
+  },
+  context_commentstring = { enable = true },
 }
-
-vim.keymap.set("n", "[[", function()
-  require("treesitter-context").go_to_context()
-end, { silent = true })
