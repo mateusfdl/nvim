@@ -109,6 +109,9 @@ lazy.setup({
   {
     'voldikss/vim-floaterm',
     lazy = true,
+    init = function()
+      require("utils.startup").lazy_load "vim-floaterm"
+    end,
     config = function()
       require("settings.float-term")
     end
@@ -162,13 +165,6 @@ lazy.setup({
     end
   },
   {
-    'rebelot/kanagawa.nvim',
-    lazy = true,
-    config = function()
-      require("settings.theme")
-    end
-  },
-  {
     'hrsh7th/vim-vsnip',
     lazy = true,
   },
@@ -202,9 +198,55 @@ lazy.setup({
     config = function()
       require("settings.lint")
     end,
-    lazy = false,
+    lazy = true,
     ft = function()
       return require("settings.lint").file_types()
     end,
   }
-})
+}, {
+  install = { colorscheme = { "nvchad" } },
+
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
+
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "tohtml",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "matchit",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
+        "tutor",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
+      },
+    },
+  },
+}
+)
