@@ -60,10 +60,6 @@ lazy.setup({
     end,
   },
   {
-    'mhinz/vim-signify',
-    lazy = true,
-  },
-  {
     'neovim/nvim-lspconfig',
     init = function()
       require("utils.startup").lazy_load "nvim-lspconfig"
@@ -71,7 +67,8 @@ lazy.setup({
     config = function()
       require("settings.lsp")
       require("settings.diagnostics")
-    end
+    end,
+    dependencies = { "hrsh7th/vim-vsnip" }
   },
   {
     'hrsh7th/cmp-nvim-lsp',
@@ -166,7 +163,7 @@ lazy.setup({
   },
   {
     'hrsh7th/vim-vsnip',
-    lazy = true,
+    cmd = { "BufEnter", "BufWritePost", "InsertEnter" },
   },
   {
     'stevearc/conform.nvim',
@@ -203,50 +200,5 @@ lazy.setup({
       return require("settings.lint").file_types()
     end,
   }
-}, {
-  install = { colorscheme = { "nvchad" } },
-
-  ui = {
-    icons = {
-      ft = "",
-      lazy = "󰂠 ",
-      loaded = "",
-      not_loaded = "",
-    },
-  },
-
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "2html_plugin",
-        "tohtml",
-        "getscript",
-        "getscriptPlugin",
-        "gzip",
-        "logipat",
-        "netrw",
-        "netrwPlugin",
-        "netrwSettings",
-        "netrwFileHandlers",
-        "matchit",
-        "tar",
-        "tarPlugin",
-        "rrhelper",
-        "spellfile_plugin",
-        "vimball",
-        "vimballPlugin",
-        "zip",
-        "zipPlugin",
-        "tutor",
-        "rplugin",
-        "syntax",
-        "synmenu",
-        "optwin",
-        "compiler",
-        "bugreport",
-        "ftplugin",
-      },
-    },
-  },
-}
+}, require("settings.lazy-setup")
 )
