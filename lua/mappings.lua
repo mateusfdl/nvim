@@ -24,6 +24,7 @@ function M.system()
 
   map("<Leader>fs", ":w<cr>")
   map("<Leader>k", ":lua require('goplayground.api').post()")
+  map("<Leader>cb", ":lua require('utils.buffers').clean_around_buffers()<CR>")
 end
 
 function M.comp()
@@ -66,7 +67,7 @@ end
 
 function M.float_term()
   nnoremap("<C-d>", ":FloatermNew --height=33 --width=150 --title=-  lazygit<CR>")
-  nnoremap("<Leader>ir", ":FloatermNew --height=30 --width=80 --title=-  irb<CR>")
+  nnoremap("<C-d>d", ":FloatermNew --height=30 --width=80 --title=-  lazydocker<CR>")
 end
 
 function M.delve()
