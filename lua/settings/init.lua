@@ -1,4 +1,3 @@
-
 local M = {}
 
 local options = vim.opt
@@ -20,7 +19,7 @@ function M.lua_auto_cmds()
   options.relativenumber = false
   options.autoindent = true
   options.autoread = true
-  --options.ruler = true
+  options.ruler = true
   options.showcmd = true
   options.smartcase = true
   options.termguicolors = true
@@ -40,11 +39,7 @@ function M.lua_auto_cmds()
   options.shortmess:append "sI"
 end
 
-function M.globals()
-end
-
 function M.setup()
-  M.globals()
   M.vim_auto_cmds()
   M.lua_auto_cmds()
 end
