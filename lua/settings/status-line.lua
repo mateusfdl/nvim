@@ -35,6 +35,7 @@ gls.left[1] = {
     highlight = { colors.red, colors.bg }
   },
 }
+
 gls.left[2] = {
   FileIcon = {
     provider = 'FileIcon',
@@ -52,9 +53,9 @@ gls.left[3] = {
 
 gls.left[4] = {
   GitIcon = {
-    provider = function() return ' ' end,
+    provider = function() return '        ' end,
     condition = condition.check_git_workspace,
-    separator = ' ',
+    separator = ' -> ',
     separator_highlight = { 'NONE', colors.bg },
     highlight = { colors.violet, colors.bg },
   }
@@ -83,10 +84,10 @@ gls.left[6] = {
 
 gls.left[7] = {
   DiffModified = {
-    provider = 'DiffModified',
+    provider = "DiffModified",
     condition = condition.hide_in_width,
     separator = ' ',
-    icon = ' 柳',
+    icon = '  ',
     separator_highlight = { 'NONE', colors.bg },
     highlight = { colors.orange, colors.bg },
   }
@@ -142,7 +143,7 @@ gls.right[4] = {
 gls.short_line_left[1] = {
   BufferType = {
     provider = 'FileTypeName',
-    separtor = ' ',
+    separator = ' ',
     separator_highlight = { 'NONE', colors.bg },
     highlight = { colors.blue, colors.bg, 'bold' }
   }

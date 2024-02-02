@@ -6,7 +6,7 @@ return {
   markdown = { 'markdownlint' },
   lua = { 'luacheck' },
   rust = { 'rustfmt' },
-  go = { 'gofmt' },
+  go = { 'golangcilint' },
   ruby = { 'rubocop' },
   c = { 'clang-format' },
   cpp = { 'clang-format' },

@@ -199,6 +199,24 @@ lazy.setup({
     ft = function()
       return require("settings.lint").file_types()
     end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = 'BufReadPre',
+    config = function()
+      require("settings.gitsigns")
+    end
+  },
+  {
+    "NeogitOrg/neogit",
+    event = 'BufReadPre',
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+      "ibhagwan/fzf-lua",
+    },
+    config = true
   }
 }, require("settings.lazy-setup")
 )

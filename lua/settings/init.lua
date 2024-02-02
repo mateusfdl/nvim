@@ -20,7 +20,7 @@ function M.lua_auto_cmds()
   options.relativenumber = false
   options.autoindent = true
   options.autoread = true
-  options.ruler = true
+  --options.ruler = true
   options.showcmd = true
   options.smartcase = true
   options.termguicolors = true
@@ -34,7 +34,6 @@ function M.lua_auto_cmds()
   options.backspace = "2"
   options.softtabstop = 2
   options.tabstop = 8
-  options.hidden = true
   options.expandtab = true
   options.wrap = true
   options.swapfile = false
