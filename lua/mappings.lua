@@ -24,20 +24,19 @@ function M.system()
 
   map("<Leader>fs", ":w<cr>")
   map("<Leader>k", ":lua require('goplayground.api').post()")
-  map("<Leader>cb", ":lua require('utils.buffers').clean_around_buffers()<CR>")
+end
+
+function M.buffers()
+  nnoremap("<Leader>cab", ":lua require('utils.buffers').clean_around_buffers()<CR>")
+  nnoremap("<Leader>cb", ":lua require('utils.buffers').close_buffer()<CR>")
+  nnoremap("<Leader>bn", ":lua require('utils.buffers').next_tab_buffer()<CR>")
+  nnoremap("<Leader>bp", ":lua require('utils.buffers').prev_tab_buffer()<CR>")
 end
 
 function M.comp()
   nnoremap('<Leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>')
   nnoremap('<Leader>D', '<cmd>lua vim.diagnostic.goto_next()<CR>')
   nnoremap('<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-end
-
-function M.nvim_tree()
-  --nnoremap("<Leader>o", ":NvimTreeToggle<CR>")
-  --nnoremap("<Leader>O", ":NvimTreeFindFileToggle<CR>")
-  --nnoremap("<leader>r", ":NvimTreeRefresh<CR>")
-  --nnoremap("<leader>n", ":NvimTreeFindFile<CR>")
 end
 
 function M.telescope()
@@ -77,18 +76,6 @@ function M.delve()
   nnoremap("<Leader>rn", ":DlvTest<CR>")
 end
 
-function M.vimGo()
-  nnoremap("<Leader>Im", ":GoImpl")
-  nnoremap("<Leader>gP", ":GoPlay<CR>")
-end
-
-function M.tabs()
-  nnoremap("<Leader>tn", ":tabnew<CR>")
-  nnoremap("<Leader>tc", ":tabclose<CR>")
-  nnoremap("<Leader>tl", ":tabnext<CR>")
-  nnoremap("<Leader>th", ":tabprevious<CR>")
-end
-
 function M.neorg()
   nnoremap("<Leader>d", ':Neorg keybind norg core.norg.qol.todo_items.todo.task_done<CR>')
 end
@@ -96,14 +83,11 @@ end
 function M.setup()
   M.system()
   M.comp()
-  M.nvim_tree()
-  M.telescope()
   M.telescope()
   M.lsp()
   M.float_term()
   M.delve()
-  M.vimGo()
-  M.tabs()
+  M.buffers()
 end
 
 return M
