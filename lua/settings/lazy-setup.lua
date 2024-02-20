@@ -1,13 +1,11 @@
 local M = {
-  ui = {
-    icons = {
-      ft = "",
-      lazy = "󰂠 ",
-      loaded = "",
-      not_loaded = "",
-    },
+  concurrency = jit.os:find("Windows") and (vim.loop.available_parallelism() * 2) or nil,
+  icons = {
+    ft = "",
+    lazy = "󰂠 ",
+    loaded = "",
+    not_loaded = "",
   },
-
   performance = {
     rtp = {
       disabled_plugins = {
