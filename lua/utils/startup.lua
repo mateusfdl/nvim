@@ -4,9 +4,6 @@ M.lazy_load = function(plugin)
   vim.api.nvim_create_autocmd({ "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),
     callback = function()
-      if vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()) == "" then
-        return
-      end
 
       local file = vim.fn.expand "%"
       local condition = file ~= "NvimTree_1" and file ~= "[lazy]" and file ~= ""
