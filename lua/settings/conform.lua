@@ -10,4 +10,5 @@ require("conform").setup({
     javascript = { { "prettier", "prettierd" } },
     typescript = { { "prettier", "prettierd" } },
   },
+		lua = { { "stylua", "stylua" } },
 })
