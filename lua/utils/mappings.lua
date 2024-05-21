@@ -1,76 +1,76 @@
 local set_keybind = function(mode, lhs, rhs, opts)
-  local options = { silent = true }
+	local options = { silent = true }
 
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
 
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-local  buf_set_keybind = function(bufnr, mode, lhs, rhs, opts)
-  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
-    silent = true,
-  })
+local buf_set_keybind = function(bufnr, mode, lhs, rhs, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+		silent = true,
+	})
 end
 
 function map(bind, command)
-  set_keybind("", bind, command)
+	set_keybind("", bind, command)
 end
 
 function smap(bind, command)
-  set_keybind("s", bind, command)
+	set_keybind("s", bind, command)
 end
 
 function imap(bind, command)
-  set_keybind("i", bind, command)
+	set_keybind("i", bind, command)
 end
 
 function nmap(bind, command)
-  set_keybind("n", bind, command)
+	set_keybind("n", bind, command)
 end
 
 function omap(bind, command)
-  set_keybind("o", bind, command)
+	set_keybind("o", bind, command)
 end
 
 function xmap(bind, command)
-  set_keybind("x", bind, command)
+	set_keybind("x", bind, command)
 end
 
 function noremap(bind, command)
-  set_keybind("", bind, command, { noremap = true })
+	set_keybind("", bind, command, { noremap = true })
 end
 
 function inoremap(bind, command)
-  set_keybind("i", bind, command, { noremap = true })
+	set_keybind("i", bind, command, { noremap = true })
 end
 
 function nnoremap(bind, command)
-  set_keybind("n", bind, command, { noremap = true })
+	set_keybind("n", bind, command, { noremap = true })
 end
 
 function vnoremap(bind, command)
-  set_keybind("v", bind, command, { noremap = true })
+	set_keybind("v", bind, command, { noremap = true })
 end
 
 function xnoremap(bind, command)
-  set_keybind("x", bind, command, { noremap = true })
+	set_keybind("x", bind, command, { noremap = true })
 end
 
 function tnoremap(bind, command)
-  set_keybind("t", bind, command, { noremap = true })
+	set_keybind("t", bind, command, { noremap = true })
 end
 
 return {
-  imap = imap,
-  nmap = nmap,
-  omap = omap,
-  xmap = xmap,
-  noremap = noremap,
-  inoremap = inoremap,
-  nnoremap = nnoremap,
-  vnoremap = vnoremap,
-  xnoremap = xnoremap,
-  buf_set_keybind = buf_set_keybind,
+	imap = imap,
+	nmap = nmap,
+	omap = omap,
+	xmap = xmap,
+	noremap = noremap,
+	inoremap = inoremap,
+	nnoremap = nnoremap,
+	vnoremap = vnoremap,
+	xnoremap = xnoremap,
+	buf_set_keybind = buf_set_keybind,
 }

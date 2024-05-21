@@ -1,111 +1,111 @@
-local theme = require("settings.colorscheme").get_theme_tb "base_16"
-local colors = require("settings.colorscheme").get_theme_tb "base_30"
+local theme = require("settings.colorscheme").get_theme_tb("base_16")
+local colors = require("settings.colorscheme").get_theme_tb("base_30")
 
 return {
 
-  diffOldFile = {
-    fg = colors.baby_pink,
-  },
+	diffOldFile = {
+		fg = colors.baby_pink,
+	},
 
-  diffNewFile = {
-    fg = colors.blue,
-  },
+	diffNewFile = {
+		fg = colors.blue,
+	},
 
-  DiffAdd = {
-    fg = colors.blue,
-  },
+	DiffAdd = {
+		fg = colors.blue,
+	},
 
-  DiffAdded = {
-    fg = colors.green,
-  },
+	DiffAdded = {
+		fg = colors.green,
+	},
 
-  DiffChange = {
-    fg = colors.light_grey,
-  },
+	DiffChange = {
+		fg = colors.light_grey,
+	},
 
-  DiffChangeDelete = {
-    fg = colors.red,
-  },
+	DiffChangeDelete = {
+		fg = colors.red,
+	},
 
-  DiffModified = {
-    fg = colors.orange,
-  },
+	DiffModified = {
+		fg = colors.orange,
+	},
 
-  DiffDelete = {
-    fg = colors.red,
-  },
+	DiffDelete = {
+		fg = colors.red,
+	},
 
-  DiffRemoved = {
-    fg = colors.red,
-  },
+	DiffRemoved = {
+		fg = colors.red,
+	},
 
-  DiffText = {
-    fg = colors.white,
-    bg = colors.black2,
-  },
+	DiffText = {
+		fg = colors.white,
+		bg = colors.black2,
+	},
 
-  -- git commits
-  gitcommitOverflow = {
-    fg = theme.base08,
-  },
+	-- git commits
+	gitcommitOverflow = {
+		fg = theme.base08,
+	},
 
-  gitcommitSummary = {
-    fg = theme.base0B,
-  },
+	gitcommitSummary = {
+		fg = theme.base0B,
+	},
 
-  gitcommitComment = {
-    fg = theme.base03,
-  },
+	gitcommitComment = {
+		fg = theme.base03,
+	},
 
-  gitcommitUntracked = {
-    fg = theme.base03,
-  },
+	gitcommitUntracked = {
+		fg = theme.base03,
+	},
 
-  gitcommitDiscarded = {
-    fg = theme.base03,
-  },
+	gitcommitDiscarded = {
+		fg = theme.base03,
+	},
 
-  gitcommitSelected = {
-    fg = theme.base03,
-  },
+	gitcommitSelected = {
+		fg = theme.base03,
+	},
 
-  gitcommitHeader = {
-    fg = theme.base0E,
-  },
+	gitcommitHeader = {
+		fg = theme.base0E,
+	},
 
-  gitcommitSelectedType = {
-    fg = theme.base0D,
-  },
+	gitcommitSelectedType = {
+		fg = theme.base0D,
+	},
 
-  gitcommitUnmergedType = {
-    fg = theme.base0D,
-  },
+	gitcommitUnmergedType = {
+		fg = theme.base0D,
+	},
 
-  gitcommitDiscardedType = {
-    fg = theme.base0D,
-  },
+	gitcommitDiscardedType = {
+		fg = theme.base0D,
+	},
 
-  gitcommitBranch = {
-    fg = theme.base09,
-    bold = true,
-  },
+	gitcommitBranch = {
+		fg = theme.base09,
+		bold = true,
+	},
 
-  gitcommitUntrackedFile = {
-    fg = theme.base0A,
-  },
+	gitcommitUntrackedFile = {
+		fg = theme.base0A,
+	},
 
-  gitcommitUnmergedFile = {
-    fg = theme.base08,
-    bold = true,
-  },
+	gitcommitUnmergedFile = {
+		fg = theme.base08,
+		bold = true,
+	},
 
-  gitcommitDiscardedFile = {
-    fg = theme.base08,
-    bold = true,
-  },
+	gitcommitDiscardedFile = {
+		fg = theme.base08,
+		bold = true,
+	},
 
-  gitcommitSelectedFile = {
-    fg = theme.base0B,
-    bold = true,
-  },
+	gitcommitSelectedFile = {
+		fg = theme.base0B,
+		bold = true,
+	},
 }

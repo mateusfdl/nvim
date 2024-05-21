@@ -1,89 +1,89 @@
-local colors = require("settings.colorscheme").get_theme_tb "base_30"
+local colors = require("settings.colorscheme").get_theme_tb("base_30")
 
 local highlights = {
 
-  TblineFill = {
-    bg = colors.black2,
-  },
+	TblineFill = {
+		bg = colors.black2,
+	},
 
-  TbLineBufOn = {
-    fg = colors.white,
-    bg = colors.black,
-  },
+	TbLineBufOn = {
+		fg = colors.white,
+		bg = colors.black,
+	},
 
-  TbLineBufOff = {
-    fg = colors.light_grey,
-    bg = colors.black2,
-  },
+	TbLineBufOff = {
+		fg = colors.light_grey,
+		bg = colors.black2,
+	},
 
-  TbLineBufOnModified = {
-    fg = colors.green,
-    bg = colors.black,
-  },
+	TbLineBufOnModified = {
+		fg = colors.green,
+		bg = colors.black,
+	},
 
-  TbLineBufOffModified = {
-    fg = colors.red,
-    bg = colors.black2,
-  },
+	TbLineBufOffModified = {
+		fg = colors.red,
+		bg = colors.black2,
+	},
 
-  TbLineBufOnClose = {
-    fg = colors.red,
-    bg = colors.black,
-  },
+	TbLineBufOnClose = {
+		fg = colors.red,
+		bg = colors.black,
+	},
 
-  TbLineBufOffClose = {
-    fg = colors.light_grey,
-    bg = colors.black2,
-  },
+	TbLineBufOffClose = {
+		fg = colors.light_grey,
+		bg = colors.black2,
+	},
 
-  TblineTabNewBtn = {
-    fg = colors.white,
-    bg = colors.one_bg3,
-    bold = true,
-  },
+	TblineTabNewBtn = {
+		fg = colors.white,
+		bg = colors.one_bg3,
+		bold = true,
+	},
 
-  TbLineTabOn = {
-    fg = colors.black,
-    bg = colors.nord_blue,
-    bold = true,
-  },
+	TbLineTabOn = {
+		fg = colors.black,
+		bg = colors.nord_blue,
+		bold = true,
+	},
 
-  TbLineTabOff = {
-    fg = colors.white,
-    bg = colors.one_bg2,
-  },
+	TbLineTabOff = {
+		fg = colors.white,
+		bg = colors.one_bg2,
+	},
 
-  TbLineTabCloseBtn = {
-    fg = colors.black,
-    bg = colors.nord_blue,
-  },
+	TbLineTabCloseBtn = {
+		fg = colors.black,
+		bg = colors.nord_blue,
+	},
 
-  TBTabTitle = {
-    fg = colors.black,
-    bg = colors.white,
-  },
+	TBTabTitle = {
+		fg = colors.black,
+		bg = colors.white,
+	},
 
-  TbLineThemeToggleBtn = {
-    bold = true,
-    fg = colors.white,
-    bg = colors.one_bg3,
-  },
+	TbLineThemeToggleBtn = {
+		bold = true,
+		fg = colors.white,
+		bg = colors.one_bg3,
+	},
 
-  TbLineCloseAllBufsBtn = {
-    bold = true,
-    bg = colors.red,
-    fg = colors.black,
-  },
+	TbLineCloseAllBufsBtn = {
+		bold = true,
+		bg = colors.red,
+		fg = colors.black,
+	},
 }
 
 local hlgroups_glassy = {
-  "TblineFill",
-  "TbLineBufOn",
-  "TbLineBufOff",
-  "TbLineBufOnClose",
-  "TbLineBufOffClose",
-  "TbLineBufOnModified",
-  "TbLineBufOffModified"
+	"TblineFill",
+	"TbLineBufOn",
+	"TbLineBufOff",
+	"TbLineBufOnClose",
+	"TbLineBufOffClose",
+	"TbLineBufOnModified",
+	"TbLineBufOffModified",
 }
 
 return highlights
