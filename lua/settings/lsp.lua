@@ -7,6 +7,7 @@ local haskell = require('settings.lsp.haskell')
 local rust = require('settings.lsp.rust')
 local lua = require('settings.lsp.lua')
 local c = require('settings.lsp.clangd')
+local elixir = require('settings.lsp.elixir')
 
 local servers = {
   tsserver = ts,
@@ -16,6 +17,7 @@ local servers = {
   hls = haskell,
   lua_ls = lua,
   clangd = c,
+  elixirls = elixir
 }
 
 function add_capabilities()
