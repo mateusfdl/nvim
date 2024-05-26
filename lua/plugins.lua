@@ -141,19 +141,19 @@ lazy.setup({
 	{
 		"wakatime/vim-wakatime",
 		lazy = true,
-		cmd = { "BufEnter", "BufWritePost", "InsertEnter" },
+		event = { "BufEnter", "BufWritePost", "InsertEnter" },
 	},
 	{
 		"zbirenbaum/copilot.lua",
 		lazy = true,
-		cmd = { "BufEnter", "BufWritePost", "InsertEnter" },
+		event = { "BufEnter", "BufWritePost", "InsertEnter" },
 		config = function()
 			require("settings.copilot")
 		end,
 	},
 	{
 		"hrsh7th/vim-vsnip",
-		cmd = { "BufEnter", "BufWritePost", "InsertEnter" },
+		event = { "BufEnter", "BufWritePost", "InsertEnter" },
 	},
 	{
 		"stevearc/conform.nvim",
