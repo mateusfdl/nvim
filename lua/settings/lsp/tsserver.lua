@@ -14,4 +14,13 @@ function M.on_attach(_, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":lua organize_imports()<CR>", { silent = true, noremap = true })
 end
 
+M.filetypes = {
+  "javascript",
+  "javascriptreact",
+  "javascript.jsx",
+  "typescript",
+  "typescriptreact",
+  "typescript.tsx"
+}
+
 return M
