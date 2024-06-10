@@ -21,14 +21,15 @@ local servers = {
 }
 
 function add_capabilities()
-	for lsp, config in pairs(servers) do
-		require("lspconfig")[lsp].setup({
-			capabilities = capabilities,
-			on_attach = config.on_attach,
-			cmd = config.cmd,
-			settings = config.settings,
-		})
-	end
+  for lsp, config in pairs(servers) do
+    require('lspconfig')[lsp].setup {
+      capabilities = capabilities,
+      on_attach = config.on_attach,
+      cmd = config.cmd,
+      settings = config.settings,
+      filetypes = config.filetypes,
+    }
+  end
 end
 
 add_capabilities()
