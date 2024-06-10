@@ -67,8 +67,8 @@ function M.lsp()
 end
 
 function M.float_term()
-	nnoremap("<C-d>", ":FloatermNew --height=50 --width=230 --title=-  lazygit<CR>")
-	nnoremap("<C-d>d", ":FloatermNew --height=50 --width=340 --title=-  lazydocker<CR>")
+  nnoremap("<C-d>g", ":FloatermNew --height=33 --width=150 --title=-  lazygit<CR>")
+  nnoremap("<C-d>d", ":FloatermNew --height=30 --width=80 --title=-  lazydocker<CR>")
 end
 
 function M.delve()
