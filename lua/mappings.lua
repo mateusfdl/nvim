@@ -67,8 +67,8 @@ function M.lsp()
 end
 
 function M.float_term()
-	nnoremap("<C-d>g", ":FloatermNew --height=33 --width=150 --title=-  lazygit<CR>")
-	nnoremap("<C-d>d", ":FloatermNew --height=30 --width=80 --title=-  lazydocker<CR>")
+	nnoremap("<C-d>g", ":FloatermNew --height=50 --width=230 --title=-  lazygit<CR>")
+	nnoremap("<C-d>d", ":FloatermNew --height=50 --width=340 --title=-  lazydocker<CR>")
 end
 
 function M.delve()
@@ -82,6 +82,21 @@ function M.neorg()
 	nnoremap("<Leader>d", ":Neorg keybind norg core.norg.qol.todo_items.todo.task_done<CR>")
 end
 
+function M.tmux()
+	nnoremap("<leader>va", ":VtrAttachToPane<cr>")
+	nnoremap("<leader>ror", ":VtrReorientRunner<cr>")
+	nnoremap("<leader>sc", ":VtrSendCommandToRunner<cr>")
+	nnoremap("<leader>sf", ":VtrSendFile<cr>")
+	nnoremap("<leader>sl", ":VtrSendLinesToRunner<cr>")
+	vnoremap("<leader>sl", ":VtrSendLinesToRunner<cr>")
+	nnoremap("<leader>or", ":VtrOpenRunner<cr>")
+	nnoremap("<leader>kr", ":VtrKillRunner<cr>")
+	nnoremap("<leader>fr", ":VtrFocusRunner<cr>")
+	nnoremap("<leader>dr", ":VtrDetachRunner<cr>")
+	nnoremap("<leader>cr", ":VtrClearRunner<cr>")
+	nnoremap("<leader>fc", ":VtrFlushCommand<cr>d")
+end
+
 function M.setup()
 	M.system()
 	M.comp()
@@ -90,6 +105,7 @@ function M.setup()
 	M.float_term()
 	M.delve()
 	M.buffers()
+	M.tmux()
 end
 
 return M
