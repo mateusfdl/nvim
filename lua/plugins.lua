@@ -47,6 +47,7 @@ lazy.setup({
 	{
 		"christoomey/vim-tmux-runner",
 		lazy = true,
+		ft = "ruby",
 		config = function()
 			require("settings.tmux-runner")
 		end,
