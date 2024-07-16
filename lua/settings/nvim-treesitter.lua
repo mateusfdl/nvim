@@ -17,8 +17,6 @@ require("nvim-treesitter.configs").setup({
 		"css",
 		"html",
 		"scss",
-		"norg",
-		"norg_meta",
 	},
 	highlight = {
 		enable = true,

@@ -97,6 +97,10 @@ function M.tmux()
 	nnoremap("<leader>fc", ":VtrFlushCommand<cr>d")
 end
 
+function M.gitsigns()
+	nnoremap("<leader>tb", ":lua require('gitsigns').blame_line{full=true}<CR>")
+end
+
 function M.setup()
 	M.system()
 	M.comp()
@@ -106,6 +110,7 @@ function M.setup()
 	M.delve()
 	M.buffers()
 	M.tmux()
+	M.gitsigns()
 end
 
 return M
