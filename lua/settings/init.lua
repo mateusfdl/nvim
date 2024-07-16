@@ -51,7 +51,12 @@ function M.lua_auto_cmds()
 	options.shortmess:append("sI")
 end
 
+function M.snippets()
+	gl.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/lua/snippets/"
+end
+
 function M.setup()
+	M.snippets()
 	M.vim_auto_cmds()
 	M.lua_auto_cmds()
 end
