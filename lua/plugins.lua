@@ -24,15 +24,13 @@ lazy.setup({
 	},
 	{
 		"nvim-lua/popup.nvim",
+		event = "BufReadPre",
 		init = function()
 			require("utils.startup").lazy_load("popup.nvim")
 		end,
 	},
 	{
 		"nvim-lua/plenary.nvim",
-		init = function()
-			require("utils.startup").lazy_load("plenary.nvim")
-		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -46,7 +44,6 @@ lazy.setup({
 	},
 	{
 		"christoomey/vim-tmux-runner",
-		lazy = true,
 		ft = "ruby",
 		config = function()
 			require("settings.tmux-runner")
@@ -54,15 +51,11 @@ lazy.setup({
 	},
 	{
 		"tpope/vim-surround",
-		event = "BufEnter",
+		event = "BufReadPre",
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
-		lazy = true,
-		init = function()
-			require("utils.startup").lazy_load("nvim-lspconfig")
-		end,
+		event = "BufReadPre",
 		config = function()
 			require("settings.lsp")
 			require("settings.diagnostics")
@@ -88,6 +81,7 @@ lazy.setup({
 			fast_wrap = {},
 			disable_filetype = { "TelescopePrompt", "vim" },
 		},
+		event = "BufReadPre",
 		config = function(_, opts)
 			require("nvim-autopairs").setup(opts)
 
@@ -97,7 +91,7 @@ lazy.setup({
 	},
 	{
 		"folke/lsp-colors.nvim",
-		event = "InsertEnter",
+		event = "BufReadPre",
 		init = function()
 			require("utils.startup").lazy_load("lsp-colors.nvim")
 		end,
@@ -110,19 +104,9 @@ lazy.setup({
 		end,
 	},
 	{
-		"nvim-neorg/neorg",
-		lazy = true,
-		dependencies = { "luarocks.nvim" },
-		config = function()
-			require("settings.neorg")
-		end,
-	},
-	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-		init = function()
-			require("utils.startup").lazy_load("nvim-tree.lua")
-		end,
+		event = "BufReadPre",
 		keys = {
 			{ mode = "n", "<Leader>o", ":NvimTreeToggle<CR>" },
 			{ mode = "n", "<Leader>O", ":NvimTreeFindFileToggle<CR>" },
@@ -138,17 +122,15 @@ lazy.setup({
 	},
 	{
 		"folke/neodev.nvim",
-		lazy = true,
+		event = "BufReadPre",
 	},
 	{
 		"wakatime/vim-wakatime",
-		lazy = true,
-		event = { "BufEnter", "BufWritePost", "InsertEnter" },
+		event = { "BufReadPre", "BufWritePost", "InsertEnter" },
 	},
 	{
 		"zbirenbaum/copilot.lua",
-		lazy = true,
-		event = { "BufEnter", "BufWritePost", "InsertEnter" },
+		event = { "BufReadPre", "BufWritePost", "InsertEnter" },
 		config = function()
 			require("settings.copilot")
 		end,
@@ -163,18 +145,14 @@ lazy.setup({
 	},
 	{
 		"stevearc/conform.nvim",
-		init = function()
-			require("utils.startup").lazy_load("conform.nvim")
-		end,
+		event = "BufReadPre",
 		config = function()
 			require("settings.conform")
 		end,
 	},
 	{
 		"akinsho/bufferline.nvim",
-		init = function()
-			require("utils.startup").lazy_load("bufferline.nvim")
-		end,
+		event = "BufReadPre",
 		config = function()
 			require("settings.buffer-line")
 		end,
