@@ -1,0 +1,55 @@
+{
+  "E2E spec": {
+    "prefix": "e2espec",
+    "body": "import { test } from '@japa/runner';\r\nimport { LivefireTesting } from 'test/utils/app/app';\r\n\r\ntest.group('', (group) => {\r\n  let livefireTestingApp: LivefireTesting;\r\n\r\n  group.setup(async () => {\r\n    livefireTestingApp = await LivefireTesting.defaultSetup();\r\n  });\r\n\r\n  group.teardown(async () => {\r\n    await livefireTestingApp.app.close();\r\n  });\r\n\r\n  test('', async ({ expect }) => {});\r\n});",
+    "description": "Base Japa E2E spec"
+  },
+
+  "NestJS Command": {
+    "prefix": "nestcmd",
+    "description": "Base NestJS Command",
+    "body": "import { Command, CommandRunner } from 'nest-commander';\r\n\r\n@Command({ name: '$1', description: '$2' })\r\nexport class $3Command extends CommandRunner {\r\n  constructor() {\r\n    super();\r\n  }\r\n\r\n  async run(): Promise<void> {\r\n    process.exit(0);\r\n  }\r\n}"
+  },
+
+  "NestJS command main": {
+    "prefix": "nestcmdmain",
+    "description": "Base NestJS Command main file",
+    "body": "import 'src/telemetry/tracer';\r\n\r\nimport { CommandFactory } from 'nest-commander';\r\n\r\nCommandFactory.run($1, ['debug', 'error', 'log', 'verbose', 'warn'])\r\n  .then(() => process.exit(0))\r\n  .catch((error) => {\r\n    console.error(error);\r\n    process.exit(1);\r\n  });"
+  },
+
+  "NestJS Module": {
+    "prefix": "nestmod",
+    "description": "Base NestJS Module",
+    "body": "import { Module } from '@nestjs/common';\r\n\r\n@Module({})\r\nexport class $1Module {}"
+  },
+
+  "NestJS injectable": {
+    "prefix": "nestinject",
+    "description": "Base NestJS Injectable",
+    "body": "import { Injectable } from \"@nestjs/common\";\r\n\r\n@Injectable()\r\nexport class $1Service {\r\n  constructor() {}\r\n}"
+  },
+
+  "NestJS controller": {
+    "prefix": "nestctrl",
+    "description": "Base NestJS Controller",
+    "body": "import { FirebaseAuthGuard } from '@livefire\/firebase\/auth\/guards\/firebase-auth.guard';\r\nimport {\r\n  Controller,\r\n  UseGuards,\r\n  UseInterceptors,\r\n} from '@nestjs\/common';\r\nimport { ApiBearerAuth, ApiTags } from '@nestjs\/swagger';\r\nimport { Transform } from 'src\/jsonapi\/transform.pipe';\r\n\r\n@ApiTags('$1')\r\n@ApiBearerAuth()\r\n@UseGuards(FirebaseAuthGuard)\r\n@UseInterceptors(Transform)\r\n@Controller('$2')\r\nexport class $3 {\r\n  constructor() {} \r\n}"
+  },
+
+  "NestJS JSONAPI Create": {
+    "prefix": "nestjsonapicreate",
+    "description": "Base NestJS JSONAPI Create",
+    "body": "  @Post('$1')\r\n  @JsonApiResponse($2)\r\n  create(): Promise<$2> {}"
+  },
+
+  "NestJS JSONAPI Get": {
+    "prefix": "nestjsonapifindone",
+    "description": "Base NestJS JSONAPI Get",
+    "body": "  @Get('$1')\r\n  @JsonApiResponse($2)\r\n  async findOne(): Promise<$2> {}"
+  },
+
+  "NestJS JSONAPI list": {
+    "prefix": "nestjsonapilist",
+    "description": "Base NestJS JSONAPI list",
+    "body": "  @Get('$1')\r\n  @JsonApiArrayResponse($2)\r\n  async list(): Promise<$2[]> {}"
+  }
+}
