@@ -66,6 +66,8 @@ cmp.setup({
 				require("copilot.suggestion").accept()
 			elseif cmp.visible() then
 				cmp.select_next_item()
+			elseif require("vsnip").jumpable(1) then
+				feedkey("<Plug>(vsnip-jump-next)", "")
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -81,10 +83,13 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
+		{ name = "vsnip" },
 		{ name = "nvim_lsp" },
+		{ name = "nvim_lua" },
 		{ name = "treesitter" },
 		{ name = "path", option = { trailing_slash = true } },
 		{ name = "nvim_lsp_signature_help" },
+		{ name = "npm", keyword_length = 2 },
 	}, {
 		{ name = "buffer" },
 	}),
@@ -94,8 +99,9 @@ cmp.setup({
 			vim_item.menu = ({
 				buffer = "[Buffer]",
 				nvim_lsp = "[LSP]",
-				luasnip = "[LuaSnip]",
+				vsnip = "[Snippet]",
 				nvim_lua = "[Lua]",
+				npm = "[NPM]",
 				latex_symbols = "[LaTeX]",
 				path = "[Path]",
 			})[entry.source.name]

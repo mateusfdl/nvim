@@ -7,8 +7,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 require("conform").setup({
 	formatters_by_ft = {
-		javascript = { { "prettier", "prettierd" } },
-		typescript = { { "prettier", "prettierd" } },
+		javascript = { { "prettier", "prettierd", "biome" } },
+		typescript = { { "prettier", "prettierd", "biome" } },
 		ruby = { { "rubocop" } },
 		lua = { { "stylua", "stylua" } },
 	},
