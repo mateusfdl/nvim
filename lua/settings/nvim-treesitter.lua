@@ -18,7 +18,7 @@ require("nvim-treesitter.configs").setup({
 		"html",
 		"scss",
 		"norg",
-		"norg_meta"
+		"norg_meta",
 	},
 	highlight = {
 		enable = true,
@@ -54,4 +54,5 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 	context_commentstring = { enable = true },
+	endwise = { enable = true },
 })
