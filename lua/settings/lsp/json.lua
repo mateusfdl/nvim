@@ -43,6 +43,10 @@ M.settings = {
 				fileMatch = { "nest-cli.json" },
 				url = "https://json.schemastore.org/nest-cli",
 			},
+			{
+				fileMatch = { "biome.json" },
+				url = "https://biomejs.dev/schemas/1.7.0/schema.json",
+			},
 		},
 	},
 }
