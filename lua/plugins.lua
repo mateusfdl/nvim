@@ -195,11 +195,6 @@ lazy.setup({
 		config = true,
 	},
 	{
-		"vhyrro/luarocks.nvim",
-		lazy = true,
-		config = true,
-	},
-	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()
 			require("settings.colorizer")
@@ -214,4 +209,12 @@ lazy.setup({
 			require("settings.cmp-npm")
 		end,
 	},
+	{ 
+		"simrat39/rust-tools.nvim",
+		event = "BufReadPre",
+		ft = "rust",
+		config = function()
+			require("settings.lsp.rust")
+		end,
+	}
 }, require("settings.lazy-setup"))
