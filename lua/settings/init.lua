@@ -42,10 +42,9 @@ function M.lua_auto_cmds()
 	options.laststatus = 2
 	options.scrolloff = 3
 	options.shiftwidth = 2
-	options.backspace = "2"
 	options.softtabstop = 2
-	options.tabstop = 8
-	options.expandtab = true
+	options.tabstop = 2
+	options.expandtab = false
 	options.wrap = true
 	options.swapfile = false
 	options.shortmess:append("sI")
