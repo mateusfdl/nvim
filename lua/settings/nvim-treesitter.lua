@@ -17,6 +17,7 @@ require("nvim-treesitter.configs").setup({
 		"css",
 		"html",
 		"scss",
+		"haskell",
 	},
 	highlight = {
 		enable = true,
@@ -53,4 +54,5 @@ require("nvim-treesitter.configs").setup({
 	},
 	context_commentstring = { enable = true },
 	endwise = { enable = true },
+	autotag = { enable = true },
 })

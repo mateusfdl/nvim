@@ -5,7 +5,6 @@ local language_linters = {
 	yaml = { "eslint" },
 	markdown = { "markdownlint" },
 	lua = { "luacheck" },
-	rust = { "rustfmt" },
 	go = { "golangcilint" },
 	ruby = { "rubocop" },
 	c = { "clang-format" },

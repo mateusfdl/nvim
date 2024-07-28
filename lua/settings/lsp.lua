@@ -4,7 +4,6 @@ local ruby = require("settings.lsp.solargraph")
 local ts = require("settings.lsp.tsserver")
 local go = require("settings.lsp.golang")
 local haskell = require("settings.lsp.haskell")
-local rust = require("settings.lsp.rust")
 local lua = require("settings.lsp.lua")
 local c = require("settings.lsp.clangd")
 local elixir = require("settings.lsp.elixir")
@@ -15,7 +14,6 @@ local servers = {
 	tsserver = ts,
 	solargraph = ruby,
 	gopls = go,
-	rust_analyzer = rust,
 	hls = haskell,
 	lua_ls = lua,
 	clangd = c,
@@ -34,6 +32,15 @@ function add_capabilities()
 			filetypes = config.filetypes,
 		})
 	end
+end
+
+function getServerNames()
+	local keyset = {}
+	for k, _ in pairs(servers) do
+		keyset[#keyset + 1] = k
+	end
+
+	return keyset
 end
 
 add_capabilities()
