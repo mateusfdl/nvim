@@ -9,6 +9,7 @@ local c = require("settings.lsp.clangd")
 local elixir = require("settings.lsp.elixir")
 local json = require("settings.lsp.json")
 local tailwind = require("settings.lsp.tailwind")
+local vue = require("settings.lsp.vue")
 
 local servers = {
 	tsserver = ts,
@@ -20,6 +21,7 @@ local servers = {
 	elixirls = elixir,
 	jsonls = json,
 	tailwindcss = tailwind,
+	volar = vue,
 }
 
 function add_capabilities()
@@ -30,6 +32,8 @@ function add_capabilities()
 			cmd = config.cmd,
 			settings = config.settings,
 			filetypes = config.filetypes,
+			on_new_config = config.on_new_config,
+			init_options = config.init_options,
 		})
 	end
 end

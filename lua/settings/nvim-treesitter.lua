@@ -18,6 +18,7 @@ require("nvim-treesitter.configs").setup({
 		"html",
 		"scss",
 		"haskell",
+		"vue",
 	},
 	highlight = {
 		enable = true,

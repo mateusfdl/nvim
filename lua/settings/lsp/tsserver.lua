@@ -15,12 +15,23 @@ function M.on_attach(_, bufnr)
 end
 
 M.filetypes = {
-  "javascript",
-  "javascriptreact",
-  "javascript.jsx",
-  "typescript",
-  "typescriptreact",
-  "typescript.tsx"
+	"javascript",
+	"javascriptreact",
+	"javascript.jsx",
+	"typescript",
+	"typescriptreact",
+	"typescript.tsx",
+	"vue",
+}
+
+local npm_root = vim.fn.system("npm root -g"):gsub("%s+", "")
+
+M.init_options = {
+	{
+		name = "@vue/typescript-plugin",
+		location = npm_root .. "/@vue/typescript-plugin",
+		languages = { "typescript", "vue" },
+	},
 }
 
 return M
