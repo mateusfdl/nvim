@@ -10,8 +10,9 @@ require("conform").setup({
 			end
 		end,
 		javascript = {},
-		ruby = { { "rubocop" } },
-		lua = { { "stylua", "stylua" } },
+		ruby = { "rubocop" },
+		lua = { "stylua" },
+		vue = { "prettier" },
 	},
 })
 
