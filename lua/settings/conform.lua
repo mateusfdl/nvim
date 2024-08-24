@@ -13,6 +13,7 @@ require("conform").setup({
 		ruby = { "rubocop" },
 		lua = { "stylua" },
 		vue = { "prettier" },
+		swift = { "swiftformat" },
 	},
 })
 

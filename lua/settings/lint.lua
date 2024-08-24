@@ -13,6 +13,7 @@ local language_linters = {
 	make = { "cmake-format" },
 	dockerfile = { "dockerlint" },
 	bash = { "shellcheck" },
+	swift = { "swiftlint" },
 }
 
 local file_types = function()
