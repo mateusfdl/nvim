@@ -19,6 +19,7 @@ require("nvim-treesitter.configs").setup({
 		"scss",
 		"haskell",
 		"toml",
+		"swift",
 	},
 	highlight = {
 		enable = true,

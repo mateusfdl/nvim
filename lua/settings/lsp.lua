@@ -9,6 +9,7 @@ local c = require("settings.lsp.clangd")
 local elixir = require("settings.lsp.elixir")
 local json = require("settings.lsp.json")
 local tailwind = require("settings.lsp.tailwind")
+local sourcekit = require("settings.lsp.sourcekit")
 
 local servers = {
 	tsserver = ts,
@@ -20,9 +21,10 @@ local servers = {
 	elixirls = elixir,
 	jsonls = json,
 	tailwindcss = tailwind,
+	sourcekit = sourcekit,
 }
 
-function add_capabilities()
+function setup_servers()
 	for lsp, config in pairs(servers) do
 		require("lspconfig")[lsp].setup({
 			capabilities = capabilities,
@@ -34,13 +36,4 @@ function add_capabilities()
 	end
 end
 
-function getServerNames()
-	local keyset = {}
-	for k, _ in pairs(servers) do
-		keyset[#keyset + 1] = k
-	end
-
-	return keyset
-end
-
-add_capabilities()
+setup_servers()
