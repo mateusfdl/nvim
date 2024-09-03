@@ -1,26 +1,33 @@
+local M = {}
+
+M.languages = {
+	"cpp",
+	"c",
+	"bash",
+	"lua",
+	"rust",
+	"json",
+	"ruby",
+	"go",
+	"typescript",
+	"javascript",
+	"proto",
+	"elixir",
+	"tsx",
+	"yaml",
+	"css",
+	"html",
+	"scss",
+	"haskell",
+	"toml",
+}
+
+if vim.loop.os_uname().sysname == "Darwin" then
+	table.insert(M.languages, "swift")
+end
+
 require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"cpp",
-		"c",
-		"bash",
-		"lua",
-		"rust",
-		"json",
-		"ruby",
-		"go",
-		"typescript",
-		"javascript",
-		"proto",
-		"elixir",
-		"tsx",
-		"yaml",
-		"css",
-		"html",
-		"scss",
-		"haskell",
-		"toml",
-		"swift",
-	},
+	ensure_installed = M.languages,
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
