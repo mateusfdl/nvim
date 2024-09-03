@@ -1,5 +1,3 @@
---vim.o.completeopt = "menuone,noselect"
-
 local kind_icons = {
 	Text = "",
 	Method = "",
@@ -51,13 +49,15 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+		["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if require("copilot.suggestion").is_visible() then
-				require("copilot.suggestion").accept()
-			elseif cmp.visible() then
+			if cmp.visible() then
 				cmp.select_next_item()
-			elseif require("vsnip").jumpable(1) then
-				feedkey("<Plug>(vsnip-jump-next)", "")
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -65,7 +65,9 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function()
-			if cmp.visible() then
+			if require("copilot.suggestion").is_visible() then
+				require("copilot.suggestion").accept()
+			elseif cmp.visible() then
 				cmp.select_prev_item()
 			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
 				feedkey("<Plug>(vsnip-jump-prev)", "")
@@ -100,7 +102,6 @@ cmp.setup({
 		end,
 	},
 })
-
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
