@@ -12,7 +12,7 @@ local tailwind = require("settings.lsp.tailwind")
 local sourcekit = require("settings.lsp.sourcekit")
 
 local servers = {
-	tsserver = ts,
+	ts_ls = ts,
 	solargraph = ruby,
 	gopls = go,
 	hls = haskell,
