@@ -192,6 +192,9 @@ lazy.setup({
 			"nvim-telescope/telescope.nvim",
 			"ibhagwan/fzf-lua",
 		},
+		init = function()
+			require("neogit").setup()
+		end,
 		config = true,
 	},
 	{
@@ -209,12 +212,12 @@ lazy.setup({
 			require("settings.cmp-npm")
 		end,
 	},
-	{ 
+	{
 		"simrat39/rust-tools.nvim",
 		event = "BufReadPre",
 		ft = "rust",
 		config = function()
 			require("settings.lsp.rust")
 		end,
-	}
+	},
 }, require("settings.lazy-setup"))
