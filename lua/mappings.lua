@@ -97,6 +97,12 @@ function M.tmux()
 	nnoremap("<leader>fc", ":VtrFlushCommand<cr>d")
 end
 
+function M.lsp_diagnostic()
+	nnoremap("<leader>q", ":lua vim.diagnostic.setloclist()<CR>")
+	nnoremap("<leader>D", ":lua vim.diagnostic.goto_next()<CR>")
+	nnoremap("<leader>d", ":lua vim.diagnostic.goto_prev()<CR>")
+end
+
 function M.gitsigns()
 	nnoremap("<leader>tb", ":lua require('gitsigns').blame_line{full=true}<CR>")
 end
@@ -111,6 +117,7 @@ function M.setup()
 	M.buffers()
 	M.tmux()
 	M.gitsigns()
+	M.lsp_diagnostic()
 end
 
 return M
