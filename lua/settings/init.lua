@@ -60,7 +60,4 @@ function M.setup()
 	M.lua_auto_cmds()
 end
 
-gl.theme_cache = vim.fn.stdpath("data") .. "/themes/cache/"
-gl.nvim_theme = "onedark"
-require("settings.colorscheme").load_all_highlights()
 return M
