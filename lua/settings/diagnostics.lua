@@ -4,6 +4,23 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+vim.diagnostic.config({
+	virtual_text = {
+		source = "always",
+		prefix = "-> ",
+	},
+	underline = false,
+	signs = true,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+		focusable = false,
+	},
+})
+
 function PrintDiagnostics(opts, bufnr, line_nr, client_id)
 	bufnr = bufnr or 0
 	line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)

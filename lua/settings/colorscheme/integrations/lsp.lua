@@ -7,10 +7,10 @@ return {
 	LspReferenceWrite = { fg = colors.darker_black, bg = colors.white },
 
 	-- Lsp Diagnostics
-	DiagnosticHint = { fg = colors.purple },
+	DiagnosticHint = { fg = colors.teal },
 	DiagnosticError = { fg = colors.red },
-	DiagnosticWarn = { fg = colors.yellow },
-	DiagnosticInformation = { fg = colors.green },
+	DiagnosticWarn = { fg = colors.sun },
+	DiagnosticInformation = { fg = colors.white },
 	LspSignatureActiveParameter = { fg = colors.black, bg = colors.green },
 
 	RenamerTitle = { fg = colors.black, bg = colors.red },
