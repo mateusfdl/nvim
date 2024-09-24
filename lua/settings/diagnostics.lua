@@ -13,7 +13,6 @@ vim.diagnostic.config({
 	signs = true,
 	severity_sort = true,
 	float = {
-		border = "rounded",
 		source = "always",
 		header = "",
 		prefix = "",
@@ -41,5 +40,38 @@ function PrintDiagnostics(opts, bufnr, line_nr, client_id)
 	end
 	vim.api.nvim_echo({ { diagnostic_message, "Normal" } }, false, {})
 end
+
+function ToggleDiagnostics()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local diagnostics = vim.diagnostic.get(bufnr)
+	if vim.tbl_isempty(diagnostics) then
+		vim.diagnostic.open(0)
+	else
+		vim.diagnostic.close(0)
+	end
+end
+
+function CopyDiagnosticToClipboard()
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	local diagnostics = vim.diagnostic.get(bufnr)
+
+	if vim.tbl_isempty(diagnostics) then
+		return
+	end
+
+	for _, diagnostic in ipairs(diagnostics) do
+		P("DL: " .. diagnostic.lnum .. "CL:" .. vim.api.nvim_win_get_cursor(0)[1])
+
+		if diagnostic.lnum == vim.api.nvim_win_get_cursor(0)[1] then
+			vim.fn.system("tmux set-buffer '" .. vim.fn.escape(diagnostic.message, "'") .. "'")
+			vim.fn.system("tmux save-buffer - | tmux load-buffer -")
+			return
+		end
+	end
+end
+
+vim.cmd([[ command! CopyDiagnosticToClipboard lua CopyDiagnosticToClipboard() ]])
+vim.cmd([[ command! ToggleDiagnostics lua ToggleDiagnostics() ]])
 
 vim.cmd([[ autocmd! CursorHold * lua PrintDiagnostics() ]])

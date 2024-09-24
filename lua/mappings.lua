@@ -101,6 +101,8 @@ function M.lsp_diagnostic()
 	nnoremap("<leader>q", ":lua vim.diagnostic.setloclist()<CR>")
 	nnoremap("<leader>D", ":lua vim.diagnostic.goto_next()<CR>")
 	nnoremap("<leader>d", ":lua vim.diagnostic.goto_prev()<CR>")
+	noremap("<leader>Dc", ":CopyDiagnosticToClipboard<CR>")
+	nnoremap("<leader>Dt", ":ToggleDiagnostics<CR>")
 end
 
 function M.gitsigns()
