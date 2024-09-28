@@ -35,12 +35,6 @@ function M.buffers()
 	nnoremap("<Leader>bp", ":lua require('utils.buffers').prev_tab_buffer()<CR>")
 end
 
-function M.comp()
-	nnoremap("<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>")
-	nnoremap("<Leader>D", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-	nnoremap("<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>")
-end
-
 function M.telescope()
 	nnoremap(";", ":lua require('telescope.builtin').find_files()<cr>")
 	nnoremap("<leader>;", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
@@ -111,7 +105,6 @@ end
 
 function M.setup()
 	M.system()
-	M.comp()
 	M.telescope()
 	M.lsp()
 	M.float_term()
