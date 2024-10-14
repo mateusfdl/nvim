@@ -1,19 +1,27 @@
 require("conform").setup({
 	formatters_by_ft = {
-		typescript = function(bufnr)
-			local path = vim.fn.getcwd()
-
-			if vim.fs.find("biome.json", { upward = true, path = path })[1] then
-				return { "biomejs" }
-			else
-				return { "prettier" }
-			end
-		end,
-		javascript = {},
+		typescript = { "biome", "prettier", stop_after_first = true },
+		javascript = { "biome", "prettier", stop_after_first = true },
 		ruby = { "rubocop" },
 		lua = { "stylua" },
 		vue = { "prettier" },
 		swift = { "swiftformat" },
+	},
+	formatters = {
+		biome = {
+			require_cwd = true,
+		},
+		["biome-check"] = {
+			require_cwd = true,
+		},
+		prettier = {
+			require_cwd = true,
+			options = {
+				ft_parsers = {
+					json = "json",
+				},
+			},
+		},
 	},
 })
 
