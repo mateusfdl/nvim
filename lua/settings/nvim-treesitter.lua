@@ -20,6 +20,10 @@ M.languages = {
 	"scss",
 	"haskell",
 	"toml",
+	"vimdoc",
+	"luadoc",
+	"vim",
+	"markdown",
 }
 
 if vim.loop.os_uname().sysname == "Darwin" then
