@@ -48,6 +48,7 @@ function M.lua_auto_cmds()
 	options.wrap = true
 	options.swapfile = false
 	options.shortmess:append("sI")
+	options.clipboard:append("unnamedplus")
 end
 
 function M.snippets()
