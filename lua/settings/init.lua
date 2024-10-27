@@ -44,9 +44,11 @@ function M.lua_auto_cmds()
 	options.shiftwidth = 2
 	options.softtabstop = 2
 	options.tabstop = 2
-	options.expandtab = false
+	options.expandtab = true
 	options.wrap = true
 	options.swapfile = false
+	options.listchars = { tab = "->", trail = "·", space = "·", lead = "·" }
+	options.list = false
 	options.shortmess:append("sI")
 	options.clipboard:append("unnamedplus")
 end
