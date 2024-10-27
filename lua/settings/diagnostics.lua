@@ -61,9 +61,7 @@ function CopyDiagnosticToClipboard()
 	end
 
 	for _, diagnostic in ipairs(diagnostics) do
-		P("DL: " .. diagnostic.lnum .. "CL:" .. vim.api.nvim_win_get_cursor(0)[1])
-
-		if diagnostic.lnum == vim.api.nvim_win_get_cursor(0)[1] then
+		if diagnostic.lnum + 1 == vim.api.nvim_win_get_cursor(0)[1] then
 			vim.fn.system("tmux set-buffer '" .. vim.fn.escape(diagnostic.message, "'") .. "'")
 			vim.fn.system("tmux save-buffer - | tmux load-buffer -")
 			return
