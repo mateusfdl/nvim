@@ -4,28 +4,12 @@ local M = {}
 
 function M.system()
 	nnoremap("<c-j>", ":m .+1<CR>==")
-	nnoremap("<c-k>", ":m .-2<CR>==")
 	inoremap("<c-j>", "<Esc>:m .+1<CR>==gi")
-	inoremap("<c-k>", "<Esc>:m .-2<CR>==gi")
 	vnoremap("<c-j>", ":m '>+1<CR>gv=gv")
+	nnoremap("<c-k>", ":m .-2<CR>==")
+	inoremap("<c-k>", "<Esc>:m .-2<CR>==gi")
 	vnoremap("<c-k>", ":m '<-2<CR>gv=gv")
-	nnoremap("<Left>", ":echoe 'this --> h'<CR>")
-	nnoremap("<Right>", ":echoe 'this --> l'<CR>")
-	nnoremap("<Up>", ":echoe 'this --> j'<CR>")
-	nnoremap("<Down>", ":echoe 'this --> j'<CR>")
-	nnoremap("<Leader>vv", ":so $HOME/.config/nvim/init.lua<CR>")
-
 	inoremap("ii", "<esc>")
-
-	map(
-		"<Leader>ts",
-		[[:call system("tmux resize-pane -y 20 -t1 && tmux send -t1 'fd -e rb | entr -c ruby -r minitest/pride *_test.rb' c-j")]]
-	)
-	map("<f1> :w<cr>", ":call system('tmux resize-pane -y 10 -t1 && tmux send -t1 'go test -v --bench .' c-j')<cr>")
-	map("<C-e>", ":lua print(table.concat(vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, 2, true)))")
-
-	map("<Leader>fs", ":w<cr>")
-	map("<Leader>k", ":lua require('goplayground.api').post()")
 end
 
 function M.buffers()
@@ -38,10 +22,12 @@ end
 function M.telescope()
 	nnoremap(";", ":lua require('telescope.builtin').find_files()<cr>")
 	nnoremap("<leader>;", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
-	nnoremap("<leader>ff", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
-	nnoremap("<leader>,", "<cmd>lua require('extensions.telescope').buffer_searcher()<cr>")
-	vnoremap("<leader>,", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
-	nnoremap("<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+	nnoremap("<leader>,b", "<cmd>lua require('extensions.telescope').buffer_searcher()<cr>")
+	vnoremap("<leader>,s", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
+	nnoremap("<leader>,h", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+	nnoremap("<leader>,c", "<cmd>lua require('telescope.builtin').git_status()<cr>")
+	nnoremap("<leader>,g", "<cmd>lua require('telescope.builtin').git_status()<cr>")
+	nnoremap("<leader>,f", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
 end
 
 function M.lsp()
