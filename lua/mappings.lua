@@ -23,10 +23,10 @@ function M.telescope()
 	nnoremap(";", ":lua require('telescope.builtin').find_files()<cr>")
 	nnoremap("<leader>;", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 	nnoremap("<leader>,b", "<cmd>lua require('extensions.telescope').buffer_searcher()<cr>")
-	vnoremap("<leader>,s", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
+	vnoremap("<leader>,g", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
 	nnoremap("<leader>,h", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 	nnoremap("<leader>,c", "<cmd>lua require('telescope.builtin').git_status()<cr>")
-	nnoremap("<leader>,g", "<cmd>lua require('telescope.builtin').git_status()<cr>")
+	nnoremap("<leader>,s", "<cmd>lua require('telescope.builtin').git_stash()<cr>")
 	nnoremap("<leader>,f", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
 end
 
