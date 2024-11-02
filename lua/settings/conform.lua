@@ -6,6 +6,8 @@ require("conform").setup({
 		lua = { "stylua" },
 		vue = { "prettier" },
 		swift = { "swiftformat" },
+		c = { "clangd" },
+		cpp = { "clangd" },
 	},
 	formatters = {
 		biome = {
