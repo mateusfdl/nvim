@@ -1,5 +1,7 @@
 local M = {}
 
+M.filetypes = { "swift", "objc", "objcpp" }
+
 M.capabilities = {
 	workspace = {
 		didChangeWatchedFiles = {
