@@ -11,7 +11,9 @@ local json = require("settings.lsp.json")
 local tailwind = require("settings.lsp.tailwind")
 local sourcekit = require("settings.lsp.sourcekit")
 
-local servers = {
+local M = {}
+
+M.servers = {
 	ts_ls = ts,
 	solargraph = ruby,
 	gopls = go,
@@ -24,8 +26,8 @@ local servers = {
 	sourcekit = sourcekit,
 }
 
-function setup_servers()
-	for lsp, config in pairs(servers) do
+function M.setup_servers()
+	for lsp, config in pairs(M.servers) do
 		require("lspconfig")[lsp].setup({
 			capabilities = capabilities,
 			on_attach = config.on_attach,
@@ -36,4 +38,4 @@ function setup_servers()
 	end
 end
 
-setup_servers()
+return M
