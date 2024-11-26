@@ -45,6 +45,10 @@ function M.lsp()
 	nnoremap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 	nnoremap("<C-n>", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
 	nnoremap("<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
+	nnoremap(
+		"gs",
+		"<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>"
+	)
 end
 
 function M.float_term()
