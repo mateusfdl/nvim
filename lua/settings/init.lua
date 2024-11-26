@@ -1,4 +1,3 @@
-local lsp = require("settings.lsp")
 local M = {}
 
 local options = vim.opt
@@ -62,7 +61,8 @@ function M.setup()
 	M.snippets()
 	M.vim_auto_cmds()
 	M.lua_auto_cmds()
-  lsp.setup_servers()
+	require("settings.lsp").setup_servers()
+	require("settings.diagnostics")
 end
 
 return M
