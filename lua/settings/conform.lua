@@ -8,6 +8,7 @@ require("conform").setup({
 		swift = { "swiftformat" },
 		c = { "clangd" },
 		cpp = { "clangd" },
+		go = { "gofmt" },
 	},
 	formatters = {
 		biome = {
