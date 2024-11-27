@@ -7,6 +7,12 @@ lazy.setup({
 			require("settings.status-line")
 		end,
 	},
+	-- {
+	-- 	dir = "~/codes/yetanotherline/",
+	-- 	config = function()
+	-- 		require("yetanotherline").setup()
+	-- 	end,
+	-- },
 	{
 		"kyazdani42/nvim-web-devicons",
 		config = function()
@@ -56,10 +62,6 @@ lazy.setup({
 	{
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
-		config = function()
-			require("settings.lsp")
-			require("settings.diagnostics")
-		end,
 		dependencies = { "hrsh7th/vim-vsnip" },
 	},
 	{
