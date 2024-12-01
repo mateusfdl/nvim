@@ -186,20 +186,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"NeogitOrg/neogit",
-		event = "BufReadPre",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
-			"ibhagwan/fzf-lua",
-		},
-		init = function()
-			require("neogit").setup()
-		end,
-		config = true,
-	},
-	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()
 			require("settings.colorizer")
