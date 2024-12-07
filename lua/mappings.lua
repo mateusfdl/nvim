@@ -43,8 +43,6 @@ function M.lsp()
 	nnoremap("gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
 	nnoremap("gT", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 	nnoremap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-	nnoremap("<C-n>", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
-	nnoremap("<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 	nnoremap(
 		"gs",
 		"<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>"
@@ -61,10 +59,6 @@ function M.delve()
 	nnoremap("<Leader>dt", ":DlvAddTracepoint<CR>")
 	nnoremap("<Leader>dc", ":DlvClearAll<CR>")
 	nnoremap("<Leader>rn", ":DlvTest<CR>")
-end
-
-function M.neorg()
-	nnoremap("<Leader>d", ":Neorg keybind norg core.norg.qol.todo_items.todo.task_done<CR>")
 end
 
 function M.tmux()
@@ -84,8 +78,8 @@ end
 
 function M.lsp_diagnostic()
 	nnoremap("<leader>q", ":lua vim.diagnostic.setloclist()<CR>")
-	nnoremap("<leader>D", ":lua vim.diagnostic.goto_next()<CR>")
-	nnoremap("<leader>d", ":lua vim.diagnostic.goto_prev()<CR>")
+	nnoremap("<C-n>", ":lua vim.diagnostic.goto_next()<CR>")
+	nnoremap("<C-p>", ":lua vim.diagnostic.goto_prev()<CR>")
 	noremap("<leader>Dc", ":CopyDiagnosticToClipboard<CR>")
 	nnoremap("<leader>Dt", ":ToggleDiagnostics<CR>")
 end
