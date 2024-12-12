@@ -13,10 +13,10 @@ function M.system()
 end
 
 function M.buffers()
-	nnoremap("<Leader>cab", ":lua require('utils.buffers').clean_around_buffers()<CR>")
-	nnoremap("<Leader>cb", ":lua require('utils.buffers').close_buffer()<CR>")
-	nnoremap("<Leader>bn", ":lua require('utils.buffers').next_tab_buffer()<CR>")
-	nnoremap("<Leader>bp", ":lua require('utils.buffers').prev_tab_buffer()<CR>")
+	nnoremap("<Leader>cab", ":BufferLineCloseOthers<CR>")
+	nnoremap("<Leader>bn", ":BufferLineCycleNext<CR>")
+	nnoremap("<Leader>bp", ":BufferLineCyclePrev<CR>")
+	nnoremap("<Leader>bd", ":BufferLinePickClose<CR>")
 end
 
 function M.telescope()

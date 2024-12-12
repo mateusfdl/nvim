@@ -1,3 +1,4 @@
+require("settings.lsp")
 local M = {}
 
 local options = vim.opt
@@ -9,18 +10,6 @@ function M.vim_auto_cmds()
 	cmd("highlight ColorColumn ctermbg=red")
 	cmd("syntax on")
 	cmd("syntax enable")
-
-	vim.api.nvim_create_autocmd({ "BufNew", "BufNewFile", "BufRead", "TabEnter", "TermOpen", "VimEnter" }, {
-		pattern = "*",
-		group = vim.api.nvim_create_augroup("BufferTabLazy", {}),
-		callback = function()
-			if #vim.api.nvim_list_bufs() == 2 then
-				options.showtabline = 1
-			else
-				options.showtabline = 2
-			end
-		end,
-	})
 end
 
 function M.lua_auto_cmds()
@@ -61,7 +50,6 @@ function M.setup()
 	M.snippets()
 	M.vim_auto_cmds()
 	M.lua_auto_cmds()
-	require("settings.lsp").setup_servers()
 	require("settings.diagnostics")
 end
 
