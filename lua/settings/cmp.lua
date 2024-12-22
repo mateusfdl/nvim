@@ -90,13 +90,13 @@ cmp.setup({
 		format = function(entry, vim_item)
 			vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 			vim_item.menu = ({
-				buffer = "[Buffer]",
 				nvim_lsp = "[LSP]",
 				vsnip = "[Snippet]",
+				path = "[Path]",
+				buffer = "[Buffer]",
 				nvim_lua = "[Lua]",
 				npm = "[NPM]",
 				latex_symbols = "[LaTeX]",
-				path = "[Path]",
 			})[entry.source.name]
 			return vim_item
 		end,
