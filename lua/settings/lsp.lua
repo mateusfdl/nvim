@@ -34,6 +34,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 					cmd = config.cmd,
 					settings = config.settings,
 					filetypes = config.filetypes,
+					init_options = config.init_options,
 				})
 			end)
 		end

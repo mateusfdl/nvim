@@ -50,6 +50,17 @@ function M.on_attach(_, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Rn", ":lua rename_file()<CR>", { silent = true, noremap = true })
 end
 
+M.init_options = {
+	plugins = {
+		{
+			name = "@vue/typescript-plugin",
+			--location = "/home/matheus/.local/share/mise/shims/vue-language-server",
+			location = vim.system({ "which", "vue-language-server" }):wait().stdout:gsub("\n", ""),
+			languages = { "typescript", "vue" },
+		},
+	},
+}
+
 M.filetypes = {
 	"javascript",
 	"javascriptreact",
@@ -57,6 +68,7 @@ M.filetypes = {
 	"typescript",
 	"typescriptreact",
 	"typescript.tsx",
+	"vue",
 }
 
 return M
