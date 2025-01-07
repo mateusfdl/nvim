@@ -37,6 +37,9 @@ function M.lua_auto_cmds()
 	options.wrap = true
 	options.swapfile = false
 	options.listchars = { tab = "->", trail = "·", space = "·", lead = "·" }
+	options.fillchars = {
+		vert = "|",
+	}
 	options.list = false
 	options.shortmess:append("sI")
 	options.clipboard:append("unnamedplus")
