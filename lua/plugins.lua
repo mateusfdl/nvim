@@ -2,17 +2,11 @@ local lazy = require("lazy")
 
 lazy.setup({
 	{
-		"glepnir/galaxyline.nvim",
+		"mateusfdl/yetanotherline",
 		config = function()
-			require("settings.status-line")
+			require("yetanotherline").setup()
 		end,
 	},
-	-- {
-	-- 	dir = "~/codes/yetanotherline/",
-	-- 	config = function()
-	-- 		require("yetanotherline").setup()
-	-- 	end,
-	-- },
 	{
 		"kyazdani42/nvim-web-devicons",
 		config = function()
