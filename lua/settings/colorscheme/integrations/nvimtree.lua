@@ -15,7 +15,7 @@ return {
 	NvimTreeGitIgnored = { fg = colors.light_grey },
 
 	NvimTreeWinSeparator = {
-		fg = colors.blue,
+		fg = colors.yellow,
 		bg = colors.darker_black,
 	},
 
