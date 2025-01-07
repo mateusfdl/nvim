@@ -88,6 +88,7 @@ local mappings = {
 require("nvim-tree").setup({
 	filters = {
 		custom = { "\\.git$", "\\.node_modules" },
+		dotfiles = false,
 	},
 	git = {
 		ignore = false,
