@@ -43,8 +43,7 @@ M.compile = function()
 	local hl_files = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h") .. "/integrations"
 
 	for _, file in ipairs(vim.fn.readdir(hl_files)) do
-		-- skip caching some files
-		if file ~= "statusline" or file ~= "treesitter" then
+		if file ~= "yetanotherline" or file ~= "treesitter" then
 			local filename = vim.fn.fnamemodify(file, ":r")
 			M.saveStr_to_cache(filename, M.load_highlight(filename))
 		end
