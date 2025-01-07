@@ -94,6 +94,7 @@ require("nvim-tree").setup({
 		ignore = false,
 	},
 	renderer = {
+		root_folder_label = false,
 		icons = {
 			glyphs = {
 				git = {
