@@ -14,13 +14,15 @@ lazy.setup({
 		end,
 	},
 	{
+
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-		event = "BufEnter",
+		lazy = true,
 		config = function()
 			require("settings.nvim-treesitter")
 		end,
+		init = require("utils.startup").lazy_load("nvim-treesitter"),
 	},
 	{
 		"nvim-lua/popup.nvim",
@@ -55,12 +57,14 @@ lazy.setup({
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = "BufReadPre",
+		lazy = true,
+		init = require("utils.startup").lazy_load("nvim-lspconfig"),
 		dependencies = { "hrsh7th/vim-vsnip" },
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		lazy = true,
+		init = require("utils.startup").lazy_load("nvim-cmp"),
 		config = function()
 			require("settings.cmp")
 		end,
@@ -87,10 +91,7 @@ lazy.setup({
 	},
 	{
 		"folke/lsp-colors.nvim",
-		event = "BufReadPre",
-		init = function()
-			require("utils.startup").lazy_load("lsp-colors.nvim")
-		end,
+		init = require("utils.startup").lazy_load("lsp-colors.nvim"),
 	},
 	{
 		"voldikss/vim-floaterm",
@@ -133,11 +134,13 @@ lazy.setup({
 	},
 	{
 		"hrsh7th/vim-vsnip",
-		event = { "InsertEnter" },
+		lazy = true,
+		init = require("utils.startup").lazy_load("vim-vsnip"),
 	},
 	{
 		"hrsh7th/cmp-vsnip",
-		event = { "InsertEnter" },
+		lazy = true,
+		init = require("utils.startup").lazy_load("cmp-vsnip"),
 	},
 	{
 		"stevearc/conform.nvim",
@@ -181,6 +184,7 @@ lazy.setup({
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
+		init = require("utils.startup").lazy_load("nvim-colorizer.lua"),
 		config = function()
 			require("settings.colorizer")
 		end,

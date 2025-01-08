@@ -1,26 +1,15 @@
 M = {}
 
-M.lazy_load = function(plugin)
-	vim.api.nvim_create_autocmd({ "BufNewFile" }, {
-		group = vim.api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),
+M.lazy_load = function(mod_name)
+	local group = vim.api.nvim_create_augroup("LazyTreesitterLoad", { clear = true })
+	vim.api.nvim_create_autocmd("BufEnter", {
+		group = group,
 		callback = function()
-			local file = vim.fn.expand("%")
-			local condition = file ~= "NvimTree_1" and file ~= "[lazy]" and file ~= ""
-
-			if condition then
-				vim.api.nvim_del_augroup_by_name("BeLazyOnFileOpen" .. plugin)
-
-				if plugin ~= "nvim-treesitter" then
-					vim.schedule(function()
-						lazy = require("lazy").load({ plugins = plugin })
-
-						if plugin == "nvim-lspconfig" then
-							vim.cmd("silent! do FileType")
-						end
-					end)
-				else
-					require("lazy").load({ plugins = plugin })
-				end
+			local buf_name = vim.api.nvim_buf_get_name(0)
+			-- Load only if the buffer is not [No Name]
+			if buf_name ~= "" then
+				require("lazy").load({ plugins = { mod_name } })
+				vim.api.nvim_del_augroup_by_name("LazyTreesitterLoad")
 			end
 		end,
 	})
