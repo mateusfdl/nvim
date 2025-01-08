@@ -1,5 +1,4 @@
 local M = {}
-require("utils.lua")
 
 vim.g.mapleader = ","
 
