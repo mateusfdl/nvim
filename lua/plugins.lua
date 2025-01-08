@@ -91,6 +91,7 @@ lazy.setup({
 	},
 	{
 		"folke/lsp-colors.nvim",
+		lazy = true,
 		init = require("utils.startup").lazy_load("lsp-colors.nvim"),
 	},
 	{
@@ -184,6 +185,7 @@ lazy.setup({
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
+    lazy = true,
 		init = require("utils.startup").lazy_load("nvim-colorizer.lua"),
 		config = function()
 			require("settings.colorizer")
