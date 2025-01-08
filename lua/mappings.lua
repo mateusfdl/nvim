@@ -88,6 +88,10 @@ function M.gitsigns()
 	nnoremap("<leader>tb", ":lua require('gitsigns').blame_line{full=true}<CR>")
 end
 
+function M.theme()
+  nnoremap("<leader>tm", ":lua require('theme').switch_global_theme()<CR>")
+end
+
 function M.setup()
 	M.system()
 	M.telescope()
@@ -98,6 +102,7 @@ function M.setup()
 	M.tmux()
 	M.gitsigns()
 	M.lsp_diagnostic()
+  M.theme()
 end
 
 return M
