@@ -89,7 +89,22 @@ function M.gitsigns()
 end
 
 function M.theme()
-  nnoremap("<leader>tm", ":lua require('theme').switch_global_theme()<CR>")
+	nnoremap("<leader>tm", ":lua require('theme').switch_global_theme()<CR>")
+end
+
+function M.AI()
+	vnoremap(
+		"<leader>gH",
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = false, floating_window = true})<CR>"
+	)
+	vnoremap(
+		"<leader>gH",
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = false, floating_window = true})<CR>"
+	)
+	vnoremap(
+		"<leader>gW",
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, floating_window = false})<CR>"
+	)
 end
 
 function M.setup()
@@ -102,7 +117,8 @@ function M.setup()
 	M.tmux()
 	M.gitsigns()
 	M.lsp_diagnostic()
-  M.theme()
+	M.theme()
+	M.AI()
 end
 
 return M

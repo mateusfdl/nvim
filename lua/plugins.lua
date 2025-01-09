@@ -2,7 +2,18 @@ local lazy = require("lazy")
 
 lazy.setup({
 	{
-		"mateusfdl/yetanotherline",
+		"mateusfdl/schadenfreude.nvim",
+		config = function()
+			require("schadenfreude").setup({
+				gpt = {
+					api_key = vim.fn.getenv("GPT_API_KEY"),
+				},
+				groq = {
+					api_key = vim.fn.getenv("GROQ_API_KEY"),
+				},
+			})
+		end,
+	},
 		config = function()
 			require("yetanotherline").setup()
 		end,
