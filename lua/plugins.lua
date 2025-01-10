@@ -196,7 +196,7 @@ lazy.setup({
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
-    lazy = true,
+		lazy = true,
 		init = require("utils.startup").lazy_load("nvim-colorizer.lua"),
 		config = function()
 			require("settings.colorizer")

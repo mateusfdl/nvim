@@ -31,6 +31,7 @@ M.base_30 = {
 	lightbg = "#2d3139",
 	pmenu_bg = "#61afef",
 	folder_bg = "#61afef",
+	blue = "#51afef",
 }
 
 M.base_16 = {
