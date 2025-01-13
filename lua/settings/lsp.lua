@@ -1,48 +1,44 @@
-local group = vim.api.nvim_create_augroup("LazyTreesitterLoad", { clear = true })
+local lsp_clients = {}
+
 vim.api.nvim_create_autocmd("BufEnter", {
-	group = group,
-	callback = function()
-		local buf_name = vim.api.nvim_buf_get_name(0)
-		-- Load only if the buffer is not [No Name]
-		if buf_name ~= "" then
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    callback = function()
+        local buf = vim.api.nvim_get_current_buf()
+        local buf_name = vim.api.nvim_buf_get_name(buf)
 
-			local ruby = require("settings.lsp.solargraph")
-			local ts = require("settings.lsp.tsserver")
-			local go = require("settings.lsp.golang")
-			local haskell = require("settings.lsp.haskell")
-			local lua = require("settings.lsp.lua")
-			local c = require("settings.lsp.clangd")
-			local elixir = require("settings.lsp.elixir")
-			local json = require("settings.lsp.json")
-			local tailwind = require("settings.lsp.tailwind")
-			local sourcekit = require("settings.lsp.sourcekit")
+        -- Skip [No Name] buffers and buffers already initialized
+        if buf_name == "" or lsp_clients[buf] then
+            return
+        end
 
-			local servers = {
-				ts_ls = ts,
-				solargraph = ruby,
-				gopls = go,
-				hls = haskell,
-				lua_ls = lua,
-				clangd = c,
-				elixirls = elixir,
-				jsonls = json,
-				tailwindcss = tailwind,
-				sourcekit = sourcekit,
-			}
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			for lsp, config in pairs(servers) do
-				vim.schedule(function()
-					require("lspconfig")[lsp].setup({
-						capabilities = capabilities,
-						on_attach = config.on_attach,
-						cmd = config.cmd,
-						settings = config.settings,
-						filetypes = config.filetypes,
-						init_options = config.init_options,
-					})
-				end)
-			end
-		end
-	end,
+        local lsp_configs = {
+            ts_ls = require("settings.lsp.tsserver"),
+            solargraph = require("settings.lsp.solargraph"),
+            gopls = require("settings.lsp.golang"),
+            hls = require("settings.lsp.haskell"),
+            lua_ls = require("settings.lsp.lua"),
+            clangd = require("settings.lsp.clangd"),
+            elixirls = require("settings.lsp.elixir"),
+            jsonls = require("settings.lsp.json"),
+            tailwindcss = require("settings.lsp.tailwind"),
+            sourcekit = require("settings.lsp.sourcekit"),
+        }
+
+        for lsp, config in pairs(lsp_configs) do
+            vim.schedule(function()
+                require("lspconfig")[lsp].setup({
+                    capabilities = capabilities,
+                    on_attach = config.on_attach,
+                    cmd = config.cmd,
+                    settings = config.settings,
+                    filetypes = config.filetypes,
+                    init_options = config.init_options,
+                })
+            end)
+        end
+
+        -- Mark the buffer as initialized
+        lsp_clients[buf] = true
+    end,
 })
