@@ -14,6 +14,8 @@ lazy.setup({
 			})
 		end,
 	},
+	{
+		"mateusfdl/yetanotherline",
 		config = function()
 			require("yetanotherline").setup()
 		end,
