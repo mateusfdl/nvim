@@ -18,8 +18,7 @@ M.reload_theme = function()
 	local mode_file = "/tmp/theme-mode"
 
 	if not uv.fs_stat(mode_file) then
-		vim.notify("Mode file not found. Defaulting to dark.", vim.log.levels.WARN)
-		M.switch_theme("onedark")
+		M.switch_theme(vim.env.DARK_THEME)
 		return
 	end
 
@@ -28,9 +27,9 @@ M.reload_theme = function()
 	uv.fs_close(fd)
 
 	if mode:match("light") then
-		M.switch_theme("onelight")
+		M.switch_theme(vim.env.LIGHT_THEME)
 	else
-		M.switch_theme("onedark")
+		M.switch_theme(vim.env.DARK_THEME)
 	end
 end
 
