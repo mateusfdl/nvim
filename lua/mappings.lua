@@ -95,15 +95,16 @@ end
 function M.AI()
 	vnoremap(
 		"<leader>gH",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = false, floating_window = true})<CR>"
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, floating_window = false, chat = true})<CR>"
 	)
-	vnoremap(
+	nnoremap(
 		"<leader>gH",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = false, floating_window = true})<CR>"
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, chat = true})<CR>"
 	)
+	nnoremap("<leader>Ac", ":lua require('schadenfreude').AttachChatToWin()<CR>")
 	vnoremap(
 		"<leader>gW",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, floating_window = false})<CR>"
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, floating_window = false, chat = false})<CR>"
 	)
 end
 
