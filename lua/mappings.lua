@@ -10,6 +10,7 @@ function M.system()
 	inoremap("<c-k>", "<Esc>:m .-2<CR>==gi")
 	vnoremap("<c-k>", ":m '<-2<CR>gv=gv")
 	inoremap("ii", "<esc>")
+	noremap("<esc>", "<esc>:nohl<CR><esc>")
 end
 
 function M.buffers()
