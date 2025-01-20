@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
         local lsp_configs = {
-            ts_ls = require("settings.lsp.tsserver"),
+            ts_ls = require("settings.lsp.ts_ls"),
             solargraph = require("settings.lsp.solargraph"),
             gopls = require("settings.lsp.golang"),
             hls = require("settings.lsp.haskell"),
