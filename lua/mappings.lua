@@ -109,6 +109,18 @@ function M.AI()
 	)
 end
 
+function M.dap()
+	nnoremap("<space>b", ":lua require('dap').toggle_breakpoint()<cr>")
+	nnoremap("<space>gb", ":lua require('dap').run_to_cursor()<cr>")
+	nnoremap("<space>c", ":lua require('dap').continue()<cr>")
+	nnoremap("<space>h", ":lua require('dap').step_into()<cr>")
+	nnoremap("<space>B", ":lua require('dap').step_over()<cr>")
+	nnoremap("<space><esc>", ":lua require('dap').step_out()<cr>")
+	nnoremap("<space>b", ":lua require('dap').step_back()<cr>")
+	nnoremap("<space>r", ":lua require('dap').restart()<cr>")
+	nnoremap("<space>?", ":lua require('dapui').eval(nil, { enter = true })<cr>")
+end
+
 function M.setup()
 	M.system()
 	M.telescope()
@@ -121,6 +133,7 @@ function M.setup()
 	M.lsp_diagnostic()
 	M.theme()
 	M.AI()
+	M.dap()
 end
 
 return M

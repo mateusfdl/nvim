@@ -221,4 +221,16 @@ lazy.setup({
 			require("settings.lsp.rust")
 		end,
 	},
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"leoluz/nvim-dap-go",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-neotest/nvim-nio",
+		},
+    config = function()
+      require("settings.dap")
+    end,
+	},
 }, require("settings.lazy-setup"))
