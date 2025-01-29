@@ -1,8 +1,66 @@
 local dap = require("dap")
-local ui = require("dapui")
+local dapui = require("dapui")
 
-require("dapui").setup()
 require("dap-go").setup()
+dapui.setup({
+	controls = {
+		element = "repl",
+		enabled = true,
+		icons = {
+			disconnect = "■",
+			pause = "",
+			play = "▶",
+			run_last = "≪",
+			step_back = "←",
+			step_into = "↓",
+			step_out = "↑",
+			step_over = "→",
+			terminate = "✗",
+		},
+	},
+	expand_lines = false,
+	icons = { expanded = "▾", collapsed = "▸" },
+	mappings = {
+		open = "o",
+		remove = "d",
+		edit = "e",
+		repl = "r",
+		toggle = "t",
+	},
+	layouts = {
+		{
+			elements = {
+				"scopes",
+				"repl",
+			},
+			size = 0.3,
+			position = "bottom",
+		},
+		{
+			elements = {
+				"breakpoints",
+			},
+			size = 0.1,
+			position = "left",
+		},
+	},
+	floating = {
+		max_height = nil,
+		max_width = nil,
+		border = "single",
+		mappings = {
+			close = { "q", "<Esc>" },
+		},
+	},
+	windows = { indent = 1 },
+	render = {
+		max_type_length = nil,
+	},
+})
+
+vim.fn.sign_define("DapBreakpoint", { text = "•" })
+
+require("dapui.config.highlights").setup()
 
 dap.configurations.lua = {
 	{
@@ -20,16 +78,16 @@ dap.configurations.lua = {
 }
 
 dap.listeners.before.attach.dapui_config = function()
-	ui.open()
+	dapui.open()
 end
 dap.listeners.before.launch.dapui_config = function()
-	ui.open()
+	dapui.open()
 end
 dap.listeners.before.event_terminated.dapui_config = function()
-	ui.close()
+	dapui.close()
 end
 dap.listeners.before.event_exited.dapui_config = function()
-	ui.close()
+	dapui.close()
 end
 
 -- Adapters
