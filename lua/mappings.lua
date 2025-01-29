@@ -96,21 +96,21 @@ end
 function M.AI()
 	vnoremap(
 		"<leader>gH",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, floating_window = false, chat = true})<CR>"
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', chat = true})<CR>"
 	)
 	nnoremap(
 		"<leader>gH",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, chat = true})<CR>"
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', chat = true})<CR>"
 	)
 	nnoremap("<leader>Ac", ":lua require('schadenfreude').AttachChatToWin()<CR>")
 	vnoremap(
 		"<leader>gW",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true, floating_window = false, chat = false})<CR>"
+		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true})<CR>"
 	)
 end
 
 function M.dap()
-	nnoremap("<space>b", ":lua require('dap').toggle_breakpoint()<cr>")
+	nnoremap("<space>a", ":lua require('dap').toggle_breakpoint()<cr>")
 	nnoremap("<space>gb", ":lua require('dap').run_to_cursor()<cr>")
 	nnoremap("<space>c", ":lua require('dap').continue()<cr>")
 	nnoremap("<space>h", ":lua require('dap').step_into()<cr>")
