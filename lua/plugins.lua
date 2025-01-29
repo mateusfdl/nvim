@@ -228,9 +228,10 @@ lazy.setup({
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
 			"nvim-neotest/nvim-nio",
+			"jbyuki/one-small-step-for-vimkind",
 		},
-    config = function()
-      require("settings.dap")
-    end,
+		config = function()
+			require("settings.dap")
+		end,
 	},
 }, require("settings.lazy-setup"))
