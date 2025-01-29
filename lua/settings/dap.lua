@@ -89,6 +89,9 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
 	dapui.close()
 end
+dap.listeners.before.event_disconnect.dapui_config = function()
+	dapui.close()
+end
 
 -- Adapters
 dap.adapters.nlua = function(callback, config)
