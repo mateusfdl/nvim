@@ -119,6 +119,8 @@ function M.dap()
 	nnoremap("<space>b", ":lua require('dap').step_back()<cr>")
 	nnoremap("<space>r", ":lua require('dap').restart()<cr>")
 	nnoremap("<space>?", ":lua require('dapui').eval(nil, { enter = true })<cr>")
+	nnoremap("<space>l", ":lua require('dapui').toggle()<cr>")
+	nnoremap("<space>S", ":lua require('dap').disconnect()<cr>")
 end
 
 function M.setup()
