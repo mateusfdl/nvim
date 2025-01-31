@@ -1,0 +1,5 @@
+((selector_expression operand: (identifier) @receiver) @receiver)
+((selector_expression field: (field_identifier) @method.name) @method)
+((argument_list (interpreted_string_literal) @string.arg) @string.arg)
+((argument_list (identifier) @identifier.arg) @identifier.arg)
+((argument_list (composite_literal) @composite.arg) @composite.arg)

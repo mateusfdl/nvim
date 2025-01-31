@@ -32,8 +32,9 @@ lazy.setup({
 		build = ":TSUpdate",
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
 		lazy = true,
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		config = function()
-			require("settings.nvim-treesitter")
+			require("settings.treesitter")
 		end,
 		init = require("utils.startup").lazy_load("nvim-treesitter"),
 	},
