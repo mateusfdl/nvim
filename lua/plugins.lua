@@ -243,5 +243,7 @@ lazy.setup({
 		"BufNewFile " .. vim.fn.expand("~") .. "/org/**/*.md",
 	},
 	dependencies = { "nvim-lua/plenary.nvim" },
-	opts = { workspaces = { { name = "personal", path = "~/org/Personal" } } },
+	config = function()
+		require("settings.obsidian")
+	end,
 }, require("settings.lazy-setup"))
