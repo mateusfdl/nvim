@@ -236,4 +236,12 @@ lazy.setup({
 			require("settings.dap")
 		end,
 	},
+	"epwalsh/obsidian.nvim",
+	lazy = true,
+	event = {
+		"BufReadPre " .. vim.fn.expand("~") .. "/org/**/*.md",
+		"BufNewFile " .. vim.fn.expand("~") .. "/org/**/*.md",
+	},
+	dependencies = { "nvim-lua/plenary.nvim" },
+	opts = { workspaces = { { name = "personal", path = "~/org/Personal" } } },
 }, require("settings.lazy-setup"))
