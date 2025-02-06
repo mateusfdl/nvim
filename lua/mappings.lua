@@ -11,6 +11,8 @@ function M.system()
 	vnoremap("<c-k>", ":m '<-2<CR>gv=gv")
 	inoremap("ii", "<esc>")
 	noremap("<esc>", "<esc>:nohl<CR><esc>")
+	nnoremap("<leader>cf", '<cmd>let @+ = expand("%")<CR>')
+	nnoremap("<leader>cp", '<cmd>let @+ = expand("%:p")<CR>')
 end
 
 function M.buffers()
@@ -145,7 +147,7 @@ function M.setup()
 	M.theme()
 	M.AI()
 	M.dap()
-  M.obsidian()
+	M.obsidian()
 end
 
 return M
