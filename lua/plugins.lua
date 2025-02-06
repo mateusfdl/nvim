@@ -244,6 +244,13 @@ lazy.setup({
 			"BufReadPre " .. vim.fn.expand("~") .. "/org/**/*.md",
 			"BufNewFile " .. vim.fn.expand("~") .. "/org/**/*.md",
 		},
+		cmd = {
+			"ObsidianNew",
+			"ObsidianNewNoteFromTemplate",
+			"ObsidianOpen",
+			"ObsidianSearch",
+			"ObsidianQuickSwitch",
+		},
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("settings.obsidian")

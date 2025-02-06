@@ -123,6 +123,15 @@ function M.dap()
 	nnoremap("<space>S", ":lua require('dap').disconnect()<cr>")
 end
 
+function M.obsidian()
+	nnoremap("<leader>oo", ":ObsidianOpen<CR>")
+	nnoremap("<leader>os", ":ObsidianSearch<CR>")
+	nnoremap("<leader>on", ":ObsidianNew<CR>")
+	nnoremap("<leader>ot", ":ObdisianTemplate notes<CR>")
+	nnoremap("<leader>od", ":ObsidianToday<CR>")
+	nnoremap("<leader>ft", ":ObsidianCalendar<CR>")
+end
+
 function M.setup()
 	M.system()
 	M.telescope()
@@ -136,6 +145,7 @@ function M.setup()
 	M.theme()
 	M.AI()
 	M.dap()
+  M.obsidian()
 end
 
 return M
