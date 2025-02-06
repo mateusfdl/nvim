@@ -135,3 +135,5 @@ require("nvim-tree").setup({
 		end
 	end,
 })
+
+require("extensions.tree").setup()

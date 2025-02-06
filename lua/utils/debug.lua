@@ -21,13 +21,13 @@ end
 
 P_nested_path = function(tbl, keys)
 	if #keys == 0 then
-		return M.P(tbl)
+		return P(tbl)
 	end
 	local key = keys[1]
 	if tbl[key] == nil then
 		return nil
 	end
-	return M.P_nested_path(tbl[key], { unpack(keys, 2) })
+	return P_nested_path(tbl[key], { unpack(keys, 2) })
 end
 
 return M
