@@ -236,14 +236,17 @@ lazy.setup({
 			require("settings.dap")
 		end,
 	},
-	"epwalsh/obsidian.nvim",
-	lazy = true,
-	event = {
-		"BufReadPre " .. vim.fn.expand("~") .. "/org/**/*.md",
-		"BufNewFile " .. vim.fn.expand("~") .. "/org/**/*.md",
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*",
+		lazy = true,
+		event = {
+			"BufReadPre " .. vim.fn.expand("~") .. "/org/**/*.md",
+			"BufNewFile " .. vim.fn.expand("~") .. "/org/**/*.md",
+		},
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("settings.obsidian")
+		end,
 	},
-	dependencies = { "nvim-lua/plenary.nvim" },
-	config = function()
-		require("settings.obsidian")
-	end,
 }, require("settings.lazy-setup"))
