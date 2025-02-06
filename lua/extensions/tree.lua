@@ -1,11 +1,12 @@
 require("utils.debug")
+local async = require("plenary.async")
 local M = {}
 
 local function go_fallback(args)
-	vim.defer_fn(function()
-		vim.cmd("silent !goimports -w " .. vim.fn.shellescape(args.new_name))
+	async.run(function()
+		vim.cmd("silent !goimports -w " .. args.cwd)
 		vim.cmd("edit")
-	end, 1 * 1000 * 60)
+	end)
 end
 
 local fallback_map = {
@@ -44,6 +45,7 @@ function M.sync_on_rename(args)
 				if resp.result ~= nil then
 					vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
 				elseif resp.err ~= nil then
+					args.cwd = vim.fn.getcwd()
 					if fallback_map[client.name] ~= nil then
 						fallback_map[client.name](args)
 					end
