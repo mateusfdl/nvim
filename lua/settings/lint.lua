@@ -3,7 +3,6 @@ local language_linters = {
 	typescript = { "eslint" },
 	json = { "eslint" },
 	yaml = { "eslint" },
-	markdown = { "markdownlint" },
 	lua = { "luacheck" },
 	go = { "golangcilint" },
 	gomod = { "golangcilint" },
