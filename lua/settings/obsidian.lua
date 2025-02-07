@@ -39,4 +39,8 @@ require("obsidian").setup({
 		folder = "Templates",
 		subdir = "Templates",
 	},
+	daily_notes = {
+		folder = "Journal",
+		template = "dayli.md",
+	},
 })
