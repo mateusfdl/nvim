@@ -250,6 +250,8 @@ lazy.setup({
 			"ObsidianOpen",
 			"ObsidianSearch",
 			"ObsidianQuickSwitch",
+			"ObsidianToday",
+			"ObsidianTemplate",
 		},
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()

@@ -129,9 +129,9 @@ function M.obsidian()
 	nnoremap("<leader>oo", ":ObsidianOpen<CR>")
 	nnoremap("<leader>os", ":ObsidianSearch<CR>")
 	nnoremap("<leader>on", ":ObsidianNew<CR>")
-	nnoremap("<leader>ot", ":ObdisianTemplate notes<CR>")
-	nnoremap("<leader>od", ":ObsidianToday<CR>")
-	nnoremap("<leader>ft", ":ObsidianCalendar<CR>")
+	nnoremap("<leader>oq", ":ObsidianQuickSwitch<CR>")
+	nnoremap("<leader>ot", ":ObsidianTemplate notes<CR>")
+	nnoremap("<leader>oj", ":ObsidianToday<CR>")
 end
 
 function M.setup()
