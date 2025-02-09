@@ -96,19 +96,10 @@ function M.theme()
 end
 
 function M.AI()
-	vnoremap(
-		"<leader>gH",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', chat = true})<CR>"
-	)
-	nnoremap(
-		"<leader>gH",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', chat = true})<CR>"
-	)
-	nnoremap("<leader>Ac", ":lua require('schadenfreude').AttachChatToWin()<CR>")
-	vnoremap(
-		"<leader>gW",
-		":lua require('schadenfreude').openai_write_answer_to_buffer({ vendor = 'groq', replace = true})<CR>"
-	)
+	nnoremap("<leader>Ac", ":lua require('schadenfreude').open_chat()<CR>")
+	vnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ vendor = 'groq', chat = true})<CR>")
+	nnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ vendor = 'groq', chat = true})<CR>")
+	vnoremap("<leader>gW", ":lua require('schadenfreude').send_message({ vendor = 'groq', replace = true})<CR>")
 end
 
 function M.dap()
