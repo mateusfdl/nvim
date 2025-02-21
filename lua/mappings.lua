@@ -99,6 +99,7 @@ function M.AI()
 	nnoremap("<leader>Ac", ":lua require('schadenfreude').open_chat()<CR>")
 	vnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ vendor = 'groq', chat = true})<CR>")
 	nnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ vendor = 'groq', chat = true})<CR>")
+	nnoremap("<leader>gS", ":lua require('schadenfreude').select_model()<CR>")
 	vnoremap("<leader>gW", ":lua require('schadenfreude').send_message({ vendor = 'groq', replace = true})<CR>")
 end
 

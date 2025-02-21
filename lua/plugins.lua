@@ -4,16 +4,9 @@ lazy.setup({
 	{
 		"mateusfdl/schadenfreude.nvim",
 		config = function()
-			require("schadenfreude").setup({
-				gpt = {
-					api_key = vim.fn.getenv("GPT_API_KEY"),
-				},
-				groq = {
-					model = "llama-3.3-70b-versatile",
-					api_key = vim.fn.getenv("GROQ_API_KEY"),
-				},
-			})
+			require("settings.schadenfreude")
 		end,
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
 	},
 	{
 		"mateusfdl/yetanotherline",
