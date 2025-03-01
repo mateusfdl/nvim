@@ -1,3 +1,36 @@
+local M = {}
+
+M.languages = {
+	"cpp",
+	"c",
+	"bash",
+	"lua",
+	"rust",
+	"json",
+	"ruby",
+	"go",
+	"typescript",
+	"javascript",
+	"proto",
+	"elixir",
+	"tsx",
+	"yaml",
+	"css",
+	"html",
+	"scss",
+	"haskell",
+	"toml",
+	"vimdoc",
+	"luadoc",
+	"vim",
+	"markdown",
+	"scheme",
+	"python",
+	"java",
+	"swift",
+	"query",
+}
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = M.languages,
 	highlight = {
@@ -68,35 +101,3 @@ require("nvim-treesitter.configs").setup({
 	endwise = { enable = true },
 	autotag = { enable = true },
 })
-
-local M = {}
-
-M.languages = {
-	"cpp",
-	"c",
-	"bash",
-	"lua",
-	"rust",
-	"json",
-	"ruby",
-	"go",
-	"typescript",
-	"javascript",
-	"proto",
-	"elixir",
-	"tsx",
-	"yaml",
-	"css",
-	"html",
-	"scss",
-	"haskell",
-	"toml",
-	"vimdoc",
-	"luadoc",
-	"vim",
-	"markdown",
-}
-
-if vim.loop.os_uname().sysname == "Darwin" then
-	table.insert(M.languages, "swift")
-end
