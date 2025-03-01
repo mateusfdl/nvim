@@ -44,5 +44,5 @@ require("schadenfreude").setup({
 			url = "https://api.anthropic.com/v1/messages",
 		},
 	},
-	selected_provider = "qwen",
+	selected_provider = "sonnet",
 })
