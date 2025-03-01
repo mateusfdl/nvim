@@ -39,6 +39,7 @@ function M.lua_auto_cmds()
 	options.listchars = { tab = "->", trail = "·", space = "·", lead = "·" }
 	options.fillchars = {
 		vert = "|",
+		horiz = "━",
 	}
 	options.list = false
 	options.shortmess:append("sI")

@@ -26,7 +26,7 @@ local defaults = {
 	NormalFloat = { bg = colors.darker_black },
 
 	NvimInternalError = { fg = colors.red },
-	WinSeparator = { fg = colors.black },
+	WinSeparator = { fg = colors.grey },
 
 	Normal = {
 		fg = theme.base05,
