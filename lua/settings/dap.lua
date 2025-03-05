@@ -58,7 +58,8 @@ dapui.setup({
 	},
 })
 
-vim.fn.sign_define("DapBreakpoint", { text = "•" })
+vim.fn.sign_define("DapBreakpoint", { text = "•", texthl = "DapBreakpointText", linehl = "" })
+vim.fn.sign_define("DapStopped", { text = "|>", texthl = "DapStoppedText", linehl = "DapStoppedLine" })
 
 require("dapui.config.highlights").setup()
 
