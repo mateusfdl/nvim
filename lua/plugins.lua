@@ -6,7 +6,7 @@ lazy.setup({
 		config = function()
 			require("settings.schadenfreude")
 		end,
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 	},
 	{
 		"mateusfdl/yetanotherline",
