@@ -97,10 +97,10 @@ end
 
 function M.AI()
 	nnoremap("<leader>Ac", ":lua require('schadenfreude').open_chat()<CR>")
-	vnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ vendor = 'groq', chat = true})<CR>")
-	nnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ vendor = 'groq', chat = true})<CR>")
-	nnoremap("<leader>gS", ":lua require('schadenfreude').select_model()<CR>")
-	vnoremap("<leader>gW", ":lua require('schadenfreude').send_message({ vendor = 'groq', replace = true})<CR>")
+	vnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ chat = true})<CR>")
+	nnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ chat = true})<CR>")
+	vnoremap("<leader>gh", ":<C-u>SendToChat<CR>")
+	vnoremap("<leader>gW", ":<C-u>RefactorCode<CR>")
 end
 
 function M.dap()
