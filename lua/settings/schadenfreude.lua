@@ -44,5 +44,14 @@ require("schadenfreude").setup({
 			url = "https://api.anthropic.com/v1/messages",
 		},
 	},
+	{
+		provider = "local-qwen",
+		interface = "openai",
+		api_key = "",
+		options = {
+			model = "qwen2.5-coder-14b-instruct",
+			url = "http://desktop:1234/v1/chat/completions",
+		},
+	},
 	selected_provider = "sonnet",
 })
