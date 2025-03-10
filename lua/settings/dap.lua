@@ -1,7 +1,10 @@
 local dap = require("dap")
 local dapui = require("dapui")
+require("dapui.config.highlights").setup()
+require("settings.dap.go")
+require("settings.dap.node")
+require("settings.dap.lua")
 
-require("dap-go").setup()
 dapui.setup({
 	controls = {
 		element = "repl",
@@ -39,6 +42,7 @@ dapui.setup({
 		{
 			elements = {
 				"breakpoints",
+				"stacks",
 			},
 			size = 0.1,
 			position = "left",
@@ -58,26 +62,6 @@ dapui.setup({
 	},
 })
 
-vim.fn.sign_define("DapBreakpoint", { text = "•", texthl = "DapBreakpointText", linehl = "" })
-vim.fn.sign_define("DapStopped", { text = "|>", texthl = "DapStoppedText", linehl = "DapStoppedLine" })
-
-require("dapui.config.highlights").setup()
-
-dap.configurations.lua = {
-	{
-		type = "nlua",
-		request = "attach",
-		name = "Run this file",
-		start_neovim = {},
-	},
-	{
-		type = "nlua",
-		request = "attach",
-		name = "Attach to running Neovim instance (port = 8086)",
-		port = 8086,
-	},
-}
-
 dap.listeners.before.attach.dapui_config = function()
 	dapui.open()
 end
@@ -94,21 +78,5 @@ dap.listeners.before.event_disconnect.dapui_config = function()
 	dapui.close()
 end
 
--- Adapters
-dap.adapters.nlua = function(callback, config)
-	local adapter = {
-		type = "server",
-		host = config.host or "127.0.0.1",
-		port = config.port or 8086,
-	}
-	if config.start_neovim then
-		local dap_run = dap.run
-		dap.run = function(c)
-			adapter.port = c.port
-			adapter.host = c.host
-		end
-		require("osv").run_this()
-		dap.run = dap_run
-	end
-	callback(adapter)
-end
+vim.fn.sign_define("DapBreakpoint", { text = "•", texthl = "DapBreakpointText", linehl = "" })
+vim.fn.sign_define("DapStopped", { text = "|>", texthl = "DapStoppedText", linehl = "DapStoppedLine" })

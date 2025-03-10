@@ -220,6 +220,7 @@ lazy.setup({
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"leoluz/nvim-dap-go",
+			"mxsdev/nvim-dap-vscode-js",
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
 			"nvim-neotest/nvim-nio",
