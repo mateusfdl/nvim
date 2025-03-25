@@ -47,7 +47,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			name = "TS-Node - Launch Current File",
 			cwd = vim.fn.getcwd(),
 			runtimeExecutable = "node",
-			runtimeArgs = { "--loader", "ts-node/esm" },
+			runtimeArgs = { "--nolazy", "-r", "ts-node/register", "-r", "tsconfig-paths/register" },
 			args = { "${file}" },
 			sourceMaps = true,
 			skipFiles = { "<node_internals>/**", "node_modules/**" },
