@@ -40,7 +40,6 @@ local item_kinds = {
 	CmpItemKindEvent = { fg = colors.yellow },
 	CmpItemKindOperator = { fg = base16.base05 },
 	CmpItemKindTypeParameter = { fg = base16.base08 },
-	CmpItemKindCopilot = { fg = colors.green },
 	CmpItemKindCodeium = { fg = colors.vibrant_green },
 	CmpItemKindTabNine = { fg = colors.baby_pink },
 }

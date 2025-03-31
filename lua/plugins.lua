@@ -135,13 +135,6 @@ lazy.setup({
 		event = { "BufReadPre", "BufWritePost", "InsertEnter" },
 	},
 	{
-		"zbirenbaum/copilot.lua",
-		event = { "BufReadPre", "BufWritePost", "InsertEnter" },
-		config = function()
-			require("settings.copilot")
-		end,
-	},
-	{
 		"hrsh7th/vim-vsnip",
 		lazy = true,
 		init = require("utils.startup").lazy_load("vim-vsnip"),

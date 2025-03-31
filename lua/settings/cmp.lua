@@ -65,9 +65,7 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function()
-			if require("copilot.suggestion").is_visible() then
-				require("copilot.suggestion").accept()
-			elseif cmp.visible() then
+			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
 				feedkey("<Plug>(vsnip-jump-prev)", "")
