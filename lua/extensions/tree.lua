@@ -1,4 +1,3 @@
-require("utils.debug")
 local async = require("plenary.async")
 local M = {}
 
@@ -37,7 +36,7 @@ function M.sync_on_rename(args)
 		} },
 	}
 
-	local clients = (vim.lsp.get_clients or vim.lsp.get_active_clients)()
+	local clients = (vim.lsp.get_clients)()
 	for _, client in ipairs(clients) do
 		if client.supports_method("workspace/willRenameFiles") then
 			local resp = client.request_sync("workspace/willRenameFiles", changes, 1000, 0)
