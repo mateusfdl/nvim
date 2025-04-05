@@ -245,4 +245,17 @@ lazy.setup({
 			require("settings.obsidian")
 		end,
 	},
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("settings.neogit")
+		end,
+		lazy = true,
+		cmd = { "Neogit" },
+	},
 }, require("settings.lazy-setup"))
