@@ -6,7 +6,6 @@ require("schadenfreude").setup({
 		options = {
 			model = "llama-3.3-70b-versatile",
 			url = "https://api.groq.com/openai/v1/chat/completions",
-			debug = true,
 			debug_log_file = vim.fn.stdpath("data") .. "/schadenfreude_debug.log", -- Optional, custom log file path
 		},
 	},
@@ -15,9 +14,8 @@ require("schadenfreude").setup({
 		interface = "openai",
 		api_key = vim.fn.getenv("GROQ_API_KEY"),
 		options = {
-			model = "deepseek-r1-distill-llama-70b-specdec",
+			model = "deepseek-r1-distill-qwen-32b",
 			url = "https://api.groq.com/openai/v1/chat/completions",
-			debug = true,
 			debug_log_file = vim.fn.stdpath("data") .. "/schadenfreude_debug.log", -- Optional, custom log file path
 		},
 	},
@@ -28,7 +26,6 @@ require("schadenfreude").setup({
 		options = {
 			model = "llama-3.3-70b-specdec",
 			url = "https://api.groq.com/openai/v1/chat/completions",
-			debug = true,
 			debug_log_file = vim.fn.stdpath("data") .. "/schadenfreude_debug.log", -- Optional, custom log file path
 		},
 	},
@@ -39,7 +36,6 @@ require("schadenfreude").setup({
 		options = {
 			model = "deepseek/deepseek-chat-v3-0324:free",
 			url = "https://openrouter.ai/api/v1/chat/completions",
-			debug = true,
 			debug_log_file = vim.fn.stdpath("data") .. "/schadenfreude_debug.log", -- Optional, custom log file path
 		},
 	},
@@ -50,7 +46,6 @@ require("schadenfreude").setup({
 		options = {
 			model = "google/gemini-2.0-flash-001",
 			url = "https://openrouter.ai/api/v1/chat/completions",
-			debug = true,
 			debug_log_file = vim.fn.stdpath("data") .. "/schadenfreude_debug.log", -- Optional, custom log file path
 		},
 	},
