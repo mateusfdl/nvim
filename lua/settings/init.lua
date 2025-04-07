@@ -26,7 +26,7 @@ function M.lua_auto_cmds()
 	options.termguicolors = true
 	options.cursorline = true
 	options.autoread = true
-	options.guicursor = "v-c-sm:ver25,n-i-ci-ve:ver25,r-cr-o:ver20"
+	options.guicursor = "v-c-sm:block,n-i-ci-ve:block25,r-cr-o:block20"
 	options.ruler = true
 	options.laststatus = 2
 	options.scrolloff = 3
