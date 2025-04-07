@@ -114,7 +114,8 @@ function M.dap()
 	nnoremap("<space>r", ":lua require('dap').restart()<cr>")
 	nnoremap("<space>?", ":lua require('dapui').eval(nil, { enter = true })<cr>")
 	nnoremap("<space>l", ":lua require('dapui').toggle()<cr>")
-	nnoremap("<space>S", ":lua require('dap').disconnect()<cr>")
+	nnoremap("<space>S", ":lua require('dap').terminate()<cr>")
+	nnoremap("<space>s", ":lua require('dap').disconnect()<cr>")
 end
 
 function M.obsidian()

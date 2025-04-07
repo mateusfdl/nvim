@@ -8,7 +8,7 @@ local highlights = {
 		fg = colors.yellow,
 	},
 	DapStoppedLine = {
-		bg = colors.black2,
+		bg = colors.yellow,
 	},
 }
 

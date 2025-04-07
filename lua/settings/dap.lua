@@ -9,17 +9,6 @@ dapui.setup({
 	controls = {
 		element = "repl",
 		enabled = true,
-		icons = {
-			disconnect = "■",
-			pause = "",
-			play = "▶",
-			run_last = "≪",
-			step_back = "←",
-			step_into = "↓",
-			step_out = "↑",
-			step_over = "→",
-			terminate = "✗",
-		},
 	},
 	expand_lines = false,
 	icons = { expanded = "▾", collapsed = "▸" },
@@ -34,19 +23,25 @@ dapui.setup({
 		{
 			elements = {
 				"scopes",
-				"repl",
-			},
-			size = 0.3,
-			position = "bottom",
-		},
-		{
-			elements = {
 				"breakpoints",
 				"stacks",
+				"watches",
 			},
-			size = 0.1,
+			size = 80,
 			position = "left",
 		},
+		{
+			elements = { "repl" },
+			size = 0.25,
+			position = "bottom",
+		},
+	},
+	render = {
+		max_value_lines = 3,
+		max_type_length = nil,
+		sort_variables = function(a, b)
+			return a.name < b.name
+		end,
 	},
 	floating = {
 		max_height = nil,
@@ -57,9 +52,6 @@ dapui.setup({
 		},
 	},
 	windows = { indent = 1 },
-	render = {
-		max_type_length = nil,
-	},
 })
 
 dap.listeners.before.attach.dapui_config = function()
