@@ -98,5 +98,14 @@ require("schadenfreude").setup({
 			url = "http://desktop:1234/v1/chat/completions",
 		},
 	},
-	selected_provider = "llmama",
+	{
+		provider = "quasar",
+		interface = "openai",
+		api_key = vim.fn.getenv("OPEN_ROUTER_KEY"),
+		options = {
+			model = "openrouter/quasar-alpha",
+			url = "https://openrouter.ai/api/v1/chat/completions",
+		},
+	},
+	selected_provider = "deepseek-v3",
 })
