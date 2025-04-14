@@ -222,6 +222,7 @@ lazy.setup({
 		config = function()
 			require("settings.dap")
 		end,
+		lazy = true,
 	},
 	{
 		"epwalsh/obsidian.nvim",
