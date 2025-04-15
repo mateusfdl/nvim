@@ -29,7 +29,7 @@ function M.lua_auto_cmds()
 	options.guicursor = "v-c-sm:block,n-i-ci-ve:block25,r-cr-o:block20"
 	options.ruler = true
 	options.laststatus = 2
-	options.scrolloff = 3
+	options.scrolloff = 999
 	options.shiftwidth = 2
 	options.softtabstop = 2
 	options.tabstop = 2
