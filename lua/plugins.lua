@@ -259,4 +259,10 @@ lazy.setup({
 		lazy = true,
 		cmd = { "Neogit" },
 	},
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({})
+		end,
+	},
 }, require("settings.lazy-setup"))
