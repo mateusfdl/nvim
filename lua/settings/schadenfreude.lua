@@ -58,7 +58,7 @@ require("schadenfreude").setup({
 		interface = "openai",
 		api_key = vim.fn.getenv("GROQ_API_KEY"),
 		options = {
-			model = "qwen-2.5-coder-32b",
+			model = "qwen-qwq-32b",
 			url = "https://api.groq.com/openai/v1/chat/completions",
 		},
 	},
@@ -90,15 +90,6 @@ require("schadenfreude").setup({
 		},
 	},
 	{
-		provider = "local-qwen",
-		interface = "openai",
-		api_key = "fooooo",
-		options = {
-			model = "qwen2.5-coder-14b-instruct",
-			url = "http://desktop:1234/v1/chat/completions",
-		},
-	},
-	{
 		provider = "quasar",
 		interface = "openai",
 		api_key = vim.fn.getenv("OPEN_ROUTER_KEY"),
@@ -107,5 +98,14 @@ require("schadenfreude").setup({
 			url = "https://openrouter.ai/api/v1/chat/completions",
 		},
 	},
-	selected_provider = "deepseek-v3",
+	{
+		provider = "local-qwen",
+		interface = "openai",
+		api_key = "fooooo",
+		options = {
+			model = "qwen2.5-coder-14b-instruct",
+			url = "http://desktop:1234/v1/chat/completions",
+		},
+	},
+	selected_provider = "qwen",
 })
