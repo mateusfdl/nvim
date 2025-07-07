@@ -77,17 +77,14 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
-		{ name = "vsnip" },
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lua" },
-		{ name = "vsnip" },
-		{ name = "supermaven" },
-		{ name = "treesitter" },
-		{ name = "path", option = { trailing_slash = true } },
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "npm", keyword_length = 2 },
+		{ name = "nvim_lsp", priority = 1000 },
+		{ name = "vsnip", priority = 750 },
+		{ name = "nvim_lua", priority = 600 },
+		{ name = "path", option = { trailing_slash = true }, priority = 500 },
+		{ name = "nvim_lsp_signature_help", priority = 450 },
+		{ name = "npm", keyword_length = 2, priority = 400 },
 	}, {
-		{ name = "buffer" },
+		{ name = "buffer", priority = 300 },
 	}),
 	formatting = {
 		format = function(entry, vim_item)
@@ -95,7 +92,7 @@ cmp.setup({
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
 				vsnip = "[Snippet]",
-				AI = "[AI]",
+				nvim_lsp_signature_help = "[LSP]",
 				path = "[Path]",
 				buffer = "[Buffer]",
 				nvim_lua = "[Lua]",

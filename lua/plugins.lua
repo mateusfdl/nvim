@@ -64,10 +64,18 @@ lazy.setup({
 		event = "BufReadPre",
 	},
 	{
-		"neovim/nvim-lspconfig",
-		lazy = true,
-		init = require("utils.startup").lazy_load("nvim-lspconfig"),
-		dependencies = { "hrsh7th/vim-vsnip" },
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
+		config = function()
+			require("settings.mason")
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		config = function()
+			require("settings.mason-lspconfig")
+		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -81,6 +89,9 @@ lazy.setup({
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-vsnip",
+			"supermaven-inc/supermaven-nvim",
 		},
 	},
 	{
@@ -202,14 +213,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"simrat39/rust-tools.nvim",
-		event = "BufReadPre",
-		ft = "rust",
-		config = function()
-			require("settings.lsp.rust")
-		end,
-	},
-	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"leoluz/nvim-dap-go",
@@ -262,7 +265,14 @@ lazy.setup({
 	{
 		"supermaven-inc/supermaven-nvim",
 		config = function()
-			require("supermaven-nvim").setup({})
+			require("supermaven-nvim").setup({
+				keymaps = {
+					accept_suggestion = "<Tab>",
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
+			})
 		end,
+		dependencies = { "hrsh7th/nvim-cmp" },
 	},
 }, require("settings.lazy-setup"))
