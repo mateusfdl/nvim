@@ -34,22 +34,24 @@ function M.telescope()
 end
 
 function M.lsp()
-	nnoremap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-	nnoremap("gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-	nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-	nnoremap("gf", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-	nnoremap("gF", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
-	nnoremap("gG", "<cmd>lua require('conform').format({ lsp_fallback = true, timeout = 500, async = true})<CR>")
-	nnoremap("gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-	nnoremap("gR", "<cmd>lua vim.lsp.buf.rename()<CR>")
-	nnoremap("gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-	nnoremap("gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-	nnoremap("gT", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+	nnoremap("gd", vim.lsp.buf.definition)
+	nnoremap("gD", vim.lsp.buf.declaration)
+	nnoremap("K", vim.lsp.buf.hover)
+	nnoremap("gf", vim.lsp.buf.document_symbol)
+	nnoremap("gF", vim.lsp.buf.workspace_symbol)
+	nnoremap("gr", vim.lsp.buf.references)
+	nnoremap("gR", vim.lsp.buf.rename)
+	nnoremap("gi", vim.lsp.buf.implementation)
+	nnoremap("gt", vim.lsp.buf.type_definition)
+	nnoremap("gT", vim.lsp.buf.code_action)
 	nnoremap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+	nnoremap("ge", vim.diagnostic.open_float)
+	nnoremap("gE", vim.diagnostic.setloclist)
 	nnoremap(
 		"gs",
 		"<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>"
 	)
+	nnoremap("gG", "<cmd>lua require('conform').format({ lsp_fallback = true, timeout = 500, async = true})<CR>")
 end
 
 function M.float_term()
