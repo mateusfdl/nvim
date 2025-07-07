@@ -14,51 +14,51 @@ local buf_set_keybind = function(bufnr, mode, lhs, rhs, opts)
 	})
 end
 
-local function map(bind, command)
+function map(bind, command)
 	set_keybind("", bind, command)
 end
 
-local function smap(bind, command)
+function smap(bind, command)
 	set_keybind("s", bind, command)
 end
 
-local function imap(bind, command)
+function imap(bind, command)
 	set_keybind("i", bind, command)
 end
 
-local function nmap(bind, command)
+function nmap(bind, command)
 	set_keybind("n", bind, command)
 end
 
-local function omap(bind, command)
+function omap(bind, command)
 	set_keybind("o", bind, command)
 end
 
-local function xmap(bind, command)
+function xmap(bind, command)
 	set_keybind("x", bind, command)
 end
 
-local function noremap(bind, command)
+function noremap(bind, command)
 	set_keybind("", bind, command, { noremap = true })
 end
 
-local function inoremap(bind, command)
+function inoremap(bind, command)
 	set_keybind("i", bind, command, { noremap = true })
 end
 
-local function nnoremap(bind, command)
+function nnoremap(bind, command)
 	set_keybind("n", bind, command, { noremap = true })
 end
 
-local function vnoremap(bind, command)
+function vnoremap(bind, command)
 	set_keybind("v", bind, command, { noremap = true })
 end
 
-local function xnoremap(bind, command)
+function xnoremap(bind, command)
 	set_keybind("x", bind, command, { noremap = true })
 end
 
-local function tnoremap(bind, command)
+function tnoremap(bind, command)
 	set_keybind("t", bind, command, { noremap = true })
 end
 
@@ -67,13 +67,10 @@ return {
 	nmap = nmap,
 	omap = omap,
 	xmap = xmap,
-	map = map,
-	smap = smap,
 	noremap = noremap,
 	inoremap = inoremap,
 	nnoremap = nnoremap,
 	vnoremap = vnoremap,
 	xnoremap = xnoremap,
-	tnoremap = tnoremap,
 	buf_set_keybind = buf_set_keybind,
 }
