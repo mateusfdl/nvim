@@ -5,7 +5,7 @@ local set_keybind = function(mode, lhs, rhs, opts)
 		options = vim.tbl_extend("force", options, opts)
 	end
 
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	vim.keymap.set(mode, lhs, rhs, options)
 end
 
 local buf_set_keybind = function(bufnr, mode, lhs, rhs, opts)
