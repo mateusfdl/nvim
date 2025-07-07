@@ -2,6 +2,9 @@ require("utils.mappings")
 
 local M = {}
 
+M.cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" }
+
+
 _G.organize_imports = function()
 	vim.lsp.buf.execute_command({
 		command = "_typescript.organizeImports",
@@ -46,15 +49,14 @@ _G.rename_file = function()
 end
 
 function M.on_attach(_, bufnr)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":lua organize_imports()<CR>", { silent = true, noremap = true })
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Rn", ":lua rename_file()<CR>", { silent = true, noremap = true })
+	vim.keymap.set("n", "gs", ":lua organize_imports()<CR>", { buffer = bufnr, silent = true, noremap = true })
+	vim.keymap.set("n", "<leader>Rn", ":lua rename_file()<CR>", { buffer = bufnr, silent = true, noremap = true })
 end
 
 M.init_options = {
 	plugins = {
 		{
 			name = "@vue/typescript-plugin",
-			--location = "/home/matheus/.local/share/mise/shims/vue-language-server",
 			location = vim.system({ "which", "vue-language-server" }):wait().stdout:gsub("\n", ""),
 			languages = { "typescript", "vue" },
 		},

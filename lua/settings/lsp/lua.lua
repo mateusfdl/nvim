@@ -1,5 +1,7 @@
 local M = {}
 
+M.cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" }
+
 M.settings = {
 	Lua = {
 		diagnostics = {

@@ -1,9 +1,10 @@
 local M = {}
 
-function M.attacher(client)
-	client.resolved_capabilities.document_formatting = false
-	client.resolved_capabilities.document_range_formatting = false
+M.cmd = { vim.fn.stdpath("data") .. "/mason/bin/gopls" }
 
+function M.on_attach(client, _)
+	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
 end
 
 M.settings = {
