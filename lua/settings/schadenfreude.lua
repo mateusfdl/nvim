@@ -11,7 +11,7 @@ require("schadenfreude").setup({
 	{
 		provider = "gemma",
 		interface = "openai",
-		api_key = vim.fn.getenv("GEMINI"),
+		api_key = vim.fn.getenv("GEMINI_API_KEY"),
 		options = {
 			model = "gemini-2.5-pro",
 			url = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
