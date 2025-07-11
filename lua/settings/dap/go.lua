@@ -1,15 +1,16 @@
 local dap = require("dap")
 local dap_go = require("dap-go")
-dap_go.setup()
 
-dap.adapters.go = {
+dap.adapters.delve = {
 	type = "server",
 	port = "${port}",
 	executable = {
-		command = "dlv",
+		command = "delve",
 		args = { "dap", "-l", "127.0.0.1:${port}" },
 	},
 }
+
+dap_go.setup()
 --
 -- dap.configurations.go = {
 -- 	{

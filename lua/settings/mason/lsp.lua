@@ -227,4 +227,3 @@ for server_name, server_info in pairs(server_configs) do
 		end,
 	})
 end
-

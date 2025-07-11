@@ -1,5 +1,21 @@
 local dap = require("dap")
+
+dap.adapters["lua-debug-adapter"] = {
+	type = "server",
+	host = "localhost",
+	port = "${port}",
+	executable = {
+		command = "lua-debug-adapter",
+		args = { "${port}" },
+	},
+}
 dap.configurations.lua = {
+	{
+		type = "lua-debug-adapter",
+		request = "launch",
+		name = "Launch Lua script",
+		program = "${file}",
+	},
 	{
 		type = "nlua",
 		request = "attach",
