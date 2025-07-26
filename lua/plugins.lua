@@ -269,17 +269,17 @@ lazy.setup({
 		lazy = true,
 		cmd = { "Neogit" },
 	},
-	{
-		"supermaven-inc/supermaven-nvim",
-		config = function()
-			require("supermaven-nvim").setup({
-				keymaps = {
-					accept_suggestion = "<Tab>",
-					clear_suggestion = "<C-]>",
-					accept_word = "<C-j>",
-				},
-			})
-		end,
-		dependencies = { "hrsh7th/nvim-cmp" },
-	},
+	-- {
+	-- 	"supermaven-inc/supermaven-nvim",
+	-- 	config = function()
+	-- 		require("supermaven-nvim").setup({
+	-- 			keymaps = {
+	-- 				accept_suggestion = "<Tab>",
+	-- 				clear_suggestion = "<C-]>",
+	-- 				accept_word = "<C-j>",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- 	dependencies = { "hrsh7th/nvim-cmp" },
+	-- },
 }, require("settings.lazy-setup"))
