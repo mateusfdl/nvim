@@ -1,40 +1,39 @@
 local dap = require("dap")
 local dap_utils = require("dap.utils")
 
-dap.adapters["js-debug-adapter"] = {
-	type = "server",
-	host = "localhost",
-	port = "${port}",
-	executable = {
-		command = "js-debug-adapter",
-		args = { "${port}" },
-	},
-}
+for _, adapterType in ipairs({ "node", "chrome", "msedge", "node-terminal", "extensionHost" }) do
+	local pwaType = "pwa-" .. adapterType
 
-dap.adapters["node-debug2-adapter"] = {
-	type = "server",
-	host = "localhost",
-	port = "${port}",
-	executable = {
-		command = "node-debug2-adapter",
-		args = { "${port}" },
-	},
-}
+	dap.adapters[pwaType] = {
+		type = "server",
+		host = "localhost",
+		port = "${port}",
+		executable = {
+			command = "node",
+			args = {
+				os.getenv("HOME") .. "/.DAP/js-debug/src/dapDebugServer.js",
+				"${port}",
+			},
+		},
+	}
 
-dap.adapters["chrome-debug-adapter"] = {
-	type = "server",
-	host = "localhost",
-	port = "${port}",
-	executable = {
-		command = "chrome-debug-adapter",
-		args = { "${port}" },
-	},
-}
+	dap.adapters[adapterType] = function(cb, config)
+		local nativeAdapter = dap.adapters[pwaType]
+
+		config.type = pwaType
+
+		if type(nativeAdapter) == "function" then
+			nativeAdapter(cb, config)
+		else
+			cb(nativeAdapter)
+		end
+	end
+end
 
 for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescriptreact", "vue", "svelte" }) do
 	dap.configurations[ext] = {
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "Node - Launch Program",
 			cwd = vim.fn.getcwd(),
@@ -43,7 +42,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			protocol = "inspector",
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "TS-Node - Launch Current File",
 			cwd = vim.fn.getcwd(),
@@ -55,7 +54,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			resolveSourceMapLocations = { "${workspaceFolder}/**", "${workspaceFolder}/node_modules/**" },
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "Denon - Run file",
 			cwd = vim.fn.getcwd(),
@@ -64,7 +63,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			attachSimplePort = 9229,
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "Jest - Run test",
 			cwd = vim.fn.getcwd(),
@@ -81,7 +80,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			protocol = "inspector",
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "Vitest - Run test",
 			cwd = vim.fn.getcwd(),
@@ -93,7 +92,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			skipFiles = { "<node_internals>/**", "node_modules/**" },
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "Deno - Run test",
 			cwd = vim.fn.getcwd(),
@@ -104,7 +103,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			attachSimplePort = 9229,
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "JAPA - Run test",
 			cwd = vim.fn.getcwd(),
@@ -121,7 +120,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			},
 		},
 		{
-			type = "chrome-debug-adapter",
+			type = "pwa-chrome",
 			request = "attach",
 			name = "Chrome - Attach",
 			cwd = vim.fn.getcwd(),
@@ -133,7 +132,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			urlFilter = "*",
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "attach",
 			name = "Node - PID Attach",
 			cwd = vim.fn.getcwd(),
@@ -141,7 +140,7 @@ for _, ext in ipairs({ "javascript", "typescript", "javascriptreact", "typescrip
 			skipFiles = { "<node_internals>/**" },
 		},
 		{
-			type = "js-debug-adapter",
+			type = "pwa-node",
 			request = "launch",
 			name = "Debug Nest Application",
 			args = { "/src/main.ts" },
