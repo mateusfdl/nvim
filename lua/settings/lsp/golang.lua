@@ -19,7 +19,8 @@ M.settings = {
 M.capabilities = {
 	workspace = {
 		didChangeWatchedFiles = {
-			dynamicRegistration = true,
+			-- for some reason its frozens VIM
+			dynamicRegistration = false,
 		},
 	},
 	textDocument = {
