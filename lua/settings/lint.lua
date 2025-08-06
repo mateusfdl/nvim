@@ -12,7 +12,7 @@ local language_linters = {
 	cpp = { "clangtidy" },
 	cmake = { "cmaketidy" },
 	make = { "cmaketidy" },
-	dockerfile = { "dockerlint" },
+	dockerfile = { "hadolint" },
 	bash = { "shellcheck" },
 	swift = { "swiftlint" },
 }
