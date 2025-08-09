@@ -8,7 +8,7 @@ mason_nvim_dap.setup({
 		"chrome-debug-adapter",
 		"lua-debug-adapter",
 		"nlua",
+		"codelldb",
 	},
 	automatic_installation = true,
 })
-
