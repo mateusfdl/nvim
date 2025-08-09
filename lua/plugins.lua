@@ -2,11 +2,12 @@ local lazy = require("lazy")
 
 lazy.setup({
 	{
-		"mateusfdl/schadenfreude.nvim",
+		-- "mateusfdl/schadenfreude.nvim",
+		dir = "~/Documents/codes/schadenfreude.nvim",
 		config = function()
 			require("settings.schadenfreude")
 		end,
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter", "rcarriga/nvim-notify" },
 	},
 	{
 		"mateusfdl/yetanotherline",
@@ -39,9 +40,7 @@ lazy.setup({
 			require("utils.startup").lazy_load("popup.nvim")
 		end,
 	},
-	{
-		"nvim-lua/plenary.nvim",
-	},
+	{ "nvim-lua/plenary.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
@@ -98,7 +97,6 @@ lazy.setup({
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-vsnip",
-			"supermaven-inc/supermaven-nvim",
 		},
 	},
 	{
@@ -143,14 +141,6 @@ lazy.setup({
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-	},
-	{
-		"folke/neodev.nvim",
-		event = "BufReadPre",
-	},
-	{
-		"wakatime/vim-wakatime",
-		event = { "BufReadPre", "BufWritePost", "InsertEnter" },
 	},
 	{
 		"hrsh7th/vim-vsnip",
@@ -211,15 +201,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"David-Kunz/cmp-npm",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		event = "InsertEnter",
-		ft = "json",
-		config = function()
-			require("settings.cmp-npm")
-		end,
-	},
-	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"leoluz/nvim-dap-go",
@@ -257,29 +238,14 @@ lazy.setup({
 		end,
 	},
 	{
-		"NeogitOrg/neogit",
+		"wojciech-kulik/xcodebuild.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
+			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			require("settings.neogit")
-		end,
 		lazy = true,
-		cmd = { "Neogit" },
+		ft = "swift",
+		config = function()
+			require("settings.xcodebuild")
+		end,
 	},
-	-- {
-	-- 	"supermaven-inc/supermaven-nvim",
-	-- 	config = function()
-	-- 		require("supermaven-nvim").setup({
-	-- 			keymaps = {
-	-- 				accept_suggestion = "<Tab>",
-	-- 				clear_suggestion = "<C-]>",
-	-- 				accept_word = "<C-j>",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- 	dependencies = { "hrsh7th/nvim-cmp" },
-	-- },
 }, require("settings.lazy-setup"))
