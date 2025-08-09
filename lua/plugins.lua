@@ -22,7 +22,6 @@ lazy.setup({
 		end,
 	},
 	{
-
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -70,20 +69,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim" },
-		config = function()
-			require("settings.mason.lsp")
-		end,
-	},
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-		config = function()
-			require("settings.mason.dap")
-		end,
-	},
-	{
 		"hrsh7th/nvim-cmp",
 		lazy = true,
 		init = require("utils.startup").lazy_load("nvim-cmp"),
@@ -108,7 +93,6 @@ lazy.setup({
 		event = "BufReadPre",
 		config = function(_, opts)
 			require("nvim-autopairs").setup(opts)
-
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
@@ -202,18 +186,37 @@ lazy.setup({
 	},
 	{
 		"mfussenegger/nvim-dap",
+		cmd = {
+			"DapToggleBreakpoint",
+			"DapContinue",
+			"DapRunToCursor",
+			"DapStepInto",
+			"DapStepOver",
+			"DapStepOut",
+			"DapStepBack",
+			"DapRestart",
+			"DapTerminate",
+			"DapDisconnect",
+		},
 		dependencies = {
-			"leoluz/nvim-dap-go",
-			"mxsdev/nvim-dap-vscode-js",
-			"rcarriga/nvim-dap-ui",
-			"theHamsta/nvim-dap-virtual-text",
-			"nvim-neotest/nvim-nio",
-			"jbyuki/one-small-step-for-vimkind",
+			{
+				"jay-babu/mason-nvim-dap.nvim",
+				cmd = { "DapInstall", "DapUninstall" },
+				dependencies = { "williamboman/mason.nvim" },
+				config = function()
+					require("settings.mason.dap")
+				end,
+			},
+			{ "rcarriga/nvim-dap-ui" },
+			{ "theHamsta/nvim-dap-virtual-text", config = true },
+			{ "leoluz/nvim-dap-go" },
+			{ "mxsdev/nvim-dap-vscode-js" },
+			{ "nvim-neotest/nvim-nio" },
+			{ "jbyuki/one-small-step-for-vimkind" },
 		},
 		config = function()
 			require("settings.dap")
 		end,
-		lazy = true,
 	},
 	{
 		"epwalsh/obsidian.nvim",
