@@ -27,7 +27,7 @@ dap.configurations.go = {
 	},
 	{
 		type = "go",
-		name = "Debug test", -- configuration for debugging test files
+		name = "Debug test",
 		request = "launch",
 		mode = "test",
 		program = "${file}",
@@ -45,7 +45,7 @@ dap.configurations.go = {
 		request = "launch",
 		program = "./cmd/app/main.go",
 	},
-  {
+	{
 		type = "go",
 		name = "Attach to Running Delve",
 		request = "attach",
