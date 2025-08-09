@@ -45,7 +45,6 @@ local mason_package_names = {
 	elixirls = "elixir-ls",
 	jsonls = "json-lsp",
 	tailwindcss = "tailwindcss-language-server",
-	sourcekit = "sourcekit-lsp",
 	hls = "haskell-language-server",
 	rust_analyzer = "rust-analyzer",
 }
@@ -170,6 +169,7 @@ local server_configs = {
 		config = require("settings.lsp.sourcekit"),
 		filetypes = { "swift" },
 		root_patterns = { "Package.swift", ".git" },
+		skip_install = true,
 	},
 	hls = {
 		config = require("settings.lsp.haskell"),
@@ -191,7 +191,7 @@ local function setup_lsp_server(server_name, server_info, bufnr)
 		return
 	end
 
-	if not ensure_server_installed(server_name) then
+	if not server_info.skip_install and not ensure_server_installed(server_name) then
 		vim.defer_fn(function()
 			setup_lsp_server(server_name, server_info, bufnr)
 		end, 1000)
