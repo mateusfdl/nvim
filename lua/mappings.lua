@@ -59,13 +59,6 @@ function M.float_term()
 	nnoremap("<C-d>d", ":FloatermNew --height=50 --width=340 --title=-  lazydocker<CR>")
 end
 
-function M.delve()
-	nnoremap("<Leader>da", ":DlvAddBreakpoint<CR>")
-	nnoremap("<Leader>dt", ":DlvAddTracepoint<CR>")
-	nnoremap("<Leader>dc", ":DlvClearAll<CR>")
-	nnoremap("<Leader>rn", ":DlvTest<CR>")
-end
-
 function M.tmux()
 	nnoremap("<leader>va", ":VtrAttachToPane<cr>")
 	nnoremap("<leader>ror", ":VtrReorientRunner<cr>")
@@ -134,7 +127,6 @@ function M.setup()
 	M.telescope()
 	M.lsp()
 	M.float_term()
-	M.delve()
 	M.buffers()
 	M.tmux()
 	M.gitsigns()
