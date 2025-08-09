@@ -1,7 +1,7 @@
 local M = {}
 
-M.cmd = { vim.fn.stdpath("data") .. "/mason/bin/sourcekit-lsp" }
-
+local bin = vim.system({ "which", "sourcekit-lsp" }):wait().stdout:gsub("\n", "")
+M.cmd = { bin }
 M.filetypes = { "swift", "objc", "objcpp" }
 
 M.capabilities = {
