@@ -4,7 +4,6 @@ require("dapui.config.highlights").setup()
 require("settings.dap.go")
 require("settings.dap.node")
 require("settings.dap.lua")
-require("settings.dap.xcodeproj")
 
 local function get_dap_layout()
 	local screen_width = vim.o.columns
