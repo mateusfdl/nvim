@@ -32,13 +32,6 @@ lazy.setup({
 		end,
 		init = require("utils.startup").lazy_load("nvim-treesitter"),
 	},
-	{
-		"nvim-lua/popup.nvim",
-		event = "BufReadPre",
-		init = function()
-			require("utils.startup").lazy_load("popup.nvim")
-		end,
-	},
 	{ "nvim-lua/plenary.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
@@ -98,9 +91,11 @@ lazy.setup({
 		end,
 	},
 	{
-		"folke/lsp-colors.nvim",
-		lazy = true,
-		init = require("utils.startup").lazy_load("lsp-colors.nvim"),
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		config = function()
+			require("settings.lsp")
+		end,
 	},
 	{
 		"voldikss/vim-floaterm",
@@ -242,11 +237,16 @@ lazy.setup({
 	},
 	{
 		"wojciech-kulik/xcodebuild.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
 		lazy = true,
 		ft = "swift",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"MunifTanjim/nui.nvim",
+			"folke/snacks.nvim",
+			"nvim-tree/nvim-tree.lua",
+			"stevearc/oil.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
 		config = function()
 			require("settings.xcodebuild")
 		end,
