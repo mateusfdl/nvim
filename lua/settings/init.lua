@@ -53,7 +53,6 @@ function M.setup()
 	M.snippets()
 	M.vim_auto_cmds()
 	M.lua_auto_cmds()
-	require("settings.diagnostics")
 end
 
 return M

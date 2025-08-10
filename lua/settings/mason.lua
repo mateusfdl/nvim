@@ -6,8 +6,8 @@ mason.setup({
 		icons = {
 			package_installed = "✓",
 			package_pending = "➜",
-			package_uninstalled = "✗"
-		}
+			package_uninstalled = "✗",
+		},
 	},
 	install_root_dir = vim.fn.stdpath("data") .. "/mason",
 	PATH = "skip",
@@ -26,28 +26,3 @@ mason.setup({
 	},
 })
 
-vim.diagnostic.config({
-	virtual_text = {
-		prefix = "●",
-		spacing = 4,
-	},
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.INFO] = "",
-			[vim.diagnostic.severity.HINT] = "",
-		},
-	},
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
-	float = {
-		focusable = false,
-		style = "minimal",
-		border = "rounded",
-		source = true,
-		header = "",
-		prefix = "",
-	},
-})
