@@ -1,11 +1,37 @@
 local M = {}
+local mason_lsp = require("settings.mason.lsp")
+local methods = vim.lsp.protocol.Methods
+local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local md_namespace = vim.api.nvim_create_namespace("matheus/lsp_float")
+
+local function merge_capabilities(extra)
+	return vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), cmp_capabilities, extra or {})
+end
+
+local function find_root_dir(patterns, file_path)
+	local current_dir = vim.fn.fnamemodify(file_path, ":h")
+
+	while current_dir ~= "/" do
+		for _, pattern in ipairs(patterns) do
+			if vim.fn.glob(current_dir .. "/" .. pattern) ~= "" then
+				return current_dir
+			end
+		end
+		current_dir = vim.fn.fnamemodify(current_dir, ":h")
+	end
+	return vim.fn.getcwd()
+end
+
+local function get_root_dir(server_info, file_path)
+	if server_info.config.root_dir then
+		return server_info.config.root_dir(file_path)
+	end
+	return find_root_dir(server_info.root_patterns, file_path)
+end
 
 local function setup_diagnostics()
 	vim.diagnostic.config({
-		virtual_text = {
-			prefix = "●",
-			spacing = 4,
-		},
+		virtual_text = { prefix = "●", spacing = 4 },
 		signs = {
 			text = {
 				[vim.diagnostic.severity.ERROR] = "",
@@ -28,53 +54,240 @@ local function setup_diagnostics()
 	})
 end
 
-local function setup_keymaps(bufnr)
-	local opts = { noremap = true, silent = true, buffer = bufnr }
-
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-	vim.keymap.set("n", "<leader>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, opts)
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
-end
-
 local function on_attach(client, bufnr)
-	setup_keymaps(bufnr)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
 
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 
 	if client.server_capabilities.documentHighlightProvider then
-		vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
+		local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			group = "lsp_document_highlight",
+			group = group,
 			buffer = bufnr,
 			callback = vim.lsp.buf.document_highlight,
 		})
 		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			group = "lsp_document_highlight",
+			group = group,
 			buffer = bufnr,
 			callback = vim.lsp.buf.clear_references,
 		})
 	end
 end
 
-function M.setup_lsp_servers()
-	setup_diagnostics()
+local function enhanced_float_handler(handler)
+	return function(err, result, ctx, config)
+		if err then
+			vim.notify("LSP hover error: " .. vim.inspect(err), vim.log.levels.ERROR)
+			return
+		end
+		if not (result and result.contents) then
+			vim.notify("No hover content", vim.log.levels.DEBUG)
+			return
+		end
+
+		local buf, win = handler(
+			err,
+			result,
+			ctx,
+			vim.tbl_deep_extend("force", config or {}, {
+				border = "rounded",
+				max_height = math.floor(vim.o.lines * 0.1),
+				max_width = math.floor(vim.o.columns * 0.1),
+			})
+		)
+		if not buf or not win then
+			return
+		end
+
+		vim.wo[win].concealcursor = "n"
+
+		-- Highlight special patterns
+		for l, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+			for pattern, hl_group in pairs({
+				["|%S-|"] = "@text.reference",
+				["@%S+"] = "@parameter",
+				["^%s*(Parameters:)"] = "@text.title",
+				["^%s*(Return:)"] = "@text.title",
+				["^%s*(See also:)"] = "@text.title",
+				["{%S-}"] = "@parameter",
+			}) do
+				local from = 1
+				while from do
+					local to
+					from, to = line:find(pattern, from)
+					if from then
+						vim.api.nvim_buf_set_extmark(buf, md_namespace, l - 1, from - 1, {
+							end_col = to,
+							hl_group = hl_group,
+						})
+					end
+					from = to and to + 1 or nil
+				end
+			end
+		end
+
+		-- Link opener inside hover window
+		if not vim.b[buf].markdown_keys then
+			vim.keymap.set("n", "K", function()
+				local url = (vim.fn.expand("<cWORD>")):match("|(%S-)|")
+				if url then
+					return vim.cmd.help(url)
+				end
+				local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+				local from, to
+				from, to, url = vim.api.nvim_get_current_line():find("%[.-%]%((%S-)%)")
+				if from and col >= from and col <= to then
+					vim.system({ "open", url }, nil, function(res)
+						if res.code ~= 0 then
+							vim.notify("Failed to open URL " .. url, vim.log.levels.ERROR)
+						end
+					end)
+				end
+			end, { buffer = buf, silent = true })
+			vim.b[buf].markdown_keys = true
+		end
+	end
 end
 
-M.setup_lsp_servers()
+-- Setup each server dynamically
+local function setup_lsp_server(server_name, server_info, bufnr)
+	local server_config = server_info.config
+	local file_path = vim.api.nvim_buf_get_name(bufnr)
+
+	if server_info.conditional_setup and not server_info.conditional_setup(file_path) then
+		return
+	end
+	if not mason_lsp.ensure_server_installed(server_name) then
+		vim.defer_fn(function()
+			setup_lsp_server(server_name, server_info, bufnr)
+		end, 1000)
+		return
+	end
+
+	local root_dir = get_root_dir(server_info, file_path)
+	local merged_caps = merge_capabilities(server_config.capabilities)
+
+	local combined_on_attach = function(client, buf)
+		on_attach(client, buf)
+		if server_config.on_attach then
+			server_config.on_attach(client, buf)
+		end
+	end
+
+	vim.lsp.start({
+		name = server_name,
+		cmd = server_config.cmd,
+		root_dir = root_dir,
+		capabilities = merged_caps,
+		on_attach = combined_on_attach,
+		settings = server_config.settings,
+		init_options = server_config.init_options,
+	})
+end
+
+vim.lsp.handlers[methods.textDocument_hover] = enhanced_float_handler(vim.lsp.handlers.hover)
+vim.lsp.handlers[methods.textDocument_signatureHelp] = enhanced_float_handler(vim.lsp.handlers.signature_help)
+
+local server_configs = {
+	ts_ls = {
+		config = require("settings.lsp.ts_ls"),
+		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
+		root_patterns = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+	},
+	solargraph = {
+		config = require("settings.lsp.solargraph"),
+		filetypes = { "ruby" },
+		root_patterns = { "Gemfile", ".git" },
+	},
+	gopls = {
+		config = require("settings.lsp.golang"),
+		filetypes = { "go", "gomod", "gowork", "gotmpl" },
+		root_patterns = { "go.mod", "go.work", ".git" },
+	},
+	lua_ls = {
+		config = require("settings.lsp.lua"),
+		filetypes = { "lua" },
+		root_patterns = {
+			".luarc.json",
+			".luarc.jsonc",
+			".luacheckrc",
+			".stylua.toml",
+			"stylua.toml",
+			"selene.toml",
+			"selene.yml",
+			".git",
+		},
+	},
+	bashls = {
+		config = require("settings.lsp.bash"),
+		filetypes = { "bash", "sh" },
+		root_patterns = { ".git" },
+	},
+	clangd = {
+		config = require("settings.lsp.clangd"),
+		filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+		root_patterns = {
+			".clangd",
+			".clang-tidy",
+			".clang-format",
+			"compile_commands.json",
+			"compile_flags.txt",
+			".git",
+		},
+	},
+	elixirls = {
+		config = require("settings.lsp.elixir"),
+		filetypes = { "elixir", "eelixir" },
+		root_patterns = { "mix.exs", ".git" },
+	},
+	jsonls = {
+		config = require("settings.lsp.json"),
+		filetypes = { "json", "jsonc" },
+		root_patterns = { ".git" },
+	},
+	tailwindcss = {
+		config = require("settings.lsp.tailwind"),
+		filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+		root_patterns = { "tailwind.config.js", "tailwind.config.ts", "tailwind.config.cjs", "tailwind.config.mjs" },
+		conditional_setup = function(file_path)
+			local root_dir = find_root_dir(
+				{ "tailwind.config.js", "tailwind.config.ts", "tailwind.config.cjs", "tailwind.config.mjs" },
+				file_path
+			)
+			return root_dir ~= vim.fn.getcwd() or vim.fn.glob(root_dir .. "/tailwind.config.*") ~= ""
+		end,
+	},
+	sourcekit = {
+		config = require("settings.lsp.sourcekit"),
+		filetypes = { "swift" },
+		root_patterns = { "Package.swift", ".git" },
+		skip_install = true,
+	},
+	hls = {
+		config = require("settings.lsp.haskell"),
+		filetypes = { "haskell", "lhaskell" },
+		root_patterns = { "*.cabal", "stack.yaml", "cabal.project", ".git" },
+	},
+	rust_analyzer = {
+		config = require("settings.lsp.rust"),
+		filetypes = { "rust" },
+		root_patterns = { "Cargo.toml", "Cargo.lock", ".git" },
+	},
+}
+
+for server_name, server_info in pairs(server_configs) do
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = server_info.filetypes,
+		callback = function(args)
+			setup_lsp_server(server_name, server_info, args.buf)
+			vim.notify("LSP SET:" .. server_name, vim.log.levels.DEBUG)
+		end,
+	})
+end
+
+setup_diagnostics()
 
 return M
