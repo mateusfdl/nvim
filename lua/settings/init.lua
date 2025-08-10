@@ -1,4 +1,3 @@
-require("settings.lsp")
 local M = {}
 
 local options = vim.opt
