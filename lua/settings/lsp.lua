@@ -1,6 +1,5 @@
 local M = {}
 local mason_lsp = require("settings.mason.lsp")
-local methods = vim.lsp.protocol.Methods
 local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 local md_namespace = vim.api.nvim_create_namespace("matheus/lsp_float")
 
@@ -46,7 +45,7 @@ local function setup_diagnostics()
 		float = {
 			focusable = false,
 			style = "minimal",
-			border = "rounded",
+			border = "none",
 			source = true,
 			header = "",
 			prefix = "",
@@ -270,14 +269,49 @@ local server_configs = {
 	},
 }
 
-for server_name, server_info in pairs(server_configs) do
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = server_info.filetypes,
-		callback = function(args)
-			setup_lsp_server(server_name, server_info, args.buf)
-		end,
-	})
+local function setup_lsp_autocmds()
+	for server_name, server_info in pairs(server_configs) do
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = server_info.filetypes,
+			callback = function(args)
+				local buf_name = vim.api.nvim_buf_get_name(args.buf)
+				if buf_name ~= "" then
+					setup_lsp_server(server_name, server_info, args.buf)
+				end
+			end,
+		})
+	end
 end
+
+local function ensure_lsp_attached_to_current_buffer()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local buf_name = vim.api.nvim_buf_get_name(current_buf)
+	local filetype = vim.bo[current_buf].filetype
+
+	if buf_name == "" or filetype == "" then
+		return
+	end
+
+	local clients = vim.lsp.get_clients({ bufnr = current_buf })
+	if #clients > 0 then
+		return
+	end
+
+	for server_name, server_info in pairs(server_configs) do
+		for _, ft in ipairs(server_info.filetypes) do
+			if ft == filetype then
+				setup_lsp_server(server_name, server_info, current_buf)
+				break
+			end
+		end
+	end
+end
+
+vim.defer_fn(function()
+	ensure_lsp_attached_to_current_buffer()
+end, 100)
+
+setup_lsp_autocmds()
 
 setup_diagnostics()
 

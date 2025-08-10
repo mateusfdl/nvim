@@ -7,7 +7,11 @@ lazy.setup({
 		config = function()
 			require("settings.schadenfreude")
 		end,
+		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter", "rcarriga/nvim-notify" },
+		init = function()
+			require("utils.startup").lazy_load("schadenfreude.nvim")
+		end,
 	},
 	{
 		"mateusfdl/yetanotherline",
@@ -35,7 +39,7 @@ lazy.setup({
 	{ "nvim-lua/plenary.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
-		cmd = "Telescope",
+		lazy = true,
 		init = function()
 			require("utils.startup").lazy_load("telescope.nvim")
 		end,
@@ -93,6 +97,10 @@ lazy.setup({
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim" },
+		lazy = true,
+		init = function()
+			require("utils.startup").lazy_load("mason-lspconfig.nvim")
+		end,
 		config = function()
 			require("settings.lsp")
 		end,
