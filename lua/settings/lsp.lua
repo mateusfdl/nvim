@@ -54,29 +54,6 @@ local function setup_diagnostics()
 	})
 end
 
-local function on_attach(client, bufnr)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
-
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	end
-
-	if client.server_capabilities.documentHighlightProvider then
-		local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			group = group,
-			buffer = bufnr,
-			callback = vim.lsp.buf.document_highlight,
-		})
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			group = group,
-			buffer = bufnr,
-			callback = vim.lsp.buf.clear_references,
-		})
-	end
-end
-
 local function enhanced_float_handler(handler)
 	return function(err, result, ctx, config)
 		if err then
@@ -93,9 +70,9 @@ local function enhanced_float_handler(handler)
 			result,
 			ctx,
 			vim.tbl_deep_extend("force", config or {}, {
-				border = "rounded",
-				max_height = math.floor(vim.o.lines * 0.1),
-				max_width = math.floor(vim.o.columns * 0.1),
+				border = "none",
+				max_height = math.floor(vim.o.lines * 0.5),
+				max_width = math.floor(vim.o.columns * 0.4),
 			})
 		)
 		if not buf or not win then
@@ -104,7 +81,6 @@ local function enhanced_float_handler(handler)
 
 		vim.wo[win].concealcursor = "n"
 
-		-- Highlight special patterns
 		for l, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
 			for pattern, hl_group in pairs({
 				["|%S-|"] = "@text.reference",
@@ -129,7 +105,6 @@ local function enhanced_float_handler(handler)
 			end
 		end
 
-		-- Link opener inside hover window
 		if not vim.b[buf].markdown_keys then
 			vim.keymap.set("n", "K", function()
 				local url = (vim.fn.expand("<cWORD>")):match("|(%S-)|")
@@ -152,7 +127,27 @@ local function enhanced_float_handler(handler)
 	end
 end
 
--- Setup each server dynamically
+local function on_attach(client, bufnr)
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
+
+	if client.server_capabilities.documentHighlightProvider then
+		local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+			group = group,
+			buffer = bufnr,
+			callback = vim.lsp.buf.document_highlight,
+		})
+		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+			group = group,
+			buffer = bufnr,
+			callback = vim.lsp.buf.clear_references,
+		})
+	end
+end
+
 local function setup_lsp_server(server_name, server_info, bufnr)
 	local server_config = server_info.config
 	local file_path = vim.api.nvim_buf_get_name(bufnr)
@@ -187,9 +182,6 @@ local function setup_lsp_server(server_name, server_info, bufnr)
 		init_options = server_config.init_options,
 	})
 end
-
-vim.lsp.handlers[methods.textDocument_hover] = enhanced_float_handler(vim.lsp.handlers.hover)
-vim.lsp.handlers[methods.textDocument_signatureHelp] = enhanced_float_handler(vim.lsp.handlers.signature_help)
 
 local server_configs = {
 	ts_ls = {
@@ -289,5 +281,25 @@ for server_name, server_info in pairs(server_configs) do
 end
 
 setup_diagnostics()
+
+function M.hover()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+	if #clients == 0 then
+		vim.notify("No active LSP client for this buffer", vim.log.levels.WARN)
+		return
+	end
+
+	local client = clients[1]
+	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+
+	vim.lsp.buf_request(
+		bufnr,
+		vim.lsp.protocol.Methods.textDocument_hover,
+		params,
+		enhanced_float_handler(vim.lsp.handlers.hover)
+	)
+end
 
 return M
