@@ -275,7 +275,6 @@ for server_name, server_info in pairs(server_configs) do
 		pattern = server_info.filetypes,
 		callback = function(args)
 			setup_lsp_server(server_name, server_info, args.buf)
-			vim.notify("LSP SET:" .. server_name, vim.log.levels.DEBUG)
 		end,
 	})
 end
