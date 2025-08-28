@@ -260,3 +260,5 @@ lazy.setup({
 		end,
 	},
 }, require("settings.lazy-setup"))
+
+require("extensions.zettelkasten").setup()
