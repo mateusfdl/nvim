@@ -1,11 +1,29 @@
 require("schadenfreude").setup({
 	{
-		provider = "llmama",
+		provider = "qwen-3",
 		interface = "openai",
 		api_key = vim.fn.getenv("GROQ_API_KEY"),
 		options = {
-			model = "llama-3.3-70b-versatile",
+			model = "qwen/qwen3-32b",
 			url = "https://api.groq.com/openai/v1/chat/completions",
+		},
+	},
+	{
+		provider = "gpt-oss-120b",
+		interface = "openai",
+		api_key = vim.fn.getenv("GROQ_API_KEY"),
+		options = {
+			model = "openai/gpt-oss-120b",
+			url = "https://api.groq.com/openai/v1/chat/completions",
+		},
+	},
+	{
+		provider = "qwen3-coder",
+		interface = "openai",
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
+		options = {
+			model = "qwen/qwen3-coder",
+			url = "https://openrouter.ai/api/v1/chat/completions",
 		},
 	},
 	{
