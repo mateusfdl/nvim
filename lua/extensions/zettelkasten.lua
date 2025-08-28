@@ -1,6 +1,6 @@
 local Zettelkasten = {}
 
-Zettelkasten.config = { notes_path = "~/org/Personal/Masturbating/" }
+Zettelkasten.config = { notes_path = "~/org/Personal/Staging/" }
 
 function Zettelkasten.setup(opts)
 	Zettelkasten.config = vim.tbl_extend("force", Zettelkasten.config, opts or {})
