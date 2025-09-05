@@ -29,6 +29,7 @@ M.languages = {
 	"java",
 	"swift",
 	"query",
+  "zig",
 }
 
 require("nvim-treesitter.configs").setup({
