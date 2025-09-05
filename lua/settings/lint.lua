@@ -15,6 +15,7 @@ local language_linters = {
 	dockerfile = { "hadolint" },
 	bash = { "shellcheck" },
 	swift = { "swiftlint" },
+	zig = { "zig" },
 }
 
 local file_types = function()
