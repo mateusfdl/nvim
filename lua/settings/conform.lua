@@ -9,6 +9,7 @@ require("conform").setup({
 		c = { "clangd" },
 		cpp = { "clangd" },
 		go = { "gofmt" },
+		zig = { "zig_fmt" },
 	},
 	formatters = {
 		biome = {
