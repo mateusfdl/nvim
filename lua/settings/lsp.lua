@@ -267,6 +267,11 @@ local server_configs = {
 		filetypes = { "rust" },
 		root_patterns = { "Cargo.toml", "Cargo.lock", ".git" },
 	},
+	zls = {
+		config = require("settings.lsp.zig"),
+		filetypes = { "zig" },
+		root_patterns = { "build.zig", ".git" },
+	},
 }
 
 local function setup_lsp_autocmds()

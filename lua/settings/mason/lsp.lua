@@ -21,6 +21,7 @@ local mason_package_names = {
 	tailwindcss = "tailwindcss-language-server",
 	hls = "haskell-language-server",
 	rust_analyzer = "rust-analyzer",
+	zls = "zls",
 }
 
 function M.ensure_server_installed(server_name)
