@@ -6,17 +6,22 @@ dap.adapters.lldb = {
 	name = "lldb",
 }
 
+local function build_and_get_binary()
+	local cwd = vim.fn.getcwd()
+	local result = vim.fn.system("zig build")
+	if vim.v.shell_error ~= 0 then
+		error("Build failed:\n" .. result)
+	end
+	local program_name = vim.fn.fnamemodify(cwd, ":t")
+	return cwd .. "/zig-out/bin/" .. program_name
+end
+
 dap.configurations.zig = {
 	{
 		name = "Launch file",
 		type = "lldb",
 		request = "launch",
-		program = function()
-			local cwd = vim.fn.getcwd()
-			vim.fn.system("zig build")
-			local program_name = vim.fn.fnamemodify(cwd, ":t")
-			return cwd .. "/zig-out/bin/" .. program_name
-		end,
+		program = build_and_get_binary,
 		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
 		args = {},
@@ -26,12 +31,7 @@ dap.configurations.zig = {
 		name = "Launch with arguments",
 		type = "lldb",
 		request = "launch",
-		program = function()
-			local cwd = vim.fn.getcwd()
-			vim.fn.system("zig build")
-			local program_name = vim.fn.fnamemodify(cwd, ":t")
-			return cwd .. "/zig-out/bin/" .. program_name
-		end,
+		program = build_and_get_binary,
 		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
 		args = function()
@@ -48,5 +48,41 @@ dap.configurations.zig = {
 			return require("dap.utils").pick_process()
 		end,
 		args = {},
+	},
+	{
+		name = "Run tests (build.zig)",
+		type = "lldb",
+		request = "launch",
+		program = function()
+			local cwd = vim.fn.getcwd()
+			local result = vim.fn.system("zig build test")
+			if vim.v.shell_error ~= 0 then
+				error("Tests build failed:\n" .. result)
+			end
+			local program_name = vim.fn.fnamemodify(cwd, ":t")
+			return cwd .. "/zig-out/bin/" .. program_name .. "_test"
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+		args = {},
+		runInTerminal = false,
+	},
+	{
+		name = "Debug test (current file)",
+		type = "lldb",
+		request = "launch",
+		program = function()
+			local file = vim.fn.expand("%:p")
+			local outfile = vim.fn.tempname()
+			local result = vim.fn.system("zig test " .. file .. " -femit-bin=" .. outfile)
+			if vim.v.shell_error ~= 0 then
+				error("Test compilation failed:\n" .. result)
+			end
+			return outfile
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+		args = {},
+		runInTerminal = false,
 	},
 }

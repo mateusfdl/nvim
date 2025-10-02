@@ -15,6 +15,7 @@ M.settings = {
 		inlay_hints_hide_redundant_param_names = false,
 		inlay_hints_hide_redundant_param_names_last_token = false,
 		warn_style = false,
+		include_at_in_builtins = true,
 		highlight_global_var_declarations = false,
 	},
 }
@@ -40,4 +41,3 @@ M.on_attach = function(client, bufnr)
 end
 
 return M
-
