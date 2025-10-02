@@ -51,6 +51,15 @@ local function setup_diagnostics()
 			prefix = "",
 		},
 	})
+
+	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics,
+		{
+			delay = 50,
+			max_width = 80,
+			max_height = 20,
+		}
+	)
 end
 
 local function enhanced_float_handler(handler)
@@ -134,7 +143,7 @@ local function on_attach(client, bufnr)
 	if client.server_capabilities.documentHighlightProvider then
 		local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
 		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+		vim.api.nvim_create_autocmd({ "CursorHold" }, {
 			group = group,
 			buffer = bufnr,
 			callback = vim.lsp.buf.document_highlight,
@@ -144,6 +153,12 @@ local function on_attach(client, bufnr)
 			buffer = bufnr,
 			callback = vim.lsp.buf.clear_references,
 		})
+	end
+
+	if client.server_capabilities.semanticTokensProvider and type(client.server_capabilities.semanticTokensProvider) == "table" then
+		if client.server_capabilities.semanticTokensProvider.full and type(client.server_capabilities.semanticTokensProvider.full) == "table" then
+			client.server_capabilities.semanticTokensProvider.full.delta = true
+		end
 	end
 end
 
@@ -179,6 +194,10 @@ local function setup_lsp_server(server_name, server_info, bufnr)
 		on_attach = combined_on_attach,
 		settings = server_config.settings,
 		init_options = server_config.init_options,
+		flags = {
+			debounce_text_changes = 150,
+			allow_incremental_sync = true,
+		},
 	})
 end
 

@@ -43,6 +43,14 @@ cmp.setup({
 			vim.fn["vsnip#anonymous"](args.body)
 		end,
 	},
+	performance = {
+		debounce = 60,
+		throttle = 30,
+		fetching_timeout = 500,
+		confirm_resolve_timeout = 80,
+		async_budget = 1,
+		max_view_entries = 200,
+	},
 	mapping = cmp.mapping.preset.insert({
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -58,8 +66,6 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif has_words_before() then
-				cmp.complete()
 			else
 				fallback()
 			end
@@ -77,14 +83,14 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp", priority = 1000 },
-		{ name = "vsnip", priority = 750 },
-		{ name = "nvim_lua", priority = 600 },
-		{ name = "path", option = { trailing_slash = true }, priority = 500 },
-		{ name = "nvim_lsp_signature_help", priority = 450 },
-		{ name = "npm", keyword_length = 2, priority = 400 },
+		{ name = "nvim_lsp", priority = 1000, max_item_count = 30 },
+		{ name = "vsnip", priority = 750, max_item_count = 10 },
+		{ name = "nvim_lua", priority = 600, max_item_count = 15 },
+		{ name = "path", option = { trailing_slash = true }, priority = 500, max_item_count = 10 },
+		{ name = "nvim_lsp_signature_help", priority = 450, max_item_count = 5 },
+		{ name = "npm", keyword_length = 2, priority = 400, max_item_count = 10 },
 	}, {
-		{ name = "buffer", priority = 300 },
+		{ name = "buffer", priority = 300, max_item_count = 5 },
 	}),
 	formatting = {
 		format = function(entry, vim_item)

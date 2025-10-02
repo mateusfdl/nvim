@@ -35,6 +35,7 @@ function M.lua_auto_cmds()
 	options.expandtab = true
 	options.wrap = true
 	options.swapfile = false
+	options.updatetime = 100
 	options.listchars = { tab = "->", trail = "·", space = "·", lead = "·" }
 	options.fillchars = {
 		vert = "|",
