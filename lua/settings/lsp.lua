@@ -291,6 +291,11 @@ local server_configs = {
 		filetypes = { "zig" },
 		root_patterns = { "build.zig", ".git" },
 	},
+	qmlls = {
+		config = require("settings.lsp.qmlls"),
+		filetypes = { "qml", "qmljs" },
+		root_patterns = { "CMakeLists.txt", "*.pro", "*.qmlproject", ".git" },
+	},
 }
 
 local function setup_lsp_autocmds()

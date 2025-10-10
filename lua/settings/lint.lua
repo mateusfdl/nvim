@@ -16,6 +16,7 @@ local language_linters = {
 	bash = { "shellcheck" },
 	swift = { "swiftlint" },
 	zig = { "zig" },
+	qml = { "qmllint" },
 }
 
 local file_types = function()

@@ -29,7 +29,8 @@ M.languages = {
 	"java",
 	"swift",
 	"query",
-  "zig",
+	"zig",
+	"qmljs",
 }
 
 require("nvim-treesitter.configs").setup({

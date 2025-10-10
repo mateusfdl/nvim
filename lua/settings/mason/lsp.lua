@@ -22,6 +22,7 @@ local mason_package_names = {
 	hls = "haskell-language-server",
 	rust_analyzer = "rust-analyzer",
 	zls = "zls",
+	qmlls = "qmlls",
 }
 
 function M.ensure_server_installed(server_name)

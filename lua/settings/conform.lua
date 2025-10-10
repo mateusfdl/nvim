@@ -10,6 +10,7 @@ require("conform").setup({
 		cpp = { "clangd" },
 		go = { "gofmt" },
 		zig = { "zig_fmt" },
+		qml = { "qmlformat" },
 	},
 	formatters = {
 		biome = {
@@ -25,6 +26,11 @@ require("conform").setup({
 					json = "json",
 				},
 			},
+		},
+		qmlformat = {
+			command = "qmlformat",
+			args = { "-i", "$FILENAME" },
+			stdin = false,
 		},
 	},
 })
