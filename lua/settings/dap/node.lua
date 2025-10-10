@@ -9,9 +9,8 @@ for _, adapterType in ipairs({ "node", "chrome", "msedge", "node-terminal", "ext
 		host = "localhost",
 		port = "${port}",
 		executable = {
-			command = "node",
+			command = vim.fn.stdpath("data") .. "/mason/bin/js-debug-adapter",
 			args = {
-				os.getenv("HOME") .. "/.DAP/js-debug/src/dapDebugServer.js",
 				"${port}",
 			},
 		},
