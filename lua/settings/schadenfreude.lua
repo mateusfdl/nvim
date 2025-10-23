@@ -1,23 +1,5 @@
 require("schadenfreude").setup({
 	{
-		provider = "qwen-3",
-		interface = "openai",
-		api_key = vim.fn.getenv("GROQ_API_KEY"),
-		options = {
-			model = "qwen/qwen3-32b",
-			url = "https://api.groq.com/openai/v1/chat/completions",
-		},
-	},
-	{
-		provider = "gpt-oss-120b",
-		interface = "openai",
-		api_key = vim.fn.getenv("GROQ_API_KEY"),
-		options = {
-			model = "openai/gpt-oss-120b",
-			url = "https://api.groq.com/openai/v1/chat/completions",
-		},
-	},
-	{
 		provider = "qwen3-coder",
 		interface = "openai",
 		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
@@ -27,31 +9,67 @@ require("schadenfreude").setup({
 		},
 	},
 	{
-		provider = "gemma",
+		provider = "haiku",
 		interface = "openai",
-		api_key = vim.fn.getenv("GEMINI_API_KEY"),
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
 		options = {
-			model = "gemini-2.5-pro",
-			url = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+			model = "anthropic/claude-haiku-4.5",
+			url = "https://openrouter.ai/api/v1/chat/completions",
 		},
 	},
 	{
-		provider = "xai",
+		provider = "horizon",
 		interface = "openai",
-		api_key = vim.fn.getenv("X_GROK_API_KEY"),
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
 		options = {
-			model = "grok-3",
-			url = "https://api.x.ai/v1/chat/completions",
+			model = "openrouter/horizon-alpha",
+			url = "https://openrouter.ai/api/v1/chat/completions",
+		},
+	},
+	{
+		provider = "grok",
+		interface = "openai",
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
+		options = {
+			model = "x-ai/grok-code-fast-1",
+			url = "https://openrouter.ai/api/v1/chat/completions",
+		},
+	},
+	{
+		provider = "z",
+		interface = "openai",
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
+		options = {
+			model = "z-ai/glm-4.6",
+			url = "https://openrouter.ai/api/v1/chat/completions",
+		},
+	},
+	{
+		provider = "gepeto",
+		interface = "openai",
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
+		options = {
+			model = "openai/gpt-oss-20b",
+			url = "https://openrouter.ai/api/v1/chat/completions",
 		},
 	},
 	{
 		provider = "sonnet",
-		interface = "anthropic",
-		api_key = vim.fn.getenv("ANTHROPIC_KEY"),
+		interface = "openai",
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
 		options = {
-			model = "claude-3-5-sonnet-20241022",
-			url = "https://api.anthropic.com/v1/messages",
+			model = "anthropic/claude-sonnet-4.5",
+			url = "https://openrouter.ai/api/v1/chat/completions",
 		},
 	},
-	selected_provider = "gemma",
+	{
+		provider = "gemma",
+		interface = "openai",
+		api_key = vim.fn.getenv("OPENROUTER_API_KEY"),
+		options = {
+			model = "google/gemini-2.5-pro",
+			url = "https://openrouter.ai/api/v1/chat/completions",
+		},
+	},
+	selected_provider = "z",
 })
