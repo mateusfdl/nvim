@@ -259,6 +259,15 @@ lazy.setup({
 			require("settings.xcodebuild")
 		end,
 	},
+	{
+		cmd = { "Neogit" },
+		lazy = true,
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+		},
+	},
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()
