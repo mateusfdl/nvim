@@ -31,6 +31,7 @@ M.languages = {
 	"query",
 	"zig",
 	"qmljs",
+	"cmake",
 }
 
 require("nvim-treesitter.configs").setup({
