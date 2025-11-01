@@ -4,7 +4,7 @@ vim.g.theme_cache = vim.fn.stdpath("cache") .. "/themes/cache/"
 
 M.switch_theme = function(theme)
 	vim.g.nvim_theme = theme
-  M.reload_theme()
+	M.reload_theme()
 end
 
 M.switch_global_theme = function()
@@ -19,7 +19,7 @@ M.reload_theme = function()
 end
 
 M.reload_global_theme = function()
-	local mode_file = "/tmp/theme-mode"
+	local mode_file = uv.os_homedir() .. "/.cache/theme-mode"
 
 	if not uv.fs_stat(mode_file) then
 		M.switch_theme(vim.env.DARK_THEME)
@@ -27,7 +27,12 @@ M.reload_global_theme = function()
 	end
 
 	local fd = uv.fs_open(mode_file, "r", 438)
-	local mode = uv.fs_read(fd, uv.fs_stat(mode_file).size, 0)
+	if not fd then
+		return
+	end
+
+	local stat = uv.fs_stat(mode_file)
+	local mode = uv.fs_read(fd, stat.size, 0)
 	uv.fs_close(fd)
 
 	if mode:match("light") then
@@ -38,11 +43,12 @@ M.reload_global_theme = function()
 end
 
 M.setup = function()
-	vim.api.nvim_create_autocmd("VimResized", {
-		callback = function()
+	local sigusr1 = uv.new_signal()
+	sigusr1:start(uv.constants.SIGUSR1, function()
+		vim.schedule(function()
 			M.reload_global_theme()
-		end,
-	})
+		end)
+	end)
 
 	M.reload_global_theme()
 end
