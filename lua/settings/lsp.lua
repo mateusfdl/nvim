@@ -52,14 +52,11 @@ local function setup_diagnostics()
 		},
 	})
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics,
-		{
-			delay = 50,
-			max_width = 80,
-			max_height = 20,
-		}
-	)
+	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		delay = 50,
+		max_width = 80,
+		max_height = 20,
+	})
 end
 
 local function enhanced_float_handler(handler)
@@ -155,8 +152,14 @@ local function on_attach(client, bufnr)
 		})
 	end
 
-	if client.server_capabilities.semanticTokensProvider and type(client.server_capabilities.semanticTokensProvider) == "table" then
-		if client.server_capabilities.semanticTokensProvider.full and type(client.server_capabilities.semanticTokensProvider.full) == "table" then
+	if
+		client.server_capabilities.semanticTokensProvider
+		and type(client.server_capabilities.semanticTokensProvider) == "table"
+	then
+		if
+			client.server_capabilities.semanticTokensProvider.full
+			and type(client.server_capabilities.semanticTokensProvider.full) == "table"
+		then
 			client.server_capabilities.semanticTokensProvider.full.delta = true
 		end
 	end
