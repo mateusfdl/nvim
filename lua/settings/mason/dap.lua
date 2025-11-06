@@ -9,6 +9,7 @@ mason_nvim_dap.setup({
 		"lua-debug-adapter",
 		"nlua",
 		"codelldb",
+		"cpptools",
 	},
 	automatic_installation = true,
 })

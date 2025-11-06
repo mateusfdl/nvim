@@ -3,6 +3,8 @@ local M = {}
 M.languages = {
 	"cpp",
 	"c",
+	"cmake",
+	"make",
 	"bash",
 	"lua",
 	"rust",
