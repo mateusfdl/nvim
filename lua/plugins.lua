@@ -278,6 +278,7 @@ lazy.setup({
 			end,
 		},
 	},
+	{ "wakatime/vim-wakatime" },
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()
