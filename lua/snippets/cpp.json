@@ -1,0 +1,109 @@
+{
+  "main": {
+    "prefix": "main",
+    "body": [
+      "#include <iostream>",
+      "",
+      "int main() {",
+      "    $1",
+      "    return 0;",
+      "}"
+    ],
+    "description": "Main function template"
+  },
+  "class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:ClassName} {",
+      "public:",
+      "    ${1:ClassName}();",
+      "    ~${1:ClassName}();",
+      "    ",
+      "    $2",
+      "",
+      "private:",
+      "    $3",
+      "};"
+    ],
+    "description": "Class template"
+  },
+  "for": {
+    "prefix": "for",
+    "body": [
+      "for (${1:auto i = 0}; ${2:i < size}; ${3:++i}) {",
+      "    $4",
+      "}"
+    ],
+    "description": "For loop"
+  },
+  "foreach": {
+    "prefix": "foreach",
+    "body": [
+      "for (${1:const auto&} ${2:item} : ${3:container}) {",
+      "    $4",
+      "}"
+    ],
+    "description": "Range-based for loop"
+  },
+  "vector": {
+    "prefix": "vector",
+    "body": [
+      "std::vector<${1:int}> ${2:vec};"
+    ],
+    "description": "Vector declaration"
+  },
+  "string": {
+    "prefix": "string",
+    "body": [
+      "std::string ${1:str};"
+    ],
+    "description": "String declaration"
+  },
+  "cout": {
+    "prefix": "cout",
+    "body": [
+      "std::cout << ${1:\"text\"} << std::endl;"
+    ],
+    "description": "Console output"
+  },
+  "cin": {
+    "prefix": "cin",
+    "body": [
+      "std::cin >> ${1:variable};"
+    ],
+    "description": "Console input"
+  },
+  "include": {
+    "prefix": "inc",
+    "body": [
+      "#include <${1:iostream}>"
+    ],
+    "description": "Include header"
+  },
+  "namespace": {
+    "prefix": "ns",
+    "body": [
+      "namespace ${1:name} {",
+      "    $2",
+      "}"
+    ],
+    "description": "Namespace"
+  },
+  "template": {
+    "prefix": "template",
+    "body": [
+      "template<${1:typename T}>",
+      "${2:void} ${3:function_name}(${4:T param}) {",
+      "    $5",
+      "}"
+    ],
+    "description": "Template function"
+  },
+  "smart_ptr": {
+    "prefix": "unique_ptr",
+    "body": [
+      "std::unique_ptr<${1:Type}> ${2:ptr} = std::make_unique<${1:Type}>(${3:args});"
+    ],
+    "description": "Unique pointer"
+  }
+}

@@ -260,12 +260,22 @@ lazy.setup({
 		end,
 	},
 	{
+		"NeogitOrg/neogit",
 		cmd = { "Neogit" },
 		lazy = true,
-		"NeogitOrg/neogit",
+	},
+	{
+		"xvzc/chezmoi.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
+			cmd = {
+				"ChezmoiEdit",
+				"ChezmoiList",
+			},
+			config = function()
+				require("settings.chezmoi")
+			end,
 		},
 	},
 }, require("settings.lazy-setup"))
