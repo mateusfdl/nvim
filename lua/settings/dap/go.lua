@@ -5,7 +5,7 @@ dap.adapters.delve = {
 	type = "server",
 	port = "${port}",
 	executable = {
-		command = "delve",
+		command = vim.fn.stdpath("data") .. "/mason/bin/dlv",
 		args = { "dap", "-l", "127.0.0.1:${port}" },
 	},
 }
@@ -41,6 +41,22 @@ dap.configurations.go = {
 	},
 	{
 		type = "go",
+		name = "Debug test (go.mod) with flags",
+		request = "launch",
+		mode = "test",
+		program = "./${relativeFileDirname}",
+		buildFlags = dap_go.get_build_flags,
+	},
+	{
+		type = "go",
+		name = "Debug test with flags",
+		request = "launch",
+		mode = "test",
+		program = "${file}",
+		buildFlags = dap_go.get_build_flags,
+	},
+	{
+		type = "go",
 		name = "Debug Current CMD/main.go",
 		request = "launch",
 		program = "./cmd/app/main.go",
@@ -50,7 +66,7 @@ dap.configurations.go = {
 		name = "Attach to Running Delve",
 		request = "attach",
 		mode = "remote",
-		port = 40000, -- Change this to match the port used by your running dlv instance
+		port = 40000,
 		host = "127.0.0.1",
 	},
 }
