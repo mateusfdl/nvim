@@ -2,18 +2,6 @@ local lazy = require("lazy")
 
 lazy.setup({
 	{
-		-- "mateusfdl/schadenfreude.nvim",
-		dir = "~/Documents/codes/schadenfreude.nvim",
-		config = function()
-			require("settings.schadenfreude")
-		end,
-		lazy = true,
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter", "rcarriga/nvim-notify" },
-		init = function()
-			require("utils.startup").lazy_load("schadenfreude.nvim")
-		end,
-	},
-	{
 		"mateusfdl/yetanotherline",
 		config = function()
 			require("yetanotherline").setup()
