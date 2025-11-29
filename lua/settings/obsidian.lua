@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 })
 require("obsidian").setup({
 	workspaces = {
-		{ name = "personal", path = "~/org/Personal" },
+		{ name = "personal", path = vim.fn.getenv("OBSIDIAN_VAULT_PATH") },
 	},
 	log_level = vim.log.levels.INFO,
 	new_notes_location = "notes_subdir",
