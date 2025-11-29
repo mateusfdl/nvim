@@ -4,7 +4,6 @@ local M = {}
 
 M.cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" }
 
-
 _G.organize_imports = function()
 	vim.lsp.buf.execute_command({
 		command = "_typescript.organizeImports",
