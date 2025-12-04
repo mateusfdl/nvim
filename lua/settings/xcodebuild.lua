@@ -17,7 +17,7 @@ if vim.loop.os_uname().sysname == "Darwin" then
 		local xcodebuild = require("xcodebuild.integrations.dap")
 		local codelldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb"
 
-		xcodebuild.setup(codelldbPath)
+		xcodebuild.setup(codelldb_path)
 
 		require("utils.mappings")
 		nnoremap("<space>c", xcodebuild.build_and_debug, { desc = "Build & Debug" })
