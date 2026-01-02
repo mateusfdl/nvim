@@ -232,22 +232,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"wojciech-kulik/xcodebuild.nvim",
-		lazy = true,
-		ft = "swift",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"MunifTanjim/nui.nvim",
-			"folke/snacks.nvim",
-			"nvim-tree/nvim-tree.lua",
-			"stevearc/oil.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
-			require("settings.xcodebuild")
-		end,
-	},
-	{
 		"NeogitOrg/neogit",
 		cmd = { "Neogit" },
 		lazy = true,
@@ -262,7 +246,7 @@ lazy.setup({
 				"ChezmoiList",
 			},
 			config = function()
-				require("settings.chezmoi")
+				require("settings.chezmoi").setup()
 			end,
 		},
 	},
