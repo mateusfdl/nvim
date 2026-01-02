@@ -41,13 +41,12 @@ M.buffer_searcher = function()
 	})
 end
 
-M.chezmoi_finder = function(opts)
-	opts = opts or {}
+M.chezmoi_finder = function()
 	local telescope = require("telescope")
 
 	pcall(telescope.load_extension, "chezmoi")
 
-	telescope.extensions.chezmoi.find_files({})
+	telescope.extensions.chezmoi.find_files()
 end
 
 return M
