@@ -1,6 +1,6 @@
 local M = {}
 local mason_lsp = require("settings.mason.lsp")
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local cmp_capabilities = require("blink.cmp").get_lsp_capabilities()
 local md_namespace = vim.api.nvim_create_namespace("matheus/lsp_float")
 
 local function merge_capabilities(extra)

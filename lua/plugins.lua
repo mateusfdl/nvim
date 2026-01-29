@@ -54,20 +54,12 @@ lazy.setup({
 		end,
 	},
 	{
-		"hrsh7th/nvim-cmp",
+		"saghen/blink.cmp",
 		lazy = true,
-		init = require("utils.startup").lazy_load("nvim-cmp"),
+		event = "InsertEnter",
 		config = function()
-			require("settings.cmp")
+			require("settings.blink")
 		end,
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lua",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-vsnip",
-		},
 	},
 	{
 		"windwp/nvim-autopairs",
@@ -78,8 +70,6 @@ lazy.setup({
 		event = "BufReadPre",
 		config = function(_, opts)
 			require("nvim-autopairs").setup(opts)
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 	{
@@ -116,16 +106,6 @@ lazy.setup({
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-	},
-	{
-		"hrsh7th/vim-vsnip",
-		lazy = true,
-		init = require("utils.startup").lazy_load("vim-vsnip"),
-	},
-	{
-		"hrsh7th/cmp-vsnip",
-		lazy = true,
-		init = require("utils.startup").lazy_load("cmp-vsnip"),
 	},
 	{
 		"stevearc/conform.nvim",
@@ -251,6 +231,16 @@ lazy.setup({
 		},
 	},
 	{ "wakatime/vim-wakatime" },
+	{
+		"jim-at-jibba/nvim-stride",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("settings.ai")
+		end,
+	},
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()

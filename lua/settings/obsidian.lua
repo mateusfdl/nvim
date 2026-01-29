@@ -29,7 +29,7 @@ require("obsidian").setup({
 	note_id_func = note_id_func,
 	disable_frontmatter = true,
 	completion = {
-		nvim_cmp = true,
+		nvim_cmp = false,
 		min_chars = 2,
 	},
 	attachments = {
