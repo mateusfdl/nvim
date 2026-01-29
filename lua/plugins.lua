@@ -237,6 +237,8 @@ lazy.setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
+		lazy = true,
+		event = "InsertEnter",
 		config = function()
 			require("settings.ai")
 		end,
