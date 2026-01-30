@@ -57,6 +57,7 @@ lazy.setup({
 		"saghen/blink.cmp",
 		lazy = true,
 		event = "InsertEnter",
+		version = "1.*",
 		config = function()
 			require("settings.blink")
 		end,
@@ -218,6 +219,7 @@ lazy.setup({
 	},
 	{
 		"xvzc/chezmoi.nvim",
+		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
@@ -231,18 +233,6 @@ lazy.setup({
 		},
 	},
 	{ "wakatime/vim-wakatime" },
-	{
-		"jim-at-jibba/nvim-stride",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		lazy = true,
-		event = "InsertEnter",
-		config = function()
-			require("settings.ai")
-		end,
-	},
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()

@@ -26,31 +26,11 @@ local kind_icons = {
 	TypeParameter = "",
 }
 
-local function has_stride_suggestion()
-	local ok, stride_ui = pcall(require, "stride.ui")
-	if ok and stride_ui.current_suggestion then
-		return stride_ui.current_suggestion.text and stride_ui.current_suggestion.text ~= ""
-	end
-	return false
-end
-
 require("blink.cmp").setup({
-	snippets = { preset = "luasnip" },
-
 	keymap = {
 		preset = "default",
 		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = {
-			function()
-				if has_stride_suggestion() then
-					return true
-				end
-				return false
-			end,
-			"select_prev",
-			"snippet_backward",
-			"fallback",
-		},
+		["<S-Tab>"] = { "select_prev", "fallback" },
 		["<CR>"] = { "accept", "fallback" },
 		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<C-e>"] = { "hide", "fallback" },
@@ -90,7 +70,6 @@ require("blink.cmp").setup({
 						text = function(ctx)
 							local labels = {
 								lsp = "[LSP]",
-								snippets = "[Snippet]",
 								path = "[Path]",
 								buffer = "[Buffer]",
 							}
@@ -108,15 +87,11 @@ require("blink.cmp").setup({
 	signature = { enabled = true },
 
 	sources = {
-		default = { "lsp", "snippets", "path", "buffer" },
-		per_filetype = {
-			lua = { "lsp", "path", "buffer", "snippets" },
-		},
+		default = { "lsp", "path", "buffer" },
 		providers = {
 			lsp = { name = "LSP", score_offset = 1000, max_items = 30 },
 			path = { name = "Path", score_offset = 500, max_items = 10 },
 			buffer = { name = "Buffer", score_offset = 250, max_items = 5 },
-			snippets = { name = "Snippets", score_offset = 200, max_items = 5 },
 		},
 	},
 
