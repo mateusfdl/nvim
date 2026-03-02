@@ -233,6 +233,14 @@ lazy.setup({
 		},
 	},
 	{ "wakatime/vim-wakatime" },
+	{
+		"akinsho/flutter-tools.nvim",
+		ft = "dart",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("settings.flutter")
+		end,
+	},
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()

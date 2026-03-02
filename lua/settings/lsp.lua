@@ -172,7 +172,7 @@ local function setup_lsp_server(server_name, server_info, bufnr)
 	if server_info.conditional_setup and not server_info.conditional_setup(file_path) then
 		return
 	end
-	if not mason_lsp.ensure_server_installed(server_name) then
+	if not server_info.skip_install and not mason_lsp.ensure_server_installed(server_name) then
 		vim.defer_fn(function()
 			setup_lsp_server(server_name, server_info, bufnr)
 		end, 1000)
@@ -298,6 +298,12 @@ local server_configs = {
 		config = require("settings.lsp.qmlls"),
 		filetypes = { "qml", "qmljs" },
 		root_patterns = { "CMakeLists.txt", "*.pro", "*.qmlproject", ".git" },
+	},
+	dart_ls = {
+		config = require("settings.lsp.dart"),
+		filetypes = { "dart" },
+		root_patterns = { "pubspec.yaml", ".dart_tool", ".git" },
+		skip_install = true,
 	},
 }
 
