@@ -121,6 +121,42 @@ function M.obsidian()
 	nnoremap("<leader>oj", ":ObsidianToday<CR>")
 end
 
+function M.treesitter()
+	local select = require("nvim-treesitter-textobjects.select")
+	local move = require("nvim-treesitter-textobjects.move")
+	local ts = require("settings.treesitter")
+
+	vim.keymap.set({ "x", "o" }, "af", function()
+		select.select_textobject("@function.outer", "textobjects")
+	end, { desc = "Select outer function" })
+	vim.keymap.set({ "x", "o" }, "if", function()
+		select.select_textobject("@function.inner", "textobjects")
+	end, { desc = "Select inner function" })
+	vim.keymap.set({ "x", "o" }, "ac", function()
+		select.select_textobject("@class.outer", "textobjects")
+	end, { desc = "Select outer class" })
+	vim.keymap.set({ "x", "o" }, "ic", function()
+		select.select_textobject("@class.inner", "textobjects")
+	end, { desc = "Select inner class" })
+
+	vim.keymap.set({ "n", "x", "o" }, "]m", function()
+		move.goto_next_start("@function.outer", "textobjects")
+	end, { desc = "Next function start" })
+	vim.keymap.set({ "n", "x", "o" }, "]]", function()
+		move.goto_next_start("@class.outer", "textobjects")
+	end, { desc = "Next class start" })
+	vim.keymap.set({ "n", "x", "o" }, "[m", function()
+		move.goto_previous_start("@function.outer", "textobjects")
+	end, { desc = "Previous function start" })
+	vim.keymap.set({ "n", "x", "o" }, "[[", function()
+		move.goto_previous_start("@class.outer", "textobjects")
+	end, { desc = "Previous class start" })
+
+	vim.keymap.set("n", "+", ts.init_selection, { desc = "Init treesitter selection" })
+	vim.keymap.set("x", "+", ts.node_incremental, { desc = "Increment treesitter selection" })
+	vim.keymap.set("x", "-", ts.node_decremental, { desc = "Decrement treesitter selection" })
+end
+
 function M.setup()
 	M.system()
 	M.telescope()
@@ -134,6 +170,7 @@ function M.setup()
 	M.AI()
 	M.dap()
 	M.obsidian()
+	M.treesitter()
 end
 
 return M
