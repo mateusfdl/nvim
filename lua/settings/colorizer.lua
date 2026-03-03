@@ -8,8 +8,13 @@ require("colorizer").setup({
 		"javascriptreact",
 		"lua",
 	},
-	user_default_options = {
-		mode = "background",
-		tailwind = false,
+	options = {
+		parsers = {
+			css = true,
+			tailwind = { enable = false },
+		},
+		display = {
+			mode = "background",
+		},
 	},
 })
