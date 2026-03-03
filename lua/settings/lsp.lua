@@ -305,6 +305,11 @@ local server_configs = {
 		root_patterns = { "pubspec.yaml", ".dart_tool", ".git" },
 		skip_install = true,
 	},
+	nil_ls = {
+		config = require("settings.lsp.nix"),
+		filetypes = { "nix" },
+		root_patterns = { "flake.nix", "flake.lock", "default.nix", "shell.nix", ".git" },
+	},
 }
 
 local function setup_lsp_autocmds()

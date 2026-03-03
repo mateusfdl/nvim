@@ -15,6 +15,7 @@ local language_linters = {
 	bash = { "shellcheck" },
 	swift = { "swiftlint" },
 	zig = { "zig" },
+	nix = { "statix", "deadnix" },
 }
 
 local file_types = function()

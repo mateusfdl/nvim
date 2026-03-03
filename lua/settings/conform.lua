@@ -12,6 +12,7 @@ require("conform").setup({
 		zig = { "zig_fmt" },
 		qml = { "qmlformat" },
 		dart = { "dart_format" },
+		nix = { "nixfmt" },
 	},
 	formatters = {
 		biome = {

@@ -23,6 +23,7 @@ local mason_package_names = {
 	rust_analyzer = "rust-analyzer",
 	zls = "zls",
 	qmlls = "qmlls",
+	nil_ls = "nil",
 }
 
 function M.ensure_server_installed(server_name)
