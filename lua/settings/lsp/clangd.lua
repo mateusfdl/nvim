@@ -11,13 +11,20 @@ M.cmd = {
 	"--cross-file-rename",
 	"--enable-config",
 }
+
+if vim.fn.isdirectory("/nix") == 1 then
+	table.insert(M.cmd, "--query-driver=/run/current-system/sw/bin/clang++,/nix/store/*/bin/g++")
+end
+
 M.filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "h", "hpp", "cxx", "cc" }
+
 M.init_options = {
 	usePlaceholders = true,
 	completeUnimported = true,
 	clangdFileStatus = true,
 	semanticHighlighting = true,
 }
+
 M.capabilities = {
 	offsetEncoding = { "utf-16" },
 }
