@@ -298,6 +298,7 @@ local server_configs = {
 		config = require("settings.lsp.qmlls"),
 		filetypes = { "qml", "qmljs" },
 		root_patterns = { "CMakeLists.txt", "*.pro", "*.qmlproject", ".git" },
+		skip_install = true,
 	},
 	dart_ls = {
 		config = require("settings.lsp.dart"),

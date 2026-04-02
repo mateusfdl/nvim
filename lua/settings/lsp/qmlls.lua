@@ -1,6 +1,7 @@
 local M = {}
 
-M.cmd = { vim.fn.stdpath("data") .. "/mason/bin/qmlls" }
+local bin = vim.fn.exepath("qmlls")
+M.cmd = { bin }
 M.filetypes = { "qml", "qmljs" }
 
 M.init_options = {
