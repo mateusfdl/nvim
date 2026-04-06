@@ -7,8 +7,6 @@ local cmd = vim.cmd
 function M.vim_auto_cmds()
 	cmd("filetype plugin indent on")
 	cmd("highlight ColorColumn ctermbg=red")
-	cmd("syntax on")
-	cmd("syntax enable")
 end
 
 function M.lua_auto_cmds()

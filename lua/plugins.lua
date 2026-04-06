@@ -3,12 +3,14 @@ local lazy = require("lazy")
 lazy.setup({
 	{
 		"mateusfdl/yetanotherline",
+		event = "UIEnter",
 		config = function()
 			require("yetanotherline").setup()
 		end,
 	},
 	{
 		"kyazdani42/nvim-web-devicons",
+		lazy = true,
 		config = function()
 			require("settings.devicons")
 		end,
@@ -49,6 +51,7 @@ lazy.setup({
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
+		cmd = { "Mason", "MasonInstall", "MasonUpdate", "MasonLog", "MasonUninstall", "MasonUninstallAll" },
 		config = function()
 			require("settings.mason")
 		end,
@@ -94,7 +97,6 @@ lazy.setup({
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-		event = "BufReadPre",
 		keys = {
 			{ mode = "n", "<Leader>o", ":NvimTreeToggle<CR>" },
 			{ mode = "n", "<Leader>O", ":NvimTreeFindFileToggle<CR>" },
@@ -232,7 +234,7 @@ lazy.setup({
 			end,
 		},
 	},
-	{ "wakatime/vim-wakatime" },
+	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{
 		"akinsho/flutter-tools.nvim",
 		ft = "dart",

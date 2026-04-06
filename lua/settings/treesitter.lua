@@ -66,6 +66,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+local cur_buf = vim.api.nvim_get_current_buf()
+if vim.bo[cur_buf].filetype ~= "" then
+	local ok = pcall(vim.treesitter.start, cur_buf)
+	if ok then
+		vim.bo[cur_buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end
+end
+
 require("nvim-treesitter-textobjects").setup({
 	select = {
 		lookahead = true,

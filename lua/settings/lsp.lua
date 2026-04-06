@@ -1,10 +1,21 @@
 local M = {}
 local mason_lsp = require("settings.mason.lsp")
-local cmp_capabilities = require("blink.cmp").get_lsp_capabilities()
 local md_namespace = vim.api.nvim_create_namespace("matheus/lsp_float")
 
+local _capabilities
+local function get_capabilities()
+	if _capabilities then return _capabilities end
+	local ok, blink = pcall(require, "blink.cmp")
+	if ok then
+		_capabilities = blink.get_lsp_capabilities()
+	else
+		_capabilities = vim.lsp.protocol.make_client_capabilities()
+	end
+	return _capabilities
+end
+
 local function merge_capabilities(extra)
-	return vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), cmp_capabilities, extra or {})
+	return vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), get_capabilities(), extra or {})
 end
 
 local function find_root_dir(patterns, file_path)
@@ -52,11 +63,7 @@ local function setup_diagnostics()
 		},
 	})
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		delay = 50,
-		max_width = 80,
-		max_height = 20,
-	})
+
 end
 
 local function enhanced_float_handler(handler)
@@ -165,8 +172,15 @@ local function on_attach(client, bufnr)
 	end
 end
 
+local function get_server_config(server_info)
+	if type(server_info.config) == "function" then
+		server_info.config = server_info.config()
+	end
+	return server_info.config
+end
+
 local function setup_lsp_server(server_name, server_info, bufnr)
-	local server_config = server_info.config
+	local server_config = get_server_config(server_info)
 	local file_path = vim.api.nvim_buf_get_name(bufnr)
 
 	if server_info.conditional_setup and not server_info.conditional_setup(file_path) then
@@ -206,22 +220,22 @@ end
 
 local server_configs = {
 	ts_ls = {
-		config = require("settings.lsp.ts_ls"),
+		config = function() return require("settings.lsp.ts_ls") end,
 		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
 		root_patterns = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
 	},
 	solargraph = {
-		config = require("settings.lsp.solargraph"),
+		config = function() return require("settings.lsp.solargraph") end,
 		filetypes = { "ruby" },
 		root_patterns = { "Gemfile", ".git" },
 	},
 	gopls = {
-		config = require("settings.lsp.golang"),
+		config = function() return require("settings.lsp.golang") end,
 		filetypes = { "go", "gomod", "gowork", "gotmpl" },
 		root_patterns = { "go.mod", "go.work", ".git" },
 	},
 	lua_ls = {
-		config = require("settings.lsp.lua"),
+		config = function() return require("settings.lsp.lua") end,
 		filetypes = { "lua" },
 		root_patterns = {
 			".luarc.json",
@@ -235,12 +249,12 @@ local server_configs = {
 		},
 	},
 	bashls = {
-		config = require("settings.lsp.bash"),
+		config = function() return require("settings.lsp.bash") end,
 		filetypes = { "bash", "sh" },
 		root_patterns = { ".git" },
 	},
 	clangd = {
-		config = require("settings.lsp.clangd"),
+		config = function() return require("settings.lsp.clangd") end,
 		filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 		root_patterns = {
 			".clangd",
@@ -252,17 +266,17 @@ local server_configs = {
 		},
 	},
 	elixirls = {
-		config = require("settings.lsp.elixir"),
+		config = function() return require("settings.lsp.elixir") end,
 		filetypes = { "elixir", "eelixir" },
 		root_patterns = { "mix.exs", ".git" },
 	},
 	jsonls = {
-		config = require("settings.lsp.json"),
+		config = function() return require("settings.lsp.json") end,
 		filetypes = { "json", "jsonc" },
 		root_patterns = { ".git" },
 	},
 	tailwindcss = {
-		config = require("settings.lsp.tailwind"),
+		config = function() return require("settings.lsp.tailwind") end,
 		filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
 		root_patterns = { "tailwind.config.js", "tailwind.config.ts", "tailwind.config.cjs", "tailwind.config.mjs" },
 		conditional_setup = function(file_path)
@@ -274,40 +288,40 @@ local server_configs = {
 		end,
 	},
 	sourcekit = {
-		config = require("settings.lsp.sourcekit"),
+		config = function() return require("settings.lsp.sourcekit") end,
 		filetypes = { "swift" },
 		root_patterns = { "Package.swift", ".git" },
 		skip_install = true,
 	},
 	hls = {
-		config = require("settings.lsp.haskell"),
+		config = function() return require("settings.lsp.haskell") end,
 		filetypes = { "haskell", "lhaskell" },
 		root_patterns = { "*.cabal", "stack.yaml", "cabal.project", ".git" },
 	},
 	rust_analyzer = {
-		config = require("settings.lsp.rust"),
+		config = function() return require("settings.lsp.rust") end,
 		filetypes = { "rust" },
 		root_patterns = { "Cargo.toml", "Cargo.lock", ".git" },
 	},
 	zls = {
-		config = require("settings.lsp.zig"),
+		config = function() return require("settings.lsp.zig") end,
 		filetypes = { "zig" },
 		root_patterns = { "build.zig", ".git" },
 	},
 	qmlls = {
-		config = require("settings.lsp.qmlls"),
+		config = function() return require("settings.lsp.qmlls") end,
 		filetypes = { "qml", "qmljs" },
 		root_patterns = { "CMakeLists.txt", "*.pro", "*.qmlproject", ".git" },
 		skip_install = true,
 	},
 	dart_ls = {
-		config = require("settings.lsp.dart"),
+		config = function() return require("settings.lsp.dart") end,
 		filetypes = { "dart" },
 		root_patterns = { "pubspec.yaml", ".dart_tool", ".git" },
 		skip_install = true,
 	},
 	nil_ls = {
-		config = require("settings.lsp.nix"),
+		config = function() return require("settings.lsp.nix") end,
 		filetypes = { "nix" },
 		root_patterns = { "flake.nix", "flake.lock", "default.nix", "shell.nix", ".git" },
 	},

@@ -23,10 +23,6 @@ function M.setup()
 	require("settings.init").setup()
 	require("mappings").setup()
 	require("theme").setup()
-
-	vim.defer_fn(function()
-		require("plugins")
-	end, 0)
 end
 
 return M

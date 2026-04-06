@@ -42,6 +42,16 @@ M.reload_global_theme = function()
 	end
 end
 
+local function reapply_cache()
+	local cache_dir = vim.g.theme_cache
+	if not cache_dir or not uv.fs_stat(cache_dir) then
+		return
+	end
+	for _, file in ipairs(vim.fn.readdir(cache_dir)) do
+		pcall(dofile, cache_dir .. file)
+	end
+end
+
 M.setup = function()
 	local sigusr1 = uv.new_signal()
 	sigusr1:start(uv.constants.SIGUSR1, function()
@@ -51,6 +61,11 @@ M.setup = function()
 	end)
 
 	M.reload_global_theme()
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "LazyLoad",
+		callback = reapply_cache,
+	})
 end
 
 return M

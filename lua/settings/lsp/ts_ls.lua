@@ -56,7 +56,7 @@ M.init_options = {
 	plugins = {
 		{
 			name = "@vue/typescript-plugin",
-			location = vim.system({ "which", "vue-language-server" }):wait().stdout:gsub("\n", ""),
+			location = vim.fn.exepath("vue-language-server"),
 			languages = { "typescript", "vue" },
 		},
 	},
