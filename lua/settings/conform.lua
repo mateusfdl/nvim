@@ -11,7 +11,6 @@ require("conform").setup({
 		go = { "gofmt" },
 		zig = { "zig_fmt" },
 		qml = { "qmlformat" },
-		dart = { "dart_format" },
 		nix = { "nixfmt" },
 	},
 	formatters = {
@@ -33,11 +32,6 @@ require("conform").setup({
 			command = "qmlformat",
 			args = { "-i", "$FILENAME" },
 			stdin = false,
-		},
-		dart_format = {
-			command = "dart",
-			args = { "format", "--output=show", "--stdin-name", "$FILENAME" },
-			stdin = true,
 		},
 	},
 })

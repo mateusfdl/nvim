@@ -314,12 +314,6 @@ local server_configs = {
 		root_patterns = { "CMakeLists.txt", "*.pro", "*.qmlproject", ".git" },
 		skip_install = true,
 	},
-	dart_ls = {
-		config = function() return require("settings.lsp.dart") end,
-		filetypes = { "dart" },
-		root_patterns = { "pubspec.yaml", ".dart_tool", ".git" },
-		skip_install = true,
-	},
 	nil_ls = {
 		config = function() return require("settings.lsp.nix") end,
 		filetypes = { "nix" },
