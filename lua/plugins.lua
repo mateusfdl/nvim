@@ -193,23 +193,14 @@ lazy.setup({
 		end,
 	},
 	{
-		"epwalsh/obsidian.nvim",
+		"obsidian-nvim/obsidian.nvim",
 		version = "*",
 		lazy = true,
 		event = {
-			"BufReadPre " .. vim.fn.expand("~") .. "/org/**/*.md",
-			"BufNewFile " .. vim.fn.expand("~") .. "/org/**/*.md",
+			"BufReadPre " .. vim.fn.getenv("NOTES_VAULT") .. "/**/*.md",
+			"BufNewFile " .. vim.fn.getenv("NOTES_VAULT") .. "/**/*.md",
 		},
-		cmd = {
-			"ObsidianNew",
-			"ObsidianNewNoteFromTemplate",
-			"ObsidianOpen",
-			"ObsidianSearch",
-			"ObsidianQuickSwitch",
-			"ObsidianToday",
-			"ObsidianTemplate",
-		},
-		dependencies = { "nvim-lua/plenary.nvim" },
+		cmd = { "Obsidian" },
 		config = function()
 			require("settings.obsidian")
 		end,

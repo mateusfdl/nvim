@@ -113,12 +113,12 @@ function M.dap()
 end
 
 function M.obsidian()
-	nnoremap("<leader>oo", ":ObsidianOpen<CR>")
-	nnoremap("<leader>os", ":ObsidianSearch<CR>")
-	nnoremap("<leader>on", ":ObsidianNew<CR>")
-	nnoremap("<leader>oq", ":ObsidianQuickSwitch<CR>")
-	nnoremap("<leader>ot", ":ObsidianTemplate notes<CR>")
-	nnoremap("<leader>oj", ":ObsidianToday<CR>")
+	nnoremap("<leader>oo", ":Obsidian open<CR>")
+	nnoremap("<leader>os", ":Obsidian search<CR>")
+	nnoremap("<leader>on", ":Obsidian new<CR>")
+	nnoremap("<leader>oq", ":Obsidian quick_switch<CR>")
+	nnoremap("<leader>ot", ":Obsidian template notes<CR>")
+	nnoremap("<leader>oj", ":Obsidian today<CR>")
 end
 
 function M.treesitter()

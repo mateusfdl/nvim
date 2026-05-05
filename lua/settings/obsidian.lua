@@ -1,4 +1,3 @@
-vim.opt_local.conceallevel = 2
 local note_id_func = function(title)
 	local suffix = ""
 	if title ~= nil then
@@ -15,29 +14,30 @@ local note_id_func = function(title)
 end
 
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
-	pattern = vim.env.HOME .. "/org/**/*.md",
+	pattern = vim.fn.getenv("NOTES_VAULT") .. "/**/*.md",
 	callback = function()
 		vim.opt_local.conceallevel = 2
 	end,
 })
+
 require("obsidian").setup({
+	ui = { enable = false },
+	legacy_commands = false,
 	workspaces = {
-		{ name = "personal", path = vim.fn.getenv("OBSIDIAN_VAULT_PATH") },
+		{ name = "personal", path = vim.fn.getenv("NOTES_VAULT") },
 	},
 	log_level = vim.log.levels.INFO,
-	new_notes_location = "notes_subdir",
+	new_notes_location = "notes_subdir/Staging",
 	note_id_func = note_id_func,
-	disable_frontmatter = true,
+	frontmatter = { enabled = false },
 	completion = {
-		nvim_cmp = false,
 		min_chars = 2,
 	},
 	attachments = {
-		img_folder = "Attachments",
+		folder = "Attachments",
 	},
 	templates = {
 		folder = "Templates",
-		subdir = "Templates",
 	},
 	daily_notes = {
 		folder = "Journal",
