@@ -225,7 +225,13 @@ lazy.setup({
 			end,
 		},
 	},
-	{ "wakatime/vim-wakatime", event = "VeryLazy" },
+	{
+		"wakatime/vim-wakatime",
+		event = "VeryLazy",
+		config = function()
+			require("wakatime").setup({ plugin_name = "vim-wakatime" })
+		end,
+	},
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()
