@@ -206,11 +206,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"NeogitOrg/neogit",
-		cmd = { "Neogit" },
-		lazy = true,
-	},
-	{
 		"xvzc/chezmoi.nvim",
 		lazy = true,
 		dependencies = {
