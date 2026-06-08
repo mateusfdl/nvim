@@ -30,7 +30,6 @@ function M.telescope()
 	nnoremap("<leader>,h", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 	nnoremap("<leader>,c", "<cmd>lua require('telescope.builtin').git_status()<cr>")
 	nnoremap("<leader>,s", "<cmd>lua require('telescope.builtin').git_stash()<cr>")
-	nnoremap("<leader>,d", "<cmd>lua require('extensions.telescope').chezmoi_finder()<cr>")
 end
 
 function M.lsp()

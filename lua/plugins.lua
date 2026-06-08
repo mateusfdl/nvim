@@ -206,21 +206,6 @@ lazy.setup({
 		end,
 	},
 	{
-		"xvzc/chezmoi.nvim",
-		lazy = true,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-			cmd = {
-				"ChezmoiEdit",
-				"ChezmoiList",
-			},
-			config = function()
-				require("settings.chezmoi").setup()
-			end,
-		},
-	},
-	{
 		"wakatime/vim-wakatime",
 		event = "VeryLazy",
 		config = function()
