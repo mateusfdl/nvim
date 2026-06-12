@@ -215,3 +215,4 @@ lazy.setup({
 }, require("settings.lazy-setup"))
 
 require("extensions.zettelkasten").setup()
+require("tdw").setup()
