@@ -50,6 +50,7 @@ function M.lsp()
 		"<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>"
 	)
 	nnoremap("gG", "<cmd>lua require('conform').format({ lsp_fallback = true, timeout = 500, async = true})<CR>")
+  nnoremap("gh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
 end
 
 function M.float_term()
@@ -88,12 +89,8 @@ function M.theme()
 	nnoremap("<leader>tm", ":lua require('theme').switch_global_theme()<CR>")
 end
 
-function M.AI()
-	nnoremap("<leader>Ac", ":lua require('schadenfreude').open_chat()<CR>")
-	vnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ chat = true})<CR>")
-	nnoremap("<leader>gH", ":lua require('schadenfreude').send_message({ chat = true})<CR>")
-	vnoremap("<leader>gh", ":<C-u>SendToChat<CR>")
-	vnoremap("<leader>gW", ":<C-u>RefactorCode<CR>")
+function M.tdw()
+	nnoremap("<leader>tw", ":Tdw<CR>")
 end
 
 function M.dap()
@@ -179,7 +176,7 @@ function M.setup()
 	M.gitsigns()
 	M.lsp_diagnostic()
 	M.theme()
-	M.AI()
+	M.tdw()
 	M.dap()
 	M.obsidian()
 	M.treesitter()
