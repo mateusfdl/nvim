@@ -1,56 +1,64 @@
+-- Silverado
+-- A cool, silvery dark theme built around a single vibrant signature green.
+-- Influences: OneDark (structure/balance), Tokyo Night (blue-slate neutrals,
+-- pastel-vibrant accents), Kanagawa (semantic hue discipline, carp pink).
+-- Anchor color: #50fa7b — the most saturated color in the palette, on purpose.
+-- Everything else sits in a softer pastel band (~70-78% lightness) so the
+-- green reads as the theme's identity instead of competing with 15 neons.
+
 local M = {}
 
 M.base_30 = {
-	white = "#abb2bf",
-	darker_black = "#1b1f27",
-	black = "#1e222a", --  nvim bg
-	black2 = "#252931",
-	one_bg = "#282c34", -- real bg of onedark
-	one_bg2 = "#353b45",
-	one_bg3 = "#373b43",
-	grey = "#42464e",
-	grey_fg = "#565c64",
-	grey_fg2 = "#6f737b",
-	light_grey = "#6f737b",
-	red = "#ec5f67",
-	baby_pink = "#DE8C92",
-	pink = "#ff75a0",
-	line = "#31353d", -- for lines like vertsplit
-	green = "#50fa7b",
-	vibrant_green = "#7eca9c",
-	nord_blue = "#81A1C1",
-	blue_light = "#51afef",
-	yellow = "#e7c787",
-	sun = "#EBCB8B",
-	purple = "#de98fd",
-	dark_purple = "#c882e7",
-	teal = "#519ABA",
-	orange = "#fca2aa",
-	cyan = "#a3b8ef",
-	statusline_bg = "#22262e",
-	lightbg = "#2d3139",
-	pmenu_bg = "#61afef",
-	folder_bg = "#61afef",
-	blue = "#51afef",
+	white = "#c9d1e3", -- silvery blue-white fg (the "silver" in Silverado)
+	darker_black = "#161924",
+	black = "#1b1e2a", -- nvim bg: cool blue-slate, deeper than onedark
+	black2 = "#212431",
+	one_bg = "#252937",
+	one_bg2 = "#2e3343",
+	one_bg3 = "#373c4e",
+	grey = "#454c61", -- blue-tinted greys keep the UI cohesive
+	grey_fg = "#5a6178", -- comments: lifted slightly for readability
+	grey_fg2 = "#666e87",
+	light_grey = "#737b96",
+	red = "#f7768e", -- pastel rose with punch (errors, deletes)
+	baby_pink = "#f8a8bd",
+	pink = "#ff8fb3",
+	line = "#282c3a", -- vertsplit / indent guides: visible but quiet
+	green = "#50fa7b", -- ★ the signature: strings, success, git add
+	vibrant_green = "#9ff2b6", -- pastel mint companion to the anchor
+	nord_blue = "#8cb6f5",
+	blue = "#82aaff", -- periwinkle: functions, links
+	blue_light = "#7dcfff",
+	yellow = "#ffd882", -- warm pastel gold (warnings, types)
+	sun = "#ffe6a7",
+	purple = "#c7a4ff", -- lavender: keywords
+	dark_purple = "#a98ae8",
+	teal = "#4fd6be", -- minty teal: builtins, hints
+	orange = "#ffb38a", -- peach: numbers, constants
+	cyan = "#86e1fc", -- ice cyan: properties, escapes
+	statusline_bg = "#1f2230",
+	lightbg = "#2a2e3c",
+	pmenu_bg = "#82aaff",
+	folder_bg = "#82aaff",
 }
 
 M.base_16 = {
-	base00 = "#1e222a",
-	base01 = "#353b45",
-	base02 = "#3e4451",
-	base03 = "#545862",
-	base04 = "#565c64",
-	base05 = "#abb2bf",
-	base06 = "#b6bdca",
-	base07 = "#c8ccd4",
-	base08 = "#e06c75",
-	base09 = "#d19a66",
-	base0A = "#e5c07b",
-	base0B = "#50fa7b",
-	base0C = "#56b6c2",
-	base0D = "#61afef",
-	base0E = "#c678dd",
-	base0F = "#be5046",
+	base00 = "#1b1e2a", -- default bg
+	base01 = "#252937", -- lighter bg (status bars)
+	base02 = "#2e3343", -- selection bg
+	base03 = "#454c61", -- comments / invisibles
+	base04 = "#666e87", -- dark fg (line numbers)
+	base05 = "#c9d1e3", -- default fg
+	base06 = "#d7dde9", -- light fg
+	base07 = "#e6eaf2", -- lightest fg
+	base08 = "#f7768e", -- variables, tags, deleted
+	base09 = "#ffb38a", -- numbers, constants, booleans
+	base0A = "#ffd882", -- classes, types, search bg
+	base0B = "#50fa7b", -- ★ strings, inherited class, git add
+	base0C = "#86e1fc", -- support, regex, escapes
+	base0D = "#82aaff", -- functions, methods, headings
+	base0E = "#c7a4ff", -- keywords, storage, selectors
+	base0F = "#d27e99", -- deprecated, embedded tags (kanagawa carp pink)
 }
 
 M.type = "dark"

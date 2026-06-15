@@ -1,6 +1,7 @@
 local uv = vim.loop
 local M = {}
 vim.g.theme_cache = vim.fn.stdpath("cache") .. "/themes/cache/"
+local switch_theme_mode = vim.fn.expand("~/scripts/switch-theme-mode")
 
 M.switch_theme = function(theme)
 	vim.g.nvim_theme = theme
@@ -8,7 +9,7 @@ M.switch_theme = function(theme)
 end
 
 M.switch_global_theme = function()
-	local cmd = "sh " .. "~/scripts/switch-theme-mode"
+	local cmd = "sh " .. switch_theme_mode
 
 	vim.fn.system(cmd)
 	M.reload_global_theme()
@@ -19,26 +20,11 @@ M.reload_theme = function()
 end
 
 M.reload_global_theme = function()
-	local mode_file = uv.os_homedir() .. "/.cache/theme-mode"
+	local result = vim.fn.systemlist({ "sh", switch_theme_mode, "--current-theme" })
+	local theme = result[1]
 
-	if not uv.fs_stat(mode_file) then
-		M.switch_theme(vim.env.DARK_THEME)
-		return
-	end
-
-	local fd = uv.fs_open(mode_file, "r", 438)
-	if not fd then
-		return
-	end
-
-	local stat = uv.fs_stat(mode_file)
-	local mode = uv.fs_read(fd, stat.size, 0)
-	uv.fs_close(fd)
-
-	if mode:match("light") then
-		M.switch_theme(vim.env.LIGHT_THEME)
-	else
-		M.switch_theme(vim.env.DARK_THEME)
+	if vim.v.shell_error == 0 and theme and theme ~= "" then
+		M.switch_theme(theme)
 	end
 end
 
