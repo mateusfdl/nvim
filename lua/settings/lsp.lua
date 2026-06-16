@@ -319,6 +319,12 @@ local server_configs = {
 		filetypes = { "nix" },
 		root_patterns = { "flake.nix", "flake.lock", "default.nix", "shell.nix", ".git" },
 	},
+	ocamllsp = {
+		config = function() return require("settings.lsp.ocaml") end,
+		filetypes = { "ocaml", "ocaml.interface", "ocaml.menhir", "ocaml.ocamllex", "dune" },
+		root_patterns = { "dune-project", "dune-workspace", "*.opam", ".git" },
+		skip_install = true,
+	},
 }
 
 local function setup_lsp_autocmds()

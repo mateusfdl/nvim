@@ -12,6 +12,7 @@ require("conform").setup({
 		zig = { "zig_fmt" },
 		qml = { "qmlformat" },
 		nix = { "nixfmt" },
+		ocaml = { "ocamlformat" },
 	},
 	formatters = {
 		biome = {

@@ -35,6 +35,9 @@ M.languages = {
 	"qmljs",
 	"dart",
 	"nix",
+	"ocaml",
+	"ocaml_interface",
+	"ocamllex",
 }
 
 vim.schedule(function()
