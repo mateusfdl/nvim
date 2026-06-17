@@ -1,7 +1,12 @@
 local M = {}
 
+local clangd = vim.fn.exepath("clangd")
+if clangd == "" then
+	clangd = vim.fn.stdpath("data") .. "/mason/bin/clangd"
+end
+
 M.cmd = {
-	vim.fn.stdpath("data") .. "/mason/bin/clangd",
+	clangd,
 	"--background-index",
 	"--clang-tidy",
 	"--completion-style=detailed",
@@ -13,7 +18,7 @@ M.cmd = {
 }
 
 if vim.fn.isdirectory("/nix") == 1 then
-	table.insert(M.cmd, "--query-driver=/run/current-system/sw/bin/clang++,/nix/store/*/bin/g++")
+	table.insert(M.cmd, "--query-driver=/run/current-system/sw/bin/cc,/run/current-system/sw/bin/c++,/run/current-system/sw/bin/gcc,/run/current-system/sw/bin/g++,/nix/store/*/bin/cc,/nix/store/*/bin/c++,/nix/store/*/bin/gcc,/nix/store/*/bin/g++")
 end
 
 M.filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "h", "hpp", "cxx", "cc" }
