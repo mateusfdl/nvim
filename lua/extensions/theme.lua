@@ -1,9 +1,3 @@
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
-local finders = require("telescope.finders")
-local pickers = require("telescope.pickers")
-local conf = require("telescope.config").values
-
 local M = {}
 
 local themes_path = vim.fn.stdpath("config") .. "/lua/settings/colorscheme/themes"
@@ -31,30 +25,13 @@ local function apply_theme(theme)
 	})
 end
 
-M.switcher = function(opts)
-	opts = opts or {}
-
-	pickers
-		.new(opts, {
-			prompt_title = "Themes",
-			finder = finders.new_table({
-				results = get_themes(),
-			}),
-			sorter = conf.generic_sorter(opts),
-			attach_mappings = function(_)
-				actions.select_default:replace(function()
-					local selection = action_state.get_selected_entry()
-					if not selection then
-						return
-					end
-
-					apply_theme(selection.value)
-				end)
-
-				return true
-			end,
-		})
-		:find()
+function M.switcher()
+	vim.ui.select(get_themes(), {
+		prompt = "Themes",
+	}, function(theme)
+		if not theme then return end
+		apply_theme(theme)
+	end)
 end
 
 return M

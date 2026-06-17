@@ -73,9 +73,6 @@ M.polish_hl = {
     ["@punctuation.bracket"] = { fg = M.base_30.yellow },
   },
 
-  telescope = {
-    TelescopeMatching = { fg = M.base_30.dark_purple, bg = M.base_30.one_bg },
-  },
 }
 
 M.type = "light"

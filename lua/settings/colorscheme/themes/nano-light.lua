@@ -74,10 +74,6 @@ M.polish_hl = {
     ["@function.method.call"] = { bold = true },
   },
 
-  telescope = {
-    TelescopeMatching = { fg = M.base_30.purple, bg = M.base_30.one_bg2 },
-  },
-
   nvdash = {
     NvDashAscii = { fg = M.base_30.gray_fg, bg = M.base_30.purple },
   },

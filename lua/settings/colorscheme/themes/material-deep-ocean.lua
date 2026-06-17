@@ -74,9 +74,6 @@ M.polish_hl = {
     Define = { fg = M.base_30.blue },
   },
 
-  telescope = {
-    TelescopeSelection = { bg = M.base_30.one_bg, fg = M.base_30.blue },
-  },
 }
 
 M.type = "dark"

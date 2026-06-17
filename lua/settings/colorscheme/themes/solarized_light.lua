@@ -53,12 +53,6 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  telescope = {
-    TelescopeSelection = { bg = M.base_30.one_bg2 },
-    TelescopePromptBorder = { bg = M.base_30.one_bg2, fg = M.base_30.one_bg2 },
-    TelescopePromptNormal = { bg = M.base_30.one_bg2 },
-    TelescopePromptPrefix = { bg = M.base_30.one_bg2 },
-  }
 }
 
 M.type = "light"

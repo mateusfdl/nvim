@@ -22,14 +22,14 @@ function M.buffers()
 	nnoremap("<Leader>bd", ":BufferLinePickClose<CR>")
 end
 
-function M.telescope()
-	nnoremap(";", ":lua require('telescope.builtin').find_files()<cr>")
-	nnoremap("<leader>;", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
-	nnoremap("<leader>,b", "<cmd>lua require('extensions.telescope').buffer_searcher()<cr>")
-	vnoremap("<leader>,g", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
-	nnoremap("<leader>,h", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
-	nnoremap("<leader>,c", "<cmd>lua require('telescope.builtin').git_status()<cr>")
-	nnoremap("<leader>,s", "<cmd>lua require('telescope.builtin').git_stash()<cr>")
+function M.search()
+	nnoremap(";", require("extensions.fff").find_files)
+	nnoremap("<leader>;", require("extensions.fff").live_grep)
+	nnoremap("<leader>,b", require("extensions.fff").buffer_searcher)
+	vnoremap("<leader>,g", require("extensions.fff").grep_selection)
+	nnoremap("<leader>,h", require("extensions.fff").help_tags)
+	nnoremap("<leader>,c", require("extensions.fff").git_status)
+	nnoremap("<leader>,s", require("extensions.fff").git_stash)
 end
 
 function M.lsp()
@@ -50,7 +50,7 @@ function M.lsp()
 		"<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })<CR>"
 	)
 	nnoremap("gG", "<cmd>lua require('conform').format({ lsp_fallback = true, timeout = 500, async = true})<CR>")
-  nnoremap("gh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
+	nnoremap("gh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
 end
 
 function M.float_term()
@@ -152,7 +152,7 @@ end
 
 function M.setup()
 	M.system()
-	M.telescope()
+	M.search()
 	M.lsp()
 	M.float_term()
 	M.buffers()

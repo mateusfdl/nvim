@@ -58,11 +58,6 @@ M.polish_hl = {
     WhichKey = { fg = M.base_30.white },
   },
 
-  telescope = {
-    TelescopePromptPrefix = { fg = M.base_30.white },
-    TelescopeSelection = { bg = M.base_30.one_bg, fg = M.base_30.white },
-  },
-
   treesitter = {
     ["@punctuation.bracket"] = { fg = M.base_30.nord_blue },
   },

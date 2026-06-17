@@ -28,13 +28,13 @@ lazy.setup({
 	},
 	{ "nvim-lua/plenary.nvim" },
 	{
-		"nvim-telescope/telescope.nvim",
-		lazy = true,
-		init = function()
-			require("utils.startup").lazy_load("telescope.nvim")
+		"dmtrKovalenko/fff.nvim",
+		build = function()
+			require("fff.download").download_or_build_binary()
 		end,
+		lazy = false,
 		config = function()
-			require("settings.telescope")
+			require("settings.fff")
 		end,
 	},
 	{
@@ -69,7 +69,7 @@ lazy.setup({
 		"windwp/nvim-autopairs",
 		opts = {
 			fast_wrap = {},
-			disable_filetype = { "TelescopePrompt", "vim" },
+			disable_filetype = { "vim" },
 		},
 		event = "BufReadPre",
 		config = function(_, opts)

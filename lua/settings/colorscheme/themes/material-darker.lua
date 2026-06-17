@@ -106,9 +106,6 @@ M.polish_hl = {
     ["@lsp.typemod.record"] = { link = "@lsp.type.class" },
   },
 
-  telescope = {
-    TelescopeMatching = { fg = M.base_30.accent },
-  },
 }
 
 

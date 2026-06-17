@@ -112,16 +112,7 @@ M.polish_hl = {
 
 M.type = "dark"
 
-
 local nvconfig = require "nvconfig"
-
-if nvconfig.ui.telescope.style == "bordered" or nvconfig.base46.transparency then
-  M.polish_hl.telescope = {
-    TelescopeBorder = { link = "FloatBorder" },
-    TelescopePromptBorder = { link = "FloatBorder" },
-    TelescopeSelection = { bg = M.base_30.black, fg = M.base_30.white, bold = true },
-  }
-end
 
 if nvconfig.ui.cmp.style == "default" then
   M.polish_hl.cmp = {

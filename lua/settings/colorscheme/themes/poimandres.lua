@@ -78,10 +78,6 @@ M.polish_hl = {
     ["@constructor.tsx"] = { link = "Tag" },
   },
 
-  telescope = {
-    TelescopeMatching = { fg = M.base_30.teal },
-  },
-
   cmp = {
     CmpItemAbbr = { fg = M.base_30.purple },
     CmpItemAbbrMatch = { fg = M.base_30.dark_purple },
