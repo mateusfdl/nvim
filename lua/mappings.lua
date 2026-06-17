@@ -123,52 +123,31 @@ function M.obsidian()
 end
 
 function M.treesitter()
-	vim.keymap.set({ "x", "o" }, "af", function()
-		local ok, select = pcall(require, "nvim-treesitter-textobjects.select")
-		if ok then select.select_textobject("@function.outer", "textobjects") end
-	end, { desc = "Select outer function" })
-	vim.keymap.set({ "x", "o" }, "if", function()
-		local ok, select = pcall(require, "nvim-treesitter-textobjects.select")
-		if ok then select.select_textobject("@function.inner", "textobjects") end
-	end, { desc = "Select inner function" })
-	vim.keymap.set({ "x", "o" }, "ac", function()
-		local ok, select = pcall(require, "nvim-treesitter-textobjects.select")
-		if ok then select.select_textobject("@class.outer", "textobjects") end
-	end, { desc = "Select outer class" })
-	vim.keymap.set({ "x", "o" }, "ic", function()
-		local ok, select = pcall(require, "nvim-treesitter-textobjects.select")
-		if ok then select.select_textobject("@class.inner", "textobjects") end
-	end, { desc = "Select inner class" })
+	xnoremap("af", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@function.outer', 'textobjects')<cr>")
+	omap("af", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@function.outer', 'textobjects')<cr>")
+	xnoremap("if", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@function.inner', 'textobjects')<cr>")
+	omap("if", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@function.inner', 'textobjects')<cr>")
+	xnoremap("ac", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@class.outer', 'textobjects')<cr>")
+	omap("ac", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@class.outer', 'textobjects')<cr>")
+	xnoremap("ic", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@class.inner', 'textobjects')<cr>")
+	omap("ic", ":lua require('nvim-treesitter-textobjects.select').select_textobject('@class.inner', 'textobjects')<cr>")
 
-	vim.keymap.set({ "n", "x", "o" }, "]m", function()
-		local ok, move = pcall(require, "nvim-treesitter-textobjects.move")
-		if ok then move.goto_next_start("@function.outer", "textobjects") end
-	end, { desc = "Next function start" })
-	vim.keymap.set({ "n", "x", "o" }, "]]", function()
-		local ok, move = pcall(require, "nvim-treesitter-textobjects.move")
-		if ok then move.goto_next_start("@class.outer", "textobjects") end
-	end, { desc = "Next class start" })
-	vim.keymap.set({ "n", "x", "o" }, "[m", function()
-		local ok, move = pcall(require, "nvim-treesitter-textobjects.move")
-		if ok then move.goto_previous_start("@function.outer", "textobjects") end
-	end, { desc = "Previous function start" })
-	vim.keymap.set({ "n", "x", "o" }, "[[", function()
-		local ok, move = pcall(require, "nvim-treesitter-textobjects.move")
-		if ok then move.goto_previous_start("@class.outer", "textobjects") end
-	end, { desc = "Previous class start" })
+	nnoremap("]m", ":lua require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer', 'textobjects')<cr>")
+	xnoremap("]m", ":lua require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer', 'textobjects')<cr>")
+	omap("]m", ":lua require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer', 'textobjects')<cr>")
+	nnoremap("]]", ":lua require('nvim-treesitter-textobjects.move').goto_next_start('@class.outer', 'textobjects')<cr>")
+	xnoremap("]]", ":lua require('nvim-treesitter-textobjects.move').goto_next_start('@class.outer', 'textobjects')<cr>")
+	omap("]]", ":lua require('nvim-treesitter-textobjects.move').goto_next_start('@class.outer', 'textobjects')<cr>")
+	nnoremap("[m", ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer', 'textobjects')<cr>")
+	xnoremap("[m", ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer', 'textobjects')<cr>")
+	omap("[m", ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer', 'textobjects')<cr>")
+	nnoremap("[[", ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('@class.outer', 'textobjects')<cr>")
+	xnoremap("[[", ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('@class.outer', 'textobjects')<cr>")
+	omap("[[", ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('@class.outer', 'textobjects')<cr>")
 
-	vim.keymap.set("n", "+", function()
-		local ok, ts = pcall(require, "settings.treesitter")
-		if ok then ts.init_selection() end
-	end, { desc = "Init treesitter selection" })
-	vim.keymap.set("x", "+", function()
-		local ok, ts = pcall(require, "settings.treesitter")
-		if ok then ts.node_incremental() end
-	end, { desc = "Increment treesitter selection" })
-	vim.keymap.set("x", "-", function()
-		local ok, ts = pcall(require, "settings.treesitter")
-		if ok then ts.node_decremental() end
-	end, { desc = "Decrement treesitter selection" })
+	nnoremap("+", ":lua require('settings.treesitter').init_selection()<cr>")
+	xnoremap("+", ":lua require('settings.treesitter').node_incremental()<cr>")
+	xnoremap("-", ":lua require('settings.treesitter').node_decremental()<cr>")
 end
 
 function M.setup()
