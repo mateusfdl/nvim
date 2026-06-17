@@ -4,27 +4,36 @@ require("dapui.config.highlights").setup()
 require("settings.dap.go")
 require("settings.dap.node")
 require("settings.dap.lua")
-require("settings.dap.zig")
 require("settings.dap.cpp")
+require("settings.dap.zig")
 require("settings.dap.ocaml")
+
+local function bounded(value, minimum, maximum)
+	return math.max(minimum, math.min(maximum, value))
+end
 
 local function get_dap_layout()
 	local screen_width = vim.o.columns
 	local screen_height = vim.o.lines
-	local left_size = math.max(20, math.min(20, math.floor(screen_width * 0.28)))
-	local bottom_size = math.max(5, math.min(20, math.floor(screen_height * 0.23)))
+	local left_size = bounded(math.floor(screen_width * 0.28), 35, 60)
+	local bottom_size = bounded(math.floor(screen_height * 0.25), 10, 18)
 
 	return {
 		{
 			elements = {
-				{ id = "breakpoints", size = 0.23 },
-				{ id = "watches", size = 0.77 },
+				{ id = "scopes", size = 0.45 },
+				{ id = "stacks", size = 0.25 },
+				{ id = "breakpoints", size = 0.15 },
+				{ id = "watches", size = 0.15 },
 			},
 			size = left_size,
 			position = "left",
 		},
 		{
-			elements = { "repl" },
+			elements = {
+				{ id = "repl", size = 0.5 },
+				{ id = "console", size = 0.5 },
+			},
 			size = bottom_size,
 			position = "bottom",
 		},
@@ -34,7 +43,7 @@ end
 dapui.setup({
 	controls = {
 		element = "repl",
-		enabled = false,
+		enabled = true,
 	},
 	expand_lines = false,
 	icons = { expanded = "▾", collapsed = "▸" },
@@ -67,25 +76,13 @@ dapui.setup({
 dap.listeners.before.attach.dapui_config = function()
 	dapui.open()
 end
+
 dap.listeners.before.launch.dapui_config = function()
 	dapui.open()
 end
-dap.listeners.before.event_terminated.dapui_config = function()
-	dapui.close()
-end
-dap.listeners.before.event_exited.dapui_config = function()
-	dapui.close()
-end
-dap.listeners.before.event_disconnect.dapui_config = function()
-	dapui.close()
-end
 
 vim.fn.sign_define("DapBreakpoint", { text = "•", texthl = "DapBreakpointText", linehl = "" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "?", texthl = "DapBreakpointConditionText", linehl = "" })
+vim.fn.sign_define("DapBreakpointRejected", { text = "x", texthl = "DapBreakpointRejectedText", linehl = "" })
+vim.fn.sign_define("DapLogPoint", { text = "L", texthl = "DapLogPointText", linehl = "" })
 vim.fn.sign_define("DapStopped", { text = "|>", texthl = "DapStoppedText", linehl = "DapStoppedLine" })
-
-local ok, nvimtree_events = pcall(require, "nvim-tree.events")
-if ok then
-	nvimtree_events.subscribe("TreePreOpen", function()
-		dapui.close()
-	end)
-end

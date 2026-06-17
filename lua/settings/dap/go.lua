@@ -1,47 +1,50 @@
 local dap = require("dap")
 local dap_go = require("dap-go")
 
-dap.adapters.delve = {
-	type = "server",
-	port = "${port}",
-	executable = {
-		command = vim.fn.stdpath("data") .. "/mason/bin/dlv",
-		args = { "dap", "-l", "127.0.0.1:${port}" },
-	},
-}
-
 dap_go.setup()
+
+local function prompt_remote_host()
+	local host = vim.fn.input("Delve host: ", "127.0.0.1")
+	if host == "" then error("Delve host is required") end
+	return host
+end
+
+local function prompt_remote_port()
+	local port = tonumber(vim.fn.input("Delve port: ", "40000"))
+	if port == nil then error("Delve port must be a number") end
+	return port
+end
 
 dap.configurations.go = {
 	{
 		type = "go",
-		name = "Debug Single File",
+		name = "Debug file",
 		request = "launch",
 		program = "${file}",
 	},
 	{
 		type = "go",
-		name = "Debug Current Project",
+		name = "Debug package",
 		request = "launch",
 		program = "./${relativeFileDirname}",
 	},
 	{
 		type = "go",
-		name = "Debug test",
-		request = "launch",
-		mode = "test",
-		program = "${file}",
-	},
-	{
-		type = "go",
-		name = "Debug test (go.mod)",
+		name = "Debug package test",
 		request = "launch",
 		mode = "test",
 		program = "./${relativeFileDirname}",
 	},
 	{
 		type = "go",
-		name = "Debug test (go.mod) with flags",
+		name = "Debug file test",
+		request = "launch",
+		mode = "test",
+		program = "${file}",
+	},
+	{
+		type = "go",
+		name = "Debug package test with flags",
 		request = "launch",
 		mode = "test",
 		program = "./${relativeFileDirname}",
@@ -49,24 +52,10 @@ dap.configurations.go = {
 	},
 	{
 		type = "go",
-		name = "Debug test with flags",
-		request = "launch",
-		mode = "test",
-		program = "${file}",
-		buildFlags = dap_go.get_build_flags,
-	},
-	{
-		type = "go",
-		name = "Debug Current CMD/main.go",
-		request = "launch",
-		program = "./cmd/app/main.go",
-	},
-	{
-		type = "go",
-		name = "Attach to Running Delve",
+		name = "Attach to remote Delve",
 		request = "attach",
 		mode = "remote",
-		port = 40000,
-		host = "127.0.0.1",
+		host = prompt_remote_host,
+		port = prompt_remote_port,
 	},
 }

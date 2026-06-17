@@ -95,6 +95,8 @@ end
 
 function M.dap()
 	nnoremap("<space>a", ":DapToggleBreakpoint<cr>")
+	nnoremap("<space>A", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
+	nnoremap("<space>L", ":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
 	nnoremap("<space>gb", ":DapRunToCursor<cr>")
 	nnoremap("<space>c", ":DapContinue<cr>")
 	nnoremap("<space>n", ":DapStepInto<cr>")
@@ -103,9 +105,12 @@ function M.dap()
 	nnoremap("<space>b", ":DapStepBack<cr>")
 	nnoremap("<space>r", ":DapRestart<cr>")
 	nnoremap("<space>?", ":lua require('dapui').eval(nil, { enter = true })<cr>")
+	vnoremap("<space>?", ":lua require('dapui').eval(nil, { enter = true })<cr>")
 	nnoremap("<space>l", ":lua require('dapui').toggle()<cr>")
 	nnoremap("<space>S", ":DapTerminate<cr>")
 	nnoremap("<space>s", ":DapDisconnect<cr>")
+	nnoremap("<space>gt", ":lua require('dap-go').debug_test()<cr>")
+	nnoremap("<space>gT", ":lua require('dap-go').debug_last_test()<cr>")
 end
 
 function M.obsidian()
