@@ -112,12 +112,4 @@ M.polish_hl = {
 
 M.type = "dark"
 
-local nvconfig = require "nvconfig"
-
-if nvconfig.ui.cmp.style == "default" then
-  M.polish_hl.cmp = {
-    CmpBorder = { fg = M.base_30.purple },
-  }
-end
-
 return M
