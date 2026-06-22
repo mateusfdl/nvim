@@ -9,7 +9,6 @@ M.settings = {
 		enable_autofix = true,
 		enable_import_embedfile_argument_completions = true,
 		enable_semantic_tokens = true,
-		enable_inlay_hints = true,
 		inlay_hints_show_builtin = true,
 		inlay_hints_exclude_single_argument = true,
 		inlay_hints_hide_redundant_param_names = false,
@@ -20,11 +19,7 @@ M.settings = {
 	},
 }
 
-M.on_attach = function(client, bufnr)
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	end
-
+M.on_attach = function(_, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "<leader>zr", function()
 		vim.cmd("!zig run %")

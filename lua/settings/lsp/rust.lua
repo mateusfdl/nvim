@@ -16,18 +16,14 @@ M.settings = {
 		},
 		inlayHints = {
 			lifetimeElisionHints = {
-				enable = true,
+				enable = false,
 				useParameterNames = true,
 			},
 		},
 	},
 }
 
-M.on_attach = function(client, bufnr)
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	end
-
+M.on_attach = function(_, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "<leader>rr", function()
 		vim.cmd("!cargo run")

@@ -139,10 +139,15 @@ local function enhanced_float_handler(handler)
 	end
 end
 
+local function is_lsp_buffer(bufnr)
+	local buf_name = vim.api.nvim_buf_get_name(bufnr)
+	local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
+
+	return buf_name ~= "" and buftype == ""
+end
+
 local function on_attach(client, bufnr)
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	end
+	if not is_lsp_buffer(bufnr) then return end
 
 	if client.server_capabilities.documentHighlightProvider then
 		local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
@@ -332,8 +337,7 @@ local function setup_lsp_autocmds()
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = server_info.filetypes,
 			callback = function(args)
-				local buf_name = vim.api.nvim_buf_get_name(args.buf)
-				if buf_name ~= "" then
+				if is_lsp_buffer(args.buf) then
 					setup_lsp_server(server_name, server_info, args.buf)
 				end
 			end,
@@ -343,10 +347,9 @@ end
 
 local function ensure_lsp_attached_to_current_buffer()
 	local current_buf = vim.api.nvim_get_current_buf()
-	local buf_name = vim.api.nvim_buf_get_name(current_buf)
 	local filetype = vim.bo[current_buf].filetype
 
-	if buf_name == "" or filetype == "" then
+	if not is_lsp_buffer(current_buf) or filetype == "" then
 		return
 	end
 
