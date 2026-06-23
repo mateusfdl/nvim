@@ -28,6 +28,14 @@ lazy.setup({
 	},
 	{ "nvim-lua/plenary.nvim" },
 	{
+		"folke/snacks.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			picker = {},
+		},
+	},
+	{
 		"dmtrKovalenko/fff.nvim",
 		build = function()
 			require("fff.download").download_or_build_binary()

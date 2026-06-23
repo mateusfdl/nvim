@@ -26,7 +26,7 @@ local function apply_theme(theme)
 end
 
 function M.switcher()
-	vim.ui.select(get_themes(), {
+	require("snacks").picker.select(get_themes(), {
 		prompt = "Themes",
 	}, function(theme)
 		if not theme then return end
