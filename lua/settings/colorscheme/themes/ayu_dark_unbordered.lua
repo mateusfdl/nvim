@@ -1,58 +1,58 @@
--- credit to original theme for existing https://github.com/ayu-theme/ayu-vim (light)
--- NOTE : This is a modified version of it
+-- credits to original theme https://github.com/ayu-theme/vscode-ayu (ayu-dark-unbordered)
+-- Borderless variant of ayu_dark: identical syntax, flat #0d1017 chrome with no split borders.
 
 local M = {}
 
 M.base_30 = {
-  white = "#26292f",
-  darker_black = "#f3f3f3",
-  black = "#fafafa", --  nvim bg
-  black2 = "#efefef",
-  one_bg = "#ebebeb",
-  one_bg2 = "#e1e1e1", -- Highlight of context
-  one_bg3 = "#d7d7d7",
-  grey = "#cdcdcd",
-  grey_fg = "#b9b9b9",
-  grey_fg2 = "#acacac", -- Highlight background
-  light_grey = "#a0a0a0", -- Line numbers
-  red = "#F07171",
-  baby_pink = "#ff8282",
-  pink = "#ffa5a5",
-  line = "#e1e1e1", -- for lines like vertsplit
-  green = "#86B300",
-  vibrant_green = "#94e76b",
-  blue = "#55B4D4",
-  nord_blue = "#22A4E6",
-  yellow = "#EBA400",
-  sun = "#f3c78b",
-  purple = "#A37ACC",
-  dark_purple = "#8627e6",
+  white = "#ced4df",
+  darker_black = "#0a0e15",
+  black = "#0d1017", --  nvim bg
+  black2 = "#141821",
+  one_bg = "#161a24",
+  one_bg2 = "#1d212b",
+  one_bg3 = "#242833",
+  grey = "#33363c",
+  grey_fg = "#3d4046",
+  grey_fg2 = "#46494f",
+  light_grey = "#54575d",
+  red = "#F07178",
+  baby_pink = "#ff949b",
+  pink = "#ff8087",
+  line = "#0d1017", -- flattened to bg: no vertsplit border
+  green = "#AAD94C",
+  vibrant_green = "#b9e75b",
+  blue = "#39BAE6",
+  nord_blue = "#59C2FF",
+  yellow = "#FFB454",
+  sun = "#f0df8a",
+  purple = "#D2A6FF",
+  dark_purple = "#A37ACC",
   teal = "#74c5aa",
-  orange = "#FA8532",
-  cyan = "#4CBF99",
-  statusline_bg = "#f0f0f0",
-  lightbg = "#e6e6e6",
-  pmenu_bg = "#95E6CB",
-  folder_bg = "#5C6166",
+  orange = "#FF8F40",
+  cyan = "#95E6CB",
+  statusline_bg = "#0d1017",
+  lightbg = "#1d212b",
+  pmenu_bg = "#ff9445",
+  folder_bg = "#98a3af",
 }
 
 M.base_16 = {
-  base00 = "#fafafa",
-  base01 = "#f0f0f0",
-  base02 = "#eeeeee",
-  base03 = "#dfdfdf",
-  base04 = "#d2d2d2",
-  base05 = "#5C6166",
-  base06 = "#52575c",
-  base07 = "#484d52",
-  base08 = "#F07171",
-  base09 = "#A37ACC",
-  base0A = "#22A4E6",
-  base0B = "#86B300",
-  base0C = "#4CBF99",
-  base0D = "#EBA400",
-  base0E = "#FA8532",
-  base0F = "#E59645",
+  base00 = "#0d1017",
+  base01 = "#161a24",
+  base02 = "#1d212b",
+  base03 = "#242833",
+  base04 = "#33363c",
+  base05 = "#BFBDB6",
+  base06 = "#E6E1CF",
+  base07 = "#D9D7CE",
+  base08 = "#F07178",
+  base09 = "#D2A6FF",
+  base0A = "#59C2FF",
+  base0B = "#AAD94C",
+  base0C = "#95E6CB",
+  base0D = "#FFB454",
+  base0E = "#FF8F40",
+  base0F = "#E6B673",
 }
 
 local entity = M.base_30.nord_blue
@@ -60,11 +60,13 @@ local tag = M.base_30.blue
 local constant = M.base_30.purple
 local func = M.base_16.base0D
 local member = M.base_30.red
-local operator = "#F2A191"
-local decorator = "#E59645"
+local operator = "#F29668"
+local decorator = "#E6C08A"
 local punctuation = M.base_16.base05
 
 M.polish_hl = {
+  WinSeparator = { fg = M.base_30.black },
+
   Operator = { fg = operator },
 
   ["@operator"] = { fg = operator },
@@ -101,7 +103,6 @@ M.add_hl = {
   ["@markup.link.label"] = { fg = func },
 }
 
-
-M.type = "light"
+M.type = "dark"
 
 return M

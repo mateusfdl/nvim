@@ -49,26 +49,76 @@ M.base_16 = {
 	base0E = "#9c6f88",
 	base0F = "#c85552",
 }
+local blue = M.base_30.blue
+local ice = M.base_30.nord_blue
+local cyan = M.base_30.cyan
+local teal = M.base_30.teal
+local coral = M.base_16.base08
+local number = M.base_16.base09
+local type_hl = M.base_16.base0A
+local string_hl = M.base_16.base0B
+local tag = M.base_30.orange
+local special = M.base_16.base0F
+local punct = M.base_30.light_grey
+local quote = M.base_30.grey_fg
+
 M.polish_hl = {
-	git = {
-		DiffAdd = { fg = M.base_30.green },
-	},
-	nvimtree = {
-		NvimTreeFolderName = { fg = "#5a5448" },
-		NvimTreeWinSeparator = { fg = M.base_30.yellow },
-	},
-	tbline = {
-		TbLineThemeToggleBtn = { bg = M.base_30.one_bg },
-	},
-	defaults = {
-		Pmenu = { bg = M.base_30.black2 },
-	},
-	treesitter = {
-		["@tag"] = { fg = M.base_30.orange },
-		["@variable.member"] = { fg = M.base_16.base05 },
-		["@keyword.import"] = { fg = M.base_16.base08 },
-		["@constructor"] = { fg = M.base_30.blue },
-	},
+	DiffAdd = { fg = M.base_30.green },
+	NvimTreeFolderName = { fg = "#5a5448" },
+	NvimTreeWinSeparator = { fg = M.base_30.yellow },
+	TbLineThemeToggleBtn = { bg = M.base_30.one_bg },
+	Pmenu = { bg = M.base_30.black2 },
+
+	["@variable.builtin"] = { fg = teal, italic = true },
+	["@constant"] = { fg = number },
+	["@constant.builtin"] = { fg = number },
+	["@character"] = { fg = string_hl },
+	["@function.builtin"] = { fg = teal },
+	["@type.builtin"] = { fg = teal },
+	["@constructor"] = { fg = blue },
+	["@field"] = { fg = cyan },
+	["@field.key"] = { fg = cyan },
+	["@property"] = { fg = cyan },
+	["@parameter"] = { fg = ice },
+	["@namespace"] = { fg = type_hl },
+	["@tag"] = { fg = tag },
+	["@tag.delimiter"] = { fg = punct },
+	["@tag.attribute"] = { fg = cyan },
+	["@include"] = { fg = coral },
+	["@attribute"] = { fg = special },
+	["@annotation"] = { fg = special },
+	["@function.macro"] = { fg = special },
+	["@constant.macro"] = { fg = special },
+	["@text.literal"] = { fg = string_hl },
+	["@text.uri"] = { fg = blue, underline = true },
+	["@punctuation.bracket"] = { fg = punct },
+	["@punctuation.delimiter"] = { fg = punct },
 }
+
+M.add_hl = {
+	["@variable.parameter"] = { fg = ice },
+	["@variable.parameter.builtin"] = { fg = ice, italic = true },
+	["@variable.member"] = { fg = cyan },
+	["@module"] = { fg = type_hl },
+	["@module.builtin"] = { fg = teal },
+	["@keyword.import"] = { fg = coral },
+	["@function.method"] = { fg = blue },
+	["@function.method.call"] = { fg = blue },
+	["@markup.heading"] = { fg = blue, bold = true },
+	["@markup.strong"] = { bold = true },
+	["@markup.italic"] = { italic = true },
+	["@markup.strikethrough"] = { strikethrough = true },
+	["@markup.raw"] = { fg = string_hl },
+	["@markup.link"] = { fg = blue },
+	["@markup.link.url"] = { fg = blue, underline = true },
+	["@markup.link.label"] = { fg = cyan },
+	["@markup.list"] = { fg = tag },
+	["@markup.quote"] = { fg = quote, italic = true },
+	["@markup.math"] = { fg = cyan },
+	["@diff.plus"] = { fg = string_hl },
+	["@diff.minus"] = { fg = coral },
+	["@diff.delta"] = { fg = blue },
+}
+
 M.type = "light"
 return M
