@@ -7,29 +7,6 @@ local function with_picker_padding(open_picker)
 	vim.o.winborder = winborder
 end
 
-local function buffer_items()
-	local items = {}
-	local current_buffer = vim.api.nvim_get_current_buf()
-
-	for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
-		if buffer ~= current_buffer and vim.api.nvim_buf_is_loaded(buffer) and vim.bo[buffer].buflisted then
-			local name = vim.api.nvim_buf_get_name(buffer)
-			if name == "" then
-				name = "[No Name]"
-			else
-				name = vim.fn.fnamemodify(name, ":~:.")
-			end
-
-			table.insert(items, {
-				buffer = buffer,
-				name = name,
-			})
-		end
-	end
-
-	return items
-end
-
 function M.find_files()
 	with_picker_padding(function()
 		require("fff").find_files({ title = "" })
@@ -50,15 +27,19 @@ function M.grep_selection()
 end
 
 function M.buffer_searcher()
-	vim.ui.select(buffer_items(), {
-		prompt = "Buffers",
-		format_item = function(item)
-			return item.name
-		end,
-	}, function(item)
-		if not item then return end
-		vim.api.nvim_set_current_buf(item.buffer)
-	end)
+	require("snacks").picker.buffers({
+		title = "Buffers",
+		current = false,
+		unloaded = false,
+		nofile = true,
+		layout = {
+			preset = "default",
+			config = function(layout)
+				layout.layout.backdrop = false
+				return layout
+			end,
+		},
+	})
 end
 
 function M.help_tags()
